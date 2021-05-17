@@ -5,6 +5,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -16,7 +17,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatIconModule,
     MatCardModule,
     MatTooltipModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatProgressSpinnerModule
     
   ],
   exports:[
@@ -25,7 +27,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatIconModule,
     MatCardModule,
     MatTooltipModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule { }

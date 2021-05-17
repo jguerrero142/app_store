@@ -7,6 +7,7 @@ import { ComponentsModule } from './components/components.module';
 import { PagesModule } from './pages/pages.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { CoreModule } from './core/core.module';
 
 
 
@@ -20,6 +21,7 @@ import { MaterialModule } from './material.module';
     AppRoutingModule,
     ComponentsModule,
     PagesModule,
+    CoreModule,
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule

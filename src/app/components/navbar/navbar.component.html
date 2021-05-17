@@ -6,22 +6,43 @@
               <a class="navbar-brand" href="#">
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMwPazPFtfJRKo8Rg5Ory4byaNa-vRcrZWZQ&usqp=CAU" alt="" width="30" height="24">
               </a>
-              <span>Fenix + Sabor</span>              
-              <button mat-raised-button>Home</button>        
+              <span>Fenix + Sabor</span>  
               
-                <button mat-raised-button>
-                 Mis pedidos
-                </button>
+              <a mat-raised-button class="nav-item" routerLink="/home" routerLinkActive="active">
+                  Home</a> 
+              <a mat-raised-button 
+                class="nav-item" 
+                routerLink="/pedidos"
+                routerLinkActive="active"
+                *ngIf="auth.loggedIn">
+                  Mis Pedidos</a> 
                                  
   </div>
               
-                <a mat-icon-button color="warn">
-                  <mat-icon>favorite</mat-icon>
-                </a>
-
-                <a mat-icon-button color="warn">
-                  <mat-icon>share</mat-icon>
-                </a> 
+                
+                  <button mat-mini-fab disabled>
+                    <mat-icon>favorite</mat-icon>
+                  </button>
+                
+                
+                  <button mat-mini-fab disabled>
+                    <mat-icon>share</mat-icon>
+                  </button>
+                
+  
+                <span class="navbar-text">
+                  <button mat-raised-button color="basic"
+                          *ngIf="!auth.loggedIn"
+                          (click) = "auth.login()">
+                          Ingresar
+                  </button>
+                  <button mat-raised-button color="warn"
+                          *ngIf="auth.loggedIn"
+                          (click) = "auth.logout()">
+                          Salir
+                  </button>
+                  
+              </span>
               
   
   </mat-toolbar> 

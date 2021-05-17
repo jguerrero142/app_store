@@ -5,12 +5,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
+import { PedidosComponent } from './pedidos/pedidos.component';
 
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    PedidosComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import {MatCardModule} from '@angular/material/card';
     MatCardModule
   ],
   exports:[
-    HomeComponent
+    HomeComponent,
+    PedidosComponent
   ]
 })
 export class PagesModule { }
