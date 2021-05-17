@@ -6,6 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { ComponentsModule } from '../components/components.module';
 
 
 
@@ -19,7 +20,8 @@ import { PedidosComponent } from './pedidos/pedidos.component';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    ComponentsModule
   ],
   exports:[
     HomeComponent,

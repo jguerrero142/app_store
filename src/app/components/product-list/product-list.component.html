@@ -1,0 +1,22 @@
+<main>
+    <div class="card-group animated fadeIn fast" >
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>MI PEDIDO</mat-card-title> 
+                    <img mat-card-image src="assets/fenis.png">                 
+                </mat-card-header>
+                <mat-card-content>
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor ="let ticket of tickets">
+                          <div class="ms-2 me-auto">
+                            <div class="fw-bold">{{ticket.user_ticket}}</div>
+                            {{'$'}} {{ticket.producto}}
+                          </div>
+                          <a class="btn btn-danger"  (click)="deleteTicket(ticket.id_ticket)" *ngIf="auth.loggedIn" ><i class="far fa-trash-alt" ></i></a>
+                        </li>
+                    </ol>
+                </mat-card-content>
+            </mat-card>
+    </div>
+</main>
+

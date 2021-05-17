@@ -4,5 +4,4 @@ export interface Producto {
     valor?: number;    
     create_at?: Date;
     image?: string;
-    descripcion?: string;
 }

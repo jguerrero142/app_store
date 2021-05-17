@@ -1,6 +1,16 @@
+<main>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <app-producto [user]="id" (ticke$)="newTicket($event)"></app-producto>
+                </div>
+                <div class="col-md-4 text-center" >
+                    <app-product-list [user]="id"></app-product-list>
+                </div>
+            </div>
+        </div>
+</main>
 
-  <main>
-      <mat-card>
-          test
-      </mat-card>
-  </main>
+
+
+  

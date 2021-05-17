@@ -7,10 +7,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from '../app-routing.module';
+import {MatCardModule} from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+
+
+
+import { ProductoComponent } from './producto/producto.component';
+import { ProductListComponent } from './product-list/product-list.component';
+
 
 @NgModule({
   declarations: [
-    NavbarComponent
+    NavbarComponent,
+    ProductoComponent,
+    ProductListComponent
   ],
   imports: [
     CommonModule,
@@ -19,10 +29,14 @@ import { AppRoutingModule } from '../app-routing.module';
     MatIconModule,
     MatTooltipModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatCardModule,
+    MatTableModule
   ],
   exports:[
-    NavbarComponent
+    NavbarComponent,
+    ProductoComponent,
+    ProductListComponent
   ]
 })
 export class ComponentsModule { }
