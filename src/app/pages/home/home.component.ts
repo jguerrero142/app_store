@@ -16,9 +16,7 @@ export class HomeComponent implements OnInit {
   id: any = [];
   user$: any = [];
   user: any = [];
-  event: any = [];
   
-
   constructor(public auth: AuthService,
               public userServices: UsersService) { }
 
@@ -42,9 +40,7 @@ export class HomeComponent implements OnInit {
         console.log(this.id);
         
       },
-      err => this.saveUser()
-      
-    )
+      err => this.saveUser())
   } 
   saveUser(){
     this.userServices.saveUser(this.user$)
@@ -55,9 +51,6 @@ export class HomeComponent implements OnInit {
         err => console.log(err)
       ) 
   }
-  newTicket(idx:string){
-    this.event = idx;
-      console.log(this.event)
-  }
+  
 
 }

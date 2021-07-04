@@ -3,19 +3,29 @@
             <mat-card>
                 <mat-card-header>
                     <mat-card-title>MI PEDIDO</mat-card-title> 
-                    <img mat-card-image src="assets/fenis.png">                 
+                    <img mat-card-image src="assets/fenis.png"> 
+                    
+                        <ol class="list-group" *ngFor ="let total of totals">
+                            
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <div class="fw-bold"> TOTAL: {{ total.Total }}</div>
+                                </li>
+                            
+                        </ol>
+                                    
                 </mat-card-header>
                 <mat-card-content>
                     <ol class="list-group list-group-numbered">
-                        <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor ="let ticket of tickets">
+                        <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor ="let ticket of tic">
                           <div class="ms-2 me-auto">
-                            <div class="fw-bold">{{ticket.user_ticket}}</div>
-                            {{'$'}} {{ticket.producto}}
+                            <div class="fw-bold">{{ticket.name }}</div>
+                            <div class="fw-bold">{{'$'}} {{ticket.valor}}</div>
                           </div>
                           <a class="btn btn-danger"  (click)="deleteTicket(ticket.id_ticket)" *ngIf="auth.loggedIn" ><i class="far fa-trash-alt" ></i></a>
                         </li>
                     </ol>
                 </mat-card-content>
+                <a class="btn btn-danger fw-bold" (click)="newPedido()" *ngIf="auth.loggedIn" > Realizar Pedido</a>
             </mat-card>
     </div>
 </main>

@@ -27,6 +27,12 @@ export class TicketsService {
     getTicket(id: string){
       return this.http.get(`${this.API_URI}/ticket/${id}`)
     }
+    getData(){
+      return this.http.get(`${this.API_URI}/ticket/data/ticket`)
+    }
+    inData(){
+      return this.http.get(`${this.API_URI}/ticket/data/total`)
+    }
 
     deletTicket(id: string | number){
       return this.http.delete(`${this.API_URI}/ticket/${id}`);

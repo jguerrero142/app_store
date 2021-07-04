@@ -1,4 +1,4 @@
-import { Component, Input, OnInit,EventEmitter, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Producto } from '../../models/Producto';
 
 import { ProductosService } from 'src/app/services/productos.service';
@@ -17,7 +17,7 @@ import { TicketsService } from 'src/app/services/ticket.service';
 export class ProductoComponent implements OnInit {
 
   @Input() user: number;
-  @Output() ticke$ = new EventEmitter();
+  // @Output() ticke$ = new EventEmitter();
 
   ticket: any = [];
   productos: Producto[] = [];
@@ -37,8 +37,7 @@ export class ProductoComponent implements OnInit {
     )
   }
   saveTicket(id: number){
-      this.ticke$.emit(true);
-      this.ticket = {
+    this.ticket = {
       user_ticket: this.user,
       producto: id,
           }

@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TicketsService } from '../../services/ticket.service';
 import { Ticket } from '../../models/Ticket';
+import { PedidoService } from '../../services/pedido.service';
+import { Pedido } from '../../models/Pedido';
 
 @Component({
   selector: 'app-product-list',
@@ -13,15 +15,20 @@ export class ProductListComponent implements OnInit {
   @Input() user: number;
   
 
-  tickets: any = [];
+  tickets: any;
+  tic: any;  
+  id: any  = [];
   new: any = [];
+  totals: any = 0 ;
+  pedido: Pedido;
 
   constructor(public auth: AuthService,
-              public ticketsService: TicketsService
-              ) { }
+              public ticketsService: TicketsService,
+              private pedidoService: PedidoService
+              ) {}
 
   ngOnInit(): void {
-    this.getTickets();
+    this.getData();
     this.newTicket();
   }
   getTickets(){
@@ -30,16 +37,45 @@ export class ProductListComponent implements OnInit {
       this.tickets = resp;
     })
   }
+  getData(){
+    this.ticketsService.getData()
+    .subscribe((res: Ticket) => {
+      this.tic = res;
+      this.inData();   
+    }),
+    err => console.log(err)
+  }
+    inData(){      
+      this.ticketsService.inData()
+      .subscribe(res =>{
+        this.totals = res;
+        console.log(this.totals);
+      })
+    }
   newTicket(){
     this.ticketsService.newsTicket()
     .subscribe(res => {
-      this.getTickets();
+      this.getData();
+      this.inData();
     })
   }
+  newPedido(){
+    const value = this.totals[0]; 
+    this.pedido = {
+      id_user: this.user,
+      valor: value.Total,
+    }
+    console.log(this.pedido)
+    this.pedidoService.savePedido(this.pedido)
+    .subscribe(res => {
+      console.log(res);
+    })
+  }
+  
   deleteTicket(id: number){
     this.ticketsService.deletTicket(id).
     subscribe(res => {
-      this.getTickets();
+      this.getData();
     })
   }
   

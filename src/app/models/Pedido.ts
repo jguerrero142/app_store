@@ -1,7 +1,4 @@
-export interface Producto {
-    id?: number;
-    name?: string;
-    valor?: number;    
-    create_at?: Date;
-    image?: string;
+export interface Pedido {
+    id_user?: number;
+    valor?: number;       
 }
