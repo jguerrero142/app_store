@@ -9,18 +9,25 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from '../app-routing.module';
 import {MatCardModule} from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 
 
 import { ProductoComponent } from './producto/producto.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { PedidoListComponent } from './pedido-list/pedido-list.component';
+import { TotalPedidoComponent } from './total-pedido/total-pedido.component';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
     ProductoComponent,
-    ProductListComponent
+    ProductListComponent,
+    PedidoListComponent,
+    TotalPedidoComponent
   ],
   imports: [
     CommonModule,
@@ -31,12 +38,17 @@ import { ProductListComponent } from './product-list/product-list.component';
     FlexLayoutModule,
     AppRoutingModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatExpansionModule,
+    CdkAccordionModule
+    
   ],
   exports:[
     NavbarComponent,
     ProductoComponent,
-    ProductListComponent
+    ProductListComponent,
+    PedidoListComponent,
+    TotalPedidoComponent
   ]
 })
 export class ComponentsModule { }

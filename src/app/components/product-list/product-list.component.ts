@@ -21,6 +21,9 @@ export class ProductListComponent implements OnInit {
   new: any = [];
   totals: any = 0 ;
   pedido: Pedido;
+  idpedido: any = [];
+  ticket: any;
+  
 
   constructor(public auth: AuthService,
               public ticketsService: TicketsService,
@@ -68,15 +71,23 @@ export class ProductListComponent implements OnInit {
     console.log(this.pedido)
     this.pedidoService.savePedido(this.pedido)
     .subscribe(res => {
-      console.log(res);
+     this.idpedido = res;
+    this.AddPedido();
     })
-  }
-  
+    
+  }  
   deleteTicket(id: number){
     this.ticketsService.deletTicket(id).
     subscribe(res => {
       this.getData();
     })
+  }
+  AddPedido(){
+    const pedido = 'true';
+    this.ticketsService.AddPedido(this.idpedido.id, pedido)
+     .subscribe(res=>{
+       this.getData();
+     })
   }
   
           

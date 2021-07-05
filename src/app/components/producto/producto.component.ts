@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Producto } from '../../models/Producto';
+import { Pedido } from '../../models/Pedido';
 
 import { ProductosService } from 'src/app/services/productos.service';
 import { UsersService } from 'src/app/services/user.service';
@@ -20,7 +20,7 @@ export class ProductoComponent implements OnInit {
   // @Output() ticke$ = new EventEmitter();
 
   ticket: any = [];
-  productos: Producto[] = [];
+  productos: Pedido[] = [];
 
   constructor( public auth: AuthService,
                public userServices: UsersService,

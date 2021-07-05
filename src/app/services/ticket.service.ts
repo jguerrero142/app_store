@@ -33,7 +33,7 @@ export class TicketsService {
     inData(){
       return this.http.get(`${this.API_URI}/ticket/data/total`)
     }
-
+    
     deletTicket(id: string | number){
       return this.http.delete(`${this.API_URI}/ticket/${id}`);
     }
@@ -48,6 +48,9 @@ export class TicketsService {
     }
     updateTicket(id: string | number, updateTicket: Ticket): Observable<Ticket>{
       return this.http.put(`${this.API_URI}/ticket/${id}`, updateTicket);
+    }
+    AddPedido( id: number , pedido: string ){
+      return this.http.put(`${this.API_URI}/ticket/pedido/id/${id}`, pedido );
     }
     
 }
