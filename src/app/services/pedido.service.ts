@@ -18,6 +18,13 @@ export class PedidoService {
     getPedidos(){
       return this.http.get( `${this.API_URI}/pedido`);
     }
+
+    userPedidos(id: string){
+      return this.http.get( `${this.API_URI}/pedido/user/${id}`);
+    }
+    getUserPedidos(id: string){
+      return this.http.get( `${this.API_URI}/pedido/dataPedido/${id}`);
+    }
     
     getPedido(id: string){
       return this.http.get(`${this.API_URI}/pedido/${id}`)

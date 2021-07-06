@@ -23,6 +23,9 @@ export class TicketsService {
     getTickets(){
       return this.http.get( `${this.API_URI}/ticket`);
     }
+    userTickets(id: number){
+      return this.http.get( `${this.API_URI}/ticket/ticketPedido/${id}`);
+    }
     
     getTicket(id: string){
       return this.http.get(`${this.API_URI}/ticket/${id}`)

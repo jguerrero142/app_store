@@ -17,9 +17,10 @@
                   </mat-card-content>
                   <mat-card-actions>
                       
-                    <button mat-button>LIKE</button>
-                    <button mat-button (click)="saveTicket(producto.id)">AÑADIR</button>
-                  </mat-card-actions>
+                    <!-- <button color="warn" mat-mini-fab disabled >
+                      <mat-icon color="warn">favorite</mat-icon></button>                     -->
+                    <button mat-button color="warn" (click)="saveTicket(producto.id)" *ngIf="auth.loggedIn">AÑADIR</button>
+                    </mat-card-actions>
             </mat-card>
     </div>
 </main>

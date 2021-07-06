@@ -52,7 +52,6 @@ export class ProductListComponent implements OnInit {
       this.ticketsService.inData()
       .subscribe(res =>{
         this.totals = res;
-        console.log(this.totals);
       })
     }
   newTicket(){

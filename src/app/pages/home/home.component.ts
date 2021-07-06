@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
     this.auth.userProfile$.subscribe((perfil: User) => {
     this.user$ = perfil;
         if(this.user$){
-        console.log(this.user$.sub);
+        // console.log(this.user$.sub);
         this.getUser();
      }
     })
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     .subscribe(res => {
         this.user = res;
         this.id = this.user.id_user;
-        console.log(this.id);
+        // console.log(this.id);
         
       },
       err => this.saveUser())

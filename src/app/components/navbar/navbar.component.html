@@ -9,7 +9,11 @@
               <!-- <span>Fenix + Sabor</span>   -->
               <img mat-card-image src="assets/fenis.png"> 
               
-              <a mat-raised-button class="nav-item" routerLink="/home" routerLinkActive="active">
+              <a mat-raised-button 
+                 class="nav-item" 
+                 routerLink="/home" 
+                 routerLinkActive="active"
+                 *ngIf="auth.loggedIn">
                   Home</a> 
               <a mat-raised-button 
                 class="nav-item" 

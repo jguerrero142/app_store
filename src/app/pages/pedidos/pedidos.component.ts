@@ -26,7 +26,7 @@ export class PedidosComponent implements OnInit {
     this.auth.userProfile$.subscribe((perfil: User) => {
     this.user$ = perfil;
         if(this.user$){
-        console.log(this.user$.sub);
+        // console.log(this.user$.sub);
         this.getUser();
      }
     })

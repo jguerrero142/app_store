@@ -21,6 +21,9 @@ export class UsersService {
     getUser(id: string | number){
       return this.http.get(`${this.API_URI}/user/${id}`)
     }
+    getUserPedido(id: number){
+      return this.http.get(`${this.API_URI}/user/Upedido/${id}`)
+    }
     deleteUser(id: string){
       return this.http.delete(`${this.API_URI}/user/${id}`);
     }
