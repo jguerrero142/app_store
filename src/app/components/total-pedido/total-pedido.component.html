@@ -2,7 +2,7 @@
     <div class="card-group animated fadeIn fast" >
             <mat-card>
                 <mat-card-header>
-                    <img mat-card-image src="assets/sho.png">   
+                    <!-- <img mat-card-image [src]="pedido.picture">     -->
                 </mat-card-header>
                 <mat-card-content>
                     <ol class="list-group" >                            
@@ -10,7 +10,7 @@
                             <div class="fw-bold"> TOTAL: {{ "total" }}</div>
                         </li> 
                     </ol>
-                    <ol class="list-group list-group-numbered">
+                    <ol class="list-group list-group-numbered" *ngFor ="let pedido of pedidos">
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                           <div class="ms-2 me-auto">
                             <div class="fw-bold">{{"name" }}</div>
