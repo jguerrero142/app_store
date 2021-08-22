@@ -10,6 +10,12 @@ import { AppRoutingModule } from '../app-routing.module';
 import {MatCardModule} from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { IconsProviderModule } from '../icons-provider.module';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzCardModule } from 'ng-zorro-antd/card';
+
 
 
 
@@ -19,6 +25,11 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { PedidoListComponent } from './pedido-list/pedido-list.component';
 import { TotalPedidoComponent } from './total-pedido/total-pedido.component';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { ProductCardComponent } from './product-card/product-card.component';
+import { ProductListCardComponent } from './product-list-card/product-list-card.component';
+import { AllpedidoComponent } from './allpedido/allpedido.component';
+import { HistorialComponent } from './historial/historial.component';
 
 
 @NgModule({
@@ -27,7 +38,11 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
     ProductoComponent,
     ProductListComponent,
     PedidoListComponent,
-    TotalPedidoComponent
+    TotalPedidoComponent,
+    ProductCardComponent,
+    ProductListCardComponent,
+    AllpedidoComponent,
+    HistorialComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +55,13 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
     MatCardModule,
     MatTableModule,
     MatExpansionModule,
-    CdkAccordionModule
+    CdkAccordionModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzButtonModule,
+    NzAvatarModule,
+    NzCardModule
     
   ],
   exports:[
@@ -48,7 +69,9 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
     ProductoComponent,
     ProductListComponent,
     PedidoListComponent,
-    TotalPedidoComponent
+    TotalPedidoComponent,
+    AllpedidoComponent,
+    HistorialComponent
   ]
 })
 export class ComponentsModule { }

@@ -1,0 +1,25 @@
+<mat-card-content>
+    <div>
+                     <ol class="list-group" *ngFor ="let total of totals">
+                                
+                        <li class="list-group-item d-flex justify-content-between">
+                            <div class="bton fw-bold aling-text" *ngIf = "texto == 0"> Que quieres comer hoy?</div>
+                            <div class="bton fw-bold" *ngIf = "texto == 1"> TOTAL: {{ total.Total }}</div>
+                        </li>
+                    
+                </ol>
+                
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor ="let ticket of tic">
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold">{{ticket.name }}</div>
+                    <div class="fw-bold">{{'$'}} {{ticket.valor}}</div>
+                  </div>
+                  <a class="btn btn-danger"  (click)="deleteTicket(ticket.id_ticket)" *ngIf="auth.loggedIn" ><i class="far fa-trash-alt" ></i></a>
+                </li>
+            </ol>
+        <div class="botn">
+        <a class="btn btn-danger fw-bold" *ngIf="texto == 0"> Añade un producto</a>
+        <a class="btn btn-danger fw-bold" (click)="newPedido()" *ngIf="texto == 1"> Realizar Pedido</a></div>
+    </div>
+</mat-card-content>        

@@ -7,20 +7,22 @@
                 <mat-card-content>
                     <ol class="list-group" >                            
                         <li class="list-group-item d-flex justify-content-between">
-                            <div class="fw-bold"> TOTAL: {{ "total" }}</div>
+                            <div class="fw-bold" *ngIf = "texto == 0"> Aun no tienes Facturas</div>
+                            <div class="fw-bold" *ngIf = "texto == 1"> TOTAL: {{ "total" }}</div>
                         </li> 
                     </ol>
                     <ol class="list-group list-group-numbered" *ngFor ="let pedido of pedidos">
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                           <div class="ms-2 me-auto">
-                            <div class="fw-bold">{{"name" }}</div>
-                            <div class="fw-bold">{{'$'}} {{"ticket valor"}}</div>
+                            <!-- <div class="fw-bold">{{"name" }}</div> -->
+                            <!-- <div class="fw-bold">{{'$'}} {{"ticket.valor"}}</div> -->
                           </div>
                           <a class="btn btn-danger" ><i class="far fa-trash-alt" ></i></a>
                         </li>
                     </ol>
                 </mat-card-content>
-                <a class="btn btn-danger fw-bold" > Realizar Pedido</a>
+                <div *ngIf = "texto == 1"><a class="btn btn-danger fw-bold" > Realizar Pedido</a></div>
+                
             </mat-card>
     </div>
 </main>

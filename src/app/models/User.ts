@@ -11,4 +11,5 @@ export interface User {
     "locale"?: string;
     "updated_at"?: string;
     "email_verified"?: string;
+    "role"?: number;
 }

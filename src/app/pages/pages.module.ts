@@ -7,13 +7,19 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { ComponentsModule } from '../components/components.module';
+import { IndexComponent } from './index/index.component';
+import { PagesRoutingModule } from './pages.routing.module';
+import { WelcomeComponent } from './welcome/welcome.component';
+
 
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    PedidosComponent
+    PedidosComponent,
+    IndexComponent,
+    WelcomeComponent
   ],
   imports: [
     CommonModule,
@@ -21,11 +27,14 @@ import { ComponentsModule } from '../components/components.module';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    ComponentsModule
+    ComponentsModule,
+    PagesRoutingModule
   ],
   exports:[
     HomeComponent,
-    PedidosComponent
+    PedidosComponent,
+    IndexComponent,
+    WelcomeComponent
   ]
 })
 export class PagesModule { }

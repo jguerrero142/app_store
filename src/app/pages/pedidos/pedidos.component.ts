@@ -3,6 +3,7 @@ import { User } from '../../models/User';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/user.service';
+import { Ticket } from '../../models/Ticket';
 
 @Component({
   selector: 'app-pedidos',
@@ -11,7 +12,10 @@ import { UsersService } from 'src/app/services/user.service';
 })
 export class PedidosComponent implements OnInit {
 
-  id: any = [];
+  
+  
+  id: number;
+  role: number;
   user$: any = [];
   user: any = [];
 
@@ -19,27 +23,7 @@ export class PedidosComponent implements OnInit {
               public userServices: UsersService) { }
 
   ngOnInit(): void {
-    this.validarUser();
+    this.userServices.getAuth();
   }
-
-  validarUser(){
-    this.auth.userProfile$.subscribe((perfil: User) => {
-    this.user$ = perfil;
-        if(this.user$){
-        // console.log(this.user$.sub);
-        this.getUser();
-     }
-    })
-  }
-
-  getUser(){ 
-    this.userServices.getUser(this.user$.sub)
-    .subscribe(res => {
-        this.user = res;
-        this.id = this.user.id_user;
-        console.log(this.id);
-        
-      })
-  } 
-
+   
 }

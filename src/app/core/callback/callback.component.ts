@@ -13,5 +13,4 @@ export class CallbackComponent implements OnInit {
   ngOnInit(): void {
     this.auth.handleAuthCallback();
   }
-
 }

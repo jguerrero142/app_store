@@ -1,25 +1,20 @@
-<main>
-
     <div class="card-group animated fadeIn fast" >
+                    <mat-card *ngIf="pedidos == 0">
+                      <div class="fw-bold"> Estas a tiempo de realizar tu pedido!</div></mat-card>
                     <mat-card *ngFor ="let pedido of pedidos">
-                      <mat-card-header>
-                                  
-                        <mat-card-title>{{pedido.name | uppercase }}</mat-card-title>
-                        
+                      <mat-card-header>                                  
+                        <mat-card-title>{{pedido.name | uppercase }}</mat-card-title>                        
                         <mat-card-subtitle>{{"#pedido"}} {{pedido.id}}</mat-card-subtitle>
                       </mat-card-header>
-
                       <mat-card-content>
-
-                              <mat-accordion>
-                              
+                              <mat-accordion>                              
                                 <mat-expansion-panel (click)="userTickets(pedido.id)">
                                   <mat-expansion-panel-header>
                                     <mat-panel-title>
                                       {{'$'}} {{pedido.valor}}
                                     </mat-panel-title>
                                     <mat-panel-description>
-                                      Detalle de pedido 
+                                    {{pedido.created_at | date}}
                                     </mat-panel-description>
                                   </mat-expansion-panel-header>
                                   <p *ngFor ="let ticket of dataTicket" >
@@ -28,14 +23,11 @@
                               </mat-accordion>
 
                       </mat-card-content>
-                      <mat-card-actions>                      
-                            <button mat-button>LIKE</button>
-                            <button mat-button >AÑADIR</button>
+                      <mat-card-actions>
+                        <div><a class="btn btn-danger fw-bold" (click)="deletePedido(pedido.id,pedido.id_user)"> Eliminar Pedido</a></div>
                       </mat-card-actions>
                     </mat-card>
       
     </div>
     
 
-      
-</main>

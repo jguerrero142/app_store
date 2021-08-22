@@ -20,6 +20,8 @@ export class TotalPedidoComponent implements OnInit {
   idPedido: number;
   dataUser: any = [];
 
+  texto:any;
+
   // @Input() user: number;
   constructor(public auth: AuthService,
               public pedidoServices: PedidoService,
@@ -28,27 +30,27 @@ export class TotalPedidoComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    
+    this.texto = 0;
   }
   validarUser(){
     this.auth.userProfile$.subscribe((perfil: User) => {
     this.user$ = perfil;
         if(this.user$){
         // console.log(this.user$.sub);
-        this.getUser();
+        
         
      }
     })
   }
-  getUser(){ 
-    this.userServices.getUser(this.user$.sub)
-    .subscribe(res => {
-        this.user = res;
-        this.id = this.user.id_user;
-        console.log(this.id);
-        this.getPedidos();
-    })
-  }
+  // getUser(){ 
+  //   this.userServices.getUser(this.user$.sub)
+  //   .subscribe(res => {
+  //       this.user = res;
+  //       this.id = this.user.id_user;
+  //       console.log(this.id);
+  //       this.getPedidos();
+  //   })
+  // }
   getPedidos(){
     this.pedidoServices.getUserPedidos(this.id)
     .subscribe(resp => {

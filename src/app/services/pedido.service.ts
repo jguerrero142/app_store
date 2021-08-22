@@ -15,27 +15,20 @@ export class PedidoService {
   constructor(private http: HttpClient) {
     
   }
+  userPedidos(id: string){
+    return this.http.get( `${this.API_URI}/pedido/user/${id}`);
+  }
+  getUserPedidos(id: number){
+    return this.http.get( `${this.API_URI}/pedido/dataPedido/${id}`);
+  }
+
+
     getPedidos(){
       return this.http.get( `${this.API_URI}/pedido`);
-    }
-
-    userPedidos(id: string){
-      return this.http.get( `${this.API_URI}/pedido/user/${id}`);
-    }
-    getUserPedidos(id: string){
-      return this.http.get( `${this.API_URI}/pedido/dataPedido/${id}`);
-    }
-    
+    }    
     getPedido(id: string){
       return this.http.get(`${this.API_URI}/pedido/${id}`)
     }
-    // getData(){
-    //   return this.http.get(`${this.API_URI}/pedido`)
-    // }
-    // inData(){
-    //   return this.http.get(`${this.API_URI}/pedido`)
-    // }
-
     deletPedido(id: string | number){
       return this.http.delete(`${this.API_URI}/pedido/${id}`);
     }

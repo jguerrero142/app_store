@@ -4,7 +4,8 @@ import { PedidoService } from 'src/app/services/pedido.service';
 import { User } from '../../models/User';
 import { UsersService } from '../../services/user.service';
 import { TicketsService } from '../../services/ticket.service';
-import { Pedido } from '../../models/Pedido';
+import { map } from 'rxjs/operators';
+
 
 
 
@@ -15,61 +16,55 @@ import { Pedido } from '../../models/Pedido';
 })
 export class PedidoListComponent implements OnInit {
 
-  // @Input() user: number;
   
-  id: any = [];
-  user$: any = [];
-  user: any = [];
+   
   pedidos: any = [];
   idPedidos: any = [];
   idPedido: number;
   dataUser: any = [];
   dataTicket: any = [];
+  Iduser: any;
+  id: any;
+  role: number;
+  user: User[] = []
+  
 
   constructor(public auth: AuthService,
               public pedidoServices: PedidoService,
               public userServices: UsersService,
               public ticketsServices: TicketsService
     ) { 
-      
-    }
-
+      }
+    
   ngOnInit(): void {
-   this.validarUser();
+    this.getId();
+    this.getRole();
   }
-  validarUser(){
-    this.auth.userProfile$.subscribe((perfil: User) => {
-    this.user$ = perfil;
-        if(this.user$){
-        // console.log(this.user$.sub);
-        this.getUser();
-        
-     }
+  //Obtenemos el role del usuario.
+  getRole(){
+    this.userServices.roleS
+    .subscribe(res =>{
+      this.role = res;;
     })
+  } 
+  //Obtenemos el Id del usuario.
+  getId(){
+    this.userServices.userSID
+    .subscribe(res =>{
+      this.id = res;
+      this.getPedidos(this.id);
+    });
   }
-  getUser(){ 
-    this.userServices.getUser(this.user$.sub)
-    .subscribe(res => {
-        this.user = res;
-        this.id = this.user.id_user;
-        console.log(this.id);
-        this.getPedidos();
-    })
-  }
-  getPedidos(){
-    this.pedidoServices.getUserPedidos(this.id)
+  //Obtiene todos los pedidos del usuario.  
+  getPedidos(id: number){  
+    this.pedidoServices.getUserPedidos(id)
     .subscribe(resp => {
       this.pedidos = resp;
-    })
+      console.log(this.pedidos);
+    });
+  
   }
-  // userPedido(){
-  //   this.userServices.getUserPedido(this.id)
-  //   .subscribe(res => {
-  //     this.dataUser = res;
-  //     console.log(this.dataUser);
-  //   })
-      
-  // }
+  //Consultamos los tickets por pedido con ID
   userTickets(idPedido: number){
     this.ticketsServices.userTickets(idPedido)
     .subscribe(res => {
@@ -77,7 +72,14 @@ export class PedidoListComponent implements OnInit {
      console.log(this.dataTicket);
     })
   }
-  
- 
-
+  //Eliminamos los pedidos con numero de pedido y numero de usuario.
+  deletePedido(id:number, idu: number){
+    console.log(id);
+    this.pedidoServices.deletPedido(id)
+    .subscribe(res => {
+      this.pedidoServices.getUserPedidos(idu)
+     .subscribe(resp => {this.pedidos = resp;})
+    
+  })
+}
 }
