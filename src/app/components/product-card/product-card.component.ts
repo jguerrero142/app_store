@@ -41,37 +41,26 @@ export class ProductCardComponent implements OnInit {
   //Obtenemos todos los productos.
   getProductos(){
     this.productosServices.getProductos()
-    .subscribe(res => {
-      this.productos = res;
-      
-    });
+    .subscribe(res => {this.productos = res;});
   }
   //Obtenemos el usuario.
   getUser(){
     this.userServices.userSID
-    .subscribe(res => {
-      this.user = res;
-    })
+    .subscribe(res => {this.user = res;})
   }
   //Obtenemos el role.
-  getRole(){
-    this.userServices.roleS
-    .subscribe(res =>{
-      this.role = res;
-    })
+  getRole(){this.userServices.roleS.subscribe(res =>{this.role = res;})
   }
   //Guardamos el ticket al dar clic en anadir
   saveTicket(id: number){
     this.ticket = {
               user_ticket: this.user,
               producto: id,
-          }    
-    this.ticketsService.saveTicket(this.ticket).
-    subscribe(resp =>{
-    this.ticketsService.ticketAdd.emit(true);
-    });
+          } 
+      
+    this.ticketsService.saveTicket(this.ticket)
+    .subscribe(resp =>{this.ticketsService.ticketAdd.emit(true); });
   }
-
 
   //Editamos el producto
   editProduct(id: number){

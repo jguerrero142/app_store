@@ -15,31 +15,33 @@ export class PedidoService {
   constructor(private http: HttpClient) {
     
   }
+  
   userPedidos(id: string){
     return this.http.get( `${this.API_URI}/pedido/user/${id}`);
   }
+
   getUserPedidos(id: number){
     return this.http.get( `${this.API_URI}/pedido/dataPedido/${id}`);
   }
 
+  getPedidos(){
+    return this.http.get( `${this.API_URI}/pedido`);
+  } 
 
-    getPedidos(){
-      return this.http.get( `${this.API_URI}/pedido`);
-    }    
-    getPedido(id: string){
-      return this.http.get(`${this.API_URI}/pedido/${id}`)
-    }
-    deletPedido(id: string | number){
-      return this.http.delete(`${this.API_URI}/pedido/${id}`);
-    }
+  getPedido(id: string){
+    return this.http.get(`${this.API_URI}/pedido/${id}`)
+  }
 
+  deletPedido(id: string | number){
+    return this.http.delete(`${this.API_URI}/pedido/${id}`);
+  }
+
+  savePedido(pedido: Pedido){
+    return this.http.post(`${this.API_URI}/pedido`, pedido);
+  }
     
-    savePedido(pedido: Pedido){
-      return this.http.post(`${this.API_URI}/pedido`, pedido);
-    }
-    
-    updatePedido(id: string | number, updatePedido: Pedido): Observable<Pedido>{
-      return this.http.put(`${this.API_URI}/pedido/${id}`, updatePedido);
-    }
+  updatePedido(id: string | number, updatePedido: Pedido): Observable<Pedido>{
+    return this.http.put(`${this.API_URI}/pedido/${id}`, updatePedido);
+  }
     
 }

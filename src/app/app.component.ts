@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from './services/auth.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AuthService } from './core/auth/auth.service';
 import { UsersService } from 'src/app/services/user.service';
 
-import { User } from './models/User';
+
+//Angular Material
+import { MatSidenav } from '@angular/material/sidenav';
+import { BreakpointObserver } from '@angular/cdk/layout';
+
 
 @Component({
   selector: 'app-root',
@@ -16,53 +20,32 @@ export class AppComponent implements OnInit {
   user$: any = [];
   user: any = [];
 
-  constructor( private auth: AuthService,
-               public userServices: UsersService
+  @ViewChild(MatSidenav)
+  sidenav!: MatSidenav
+
+  constructor( public auth: AuthService,
+               public userServices: UsersService,
+               private observer: BreakpointObserver
                ) {}
 
-  isCollapsed = false;
+  
 
     ngOnInit(){
       this.auth.localAuthSetup();
     }
-     
-    // validarUser(){
-    //   this.auth.userProfile$.subscribe((perfil: User) => {
-    //   this.user$ = perfil;
-    //       if(this.user$){
-    //       this.getUser();
-    //    }
-    //   })
-    // }
-    // getUser(){      
-    //   this.userServices.getUser(this.user$.sub)
-    //   .subscribe(res => {
-        // this.role = this.userServices.role;
-        // this.id = this.userServices.idUser
-        // console.log(res);
-        
-          // this.user = res;
-          // this.id = this.user.id_user;
-          // this.role = this.user.role;
-          // this.userServices.userSID.emit(this.id);
-          // this.userServices.roleS.emit(this.role);
-        
-          // this.userServices.addUser({
-          //   id_user: this.id,
-          //   role: this.role,
-          // });
-    //   },
-    //     err => this.saveUser());
-    // } 
-    // saveUser(){
-    //   this.userServices.saveUser(this.user$)
-    //     .subscribe(
-    //       res => {
-    //         console.log(res); 
-    //       },
-    //       err => console.log(err)
-    //     ) 
-    // }
+
+    ngAfterViewInit(){
+      this.observer.observe(['(max-width: 700px)'])
+      .subscribe((res) => {
+        if(res.matches){
+          this.sidenav.mode = 'over';
+          this.sidenav.close();
+        } else{
+          this.sidenav.mode = 'side';
+          this.sidenav.open();
+        }
+      });
+    }
 }
   
 

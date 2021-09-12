@@ -1,8 +1,8 @@
 <div class="card-group animated fadeIn fast" >
             <mat-card *ngFor ="let producto of productos">
                 <mat-card-header>
-                    <button class="setting">                    
-                      <mat-icon mat-button color="warn" *ngIf="role == 2" (click)="editProduct(producto.id)">settings</mat-icon></button>
+                    <!-- <button class="setting">                    
+                      <mat-icon mat-button color="warn" *ngIf="role == 2" (click)="editProduct(producto.id)">settings</mat-icon></button> -->
                     <mat-card-title>{{producto.name}}</mat-card-title>
                     <mat-card-subtitle class="fw-bold">$ {{producto.valor}}</mat-card-subtitle>
                   </mat-card-header>

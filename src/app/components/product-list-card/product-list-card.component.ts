@@ -13,18 +13,23 @@ import { UsersService } from 'src/app/services/user.service';
 })
 export class ProductListCardComponent implements OnInit {
 
-  tickets: any;
-  tic: any;  
-  
-  new: any = [];
-  totals: any = 0 ;
-  pedido: Pedido;
-  idpedido: any = [];
-  ticket: any;
-  texto:any;
+  //Variables Auth 
   id: number;
   role: number;
-  ticA: boolean = false;
+
+  //Variables Grafica tickets Html  
+  tickets: any;  
+  //Variable del valor total tickets
+  totals: any = 0 ;
+  
+  new: any = [];
+  
+  pedido: Pedido;
+  idpedido: any = [];
+  
+  texto:any;
+  
+  
   
   
 
@@ -32,60 +37,43 @@ export class ProductListCardComponent implements OnInit {
               public ticketsService: TicketsService,
               private pedidoService: PedidoService,
               public userServices: UsersService
-              ) { 
-                
-              }
+              ) {}
 
   ngOnInit(): void {
-                
-    this.getData();
     this.getRole();
     this.getId();
     this.getEvent();
-                
+    this.getData();           
   }
+  //Obtnemos el role del usuario
   getRole(){
     this.userServices.roleS
-    .subscribe(res =>{
-      this.role = res;   
-    });
-    
+    .subscribe(res =>{this.role = res;});
   }
+  //Obtenemos el Id del usuario
   getId(){
     this.userServices.userSID
-    .subscribe(res =>{
-      this.id = res;
-    })
+    .subscribe(res =>{this.id = res;})
   }
+  //Escuchamos el evento Agregar ticket
   getEvent(){
     this.ticketsService.ticketAdd
-    .subscribe(res =>{
-      this.ticA = res;
-      this.getData();
-    })
-  }
+    .subscribe(res =>{this.getData();});}
+   
   //Obtiene todos los tickets en estado true.
   getData(){
-      this.ticketsService.getData()
-      .subscribe((res: Ticket) => {
-      this.tic = res;
+      this.ticketsService.getData(this.id)
+      .subscribe((res: Ticket) => {this.tickets = res;
             //Validamos el texto a mostrar
-            if(this.tic.length > 0){
-              this.texto = 1;
-            }
-            if(this.tic.length == 0){
-              this.texto = 0;
-            }
+            if(this.tickets.length > 0){this.texto = 1;}
+            if(this.tickets.length == 0){this.texto = 0;}
+            //Obtenemos el valor total de los tickets
             this.inData();
-          }),
-          err => console.log(err)
-  }
+          }),err => console.log(err)}
+
   //Obtiene el valor total de los tickets en true.
   inData(){      
-      this.ticketsService.inData()
-      .subscribe(res =>{
-        this.totals = res;
-      })
+      this.ticketsService.inData(this.id).subscribe(res =>{this.totals = res;});
   }
   //Agrega el pedido al dar clic en el boton.
   newPedido(){
@@ -96,25 +84,19 @@ export class ProductListCardComponent implements OnInit {
     }
     console.log(this.pedido)
     this.pedidoService.savePedido(this.pedido)
-    .subscribe(res => {
-    this.idpedido = res;
-    this.putEstado();                
-    })
-                
+    .subscribe(res => {this.idpedido = res;this.putEstado();});
+    
   }  
+  //Eliminamos el ticket
   deleteTicket(id: number){
-    this.ticketsService.deletTicket(id).
-    subscribe(res => {
-      this.getData();
-    })
+    this.ticketsService.deletTicket(id)
+    .subscribe(res => {this.getData();});
   }
-  //Asignamos false a los tickets en true.
+  //Asignamos true a todos los pedidos en false.
   putEstado(){
     const pedido = 'true';
     this.ticketsService.putEstado(this.idpedido.id, pedido)
-      .subscribe(res=>{
-        this.getData();
-      })
+      .subscribe(res=>{this.getData();});
   }
 
               

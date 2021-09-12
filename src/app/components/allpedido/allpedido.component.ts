@@ -11,10 +11,11 @@ import { TicketsService } from '../../services/ticket.service';
   styleUrls: ['./allpedido.component.css']
 })
 export class AllpedidoComponent implements OnInit {
+  //Variable Auth0
+  role: number;
+  user: any;
+  id: any;
 
-  id: any = [];
-  user$: any = [];
-  user: any = [];
   pedidos: any = [];
   idPedidos: any = [];
   idPedido: number;
@@ -28,41 +29,33 @@ export class AllpedidoComponent implements OnInit {
               ) { }
 
  ngOnInit(): void {
-   this.validarUser();
+  this.getId();
+  this.getRole();
+  
   }
-  validarUser(){
-    this.auth.userProfile$.subscribe((perfil: User) => {
-    this.user$ = perfil;
-        if(this.user$){
-        // console.log(this.user$.sub);
-        this.getUser();
-        
-     }
+ 
+  getRole(){
+    this.userServices.roleS
+    .subscribe(res =>{
+      this.role = res;
+      console.log(this.role);
     })
-  }
-  getUser(){ 
-    this.userServices.getUser(this.user$.sub)
-    .subscribe(res => {
-        this.user = res;
-        this.id = this.user.id_user;
-        console.log("holi",this.id);
-        this.getPedidos();
+  } 
+  getId(){
+    this.userServices.userSID
+    .subscribe(res =>{
+      this.id = res;
+      console.log(this.id);
+      this.getPedidos();
     })
-  }
+  }   
   getPedidos(){
-    this.pedidoServices.getUserPedidos(this.id)
+    this.pedidoServices.getPedidos()
     .subscribe(resp => {
       this.pedidos = resp;
     })
   }
-  // userPedido(){
-  //   this.userServices.getUserPedido(this.id)
-  //   .subscribe(res => {
-  //     this.dataUser = res;
-  //     console.log(this.dataUser);
-  //   })
-      
-  // }
+
   userTickets(idPedido: number){
     this.ticketsServices.userTickets(idPedido)
     .subscribe(res => {

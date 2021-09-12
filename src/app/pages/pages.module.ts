@@ -8,7 +8,7 @@ import {MatCardModule} from '@angular/material/card';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { ComponentsModule } from '../components/components.module';
 import { IndexComponent } from './index/index.component';
-import { PagesRoutingModule } from './pages.routing.module';
+// import { PagesRoutingModule } from './pages.routing.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 
@@ -27,8 +27,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    ComponentsModule,
-    PagesRoutingModule
+    ComponentsModule
+    // PagesRoutingModule
   ],
   exports:[
     HomeComponent,
