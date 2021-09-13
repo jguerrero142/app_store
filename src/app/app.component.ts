@@ -1,11 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/auth/auth.service';
-import { UsersService } from 'src/app/services/user.service';
 
 
-//Angular Material
-import { MatSidenav } from '@angular/material/sidenav';
-import { BreakpointObserver } from '@angular/cdk/layout';
+
 
 
 @Component({
@@ -20,12 +17,9 @@ export class AppComponent implements OnInit {
   user$: any = [];
   user: any = [];
 
-  @ViewChild(MatSidenav)
-  sidenav!: MatSidenav
+  
 
-  constructor( public auth: AuthService,
-               public userServices: UsersService,
-               private observer: BreakpointObserver
+  constructor( public auth: AuthService
                ) {}
 
   
@@ -34,18 +28,6 @@ export class AppComponent implements OnInit {
       this.auth.localAuthSetup();
     }
 
-    ngAfterViewInit(){
-      this.observer.observe(['(max-width: 700px)'])
-      .subscribe((res) => {
-        if(res.matches){
-          this.sidenav.mode = 'over';
-          this.sidenav.close();
-        } else{
-          this.sidenav.mode = 'side';
-          this.sidenav.open();
-        }
-      });
-    }
 }
   
 

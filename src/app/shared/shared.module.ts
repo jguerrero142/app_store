@@ -15,6 +15,7 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
 
 //Angular Material
 import { MaterialModule } from '../material.module';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -25,7 +26,8 @@ import { MaterialModule } from '../material.module';
     ConfigComponent,
     MenuComponent,
     PedidosComponent,
-    PerfilComponent
+    PerfilComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { MaterialModule } from '../material.module';
     ConfigComponent,
     MenuComponent,
     PedidosComponent,
-    PerfilComponent
+    PerfilComponent,
+    NavbarComponent
   ]
 })
 export class SharedModule { }
