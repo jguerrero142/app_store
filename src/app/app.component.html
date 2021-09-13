@@ -6,6 +6,7 @@
     </button>
     Responsive sidevar  
 </mat-toolbar>
+
 <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav" class="sidebar mat-elevation-z4">
 
@@ -37,7 +38,9 @@
         </li>
         <li>
             
-                <button mat-button class="menu-button">
+                <button mat-button class="menu-button"
+                        routerLink="/Perfil"
+                        >
                     <mat-icon>person</mat-icon>
                     <span>Perfil</span>
                 </button>
@@ -45,11 +48,23 @@
         </li>
         <li>
             
-                <button mat-button class="menu-button">
+                <button mat-button class="menu-button"
+                        routerLink="/Config"
+                        >
                     <mat-icon>settings</mat-icon>
                     <span>Config</span>
                 </button>
             
+        </li>
+        <li>
+            
+            <button mat-button class="menu-button"
+                    routerLink="/Admin"
+                    >
+                <mat-icon>extension</mat-icon>
+                <span>Admin</span>
+            </button>
+        
         </li>
         <mat-divider></mat-divider>
         <li>

@@ -12,13 +12,6 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './material.module';
 
-
-import { ComponentsModule } from './components/components.module';
-import { PagesModule } from './pages/pages.module';
-
-
-
-
 registerLocaleData(es);
 
 
@@ -36,9 +29,6 @@ registerLocaleData(es);
     CoreModule,
     SharedModule,
     MaterialModule,
-
-    ComponentsModule,
-    PagesModule
      
   ],
   providers: [ ],
