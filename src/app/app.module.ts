@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './material.module';
+import { MenuModule } from './modulos/menu/menu.module';
 
 registerLocaleData(es);
 
@@ -28,7 +29,8 @@ registerLocaleData(es);
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    MaterialModule,
+    MenuModule,
+    MaterialModule
      
   ],
   providers: [ ],
