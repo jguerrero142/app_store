@@ -9,7 +9,7 @@ import { MenuModule } from '../modulos/menu/menu.module';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ConfigComponent } from './pages/config/config.component';
 import { MenuComponent } from './pages/menu/menu.component';
-import { PedidosComponent } from './pages/pedidos/pedidos.component';
+import { ReservaComponent } from './pages/reserva/reserva.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 
 
@@ -25,7 +25,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     AdminComponent,
     ConfigComponent,
     MenuComponent,
-    PedidosComponent,
+    ReservaComponent,
     PerfilComponent,
     NavbarComponent
   ],
@@ -39,7 +39,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     AdminComponent,
     ConfigComponent,
     MenuComponent,
-    PedidosComponent,
+    ReservaComponent,
     PerfilComponent,
     NavbarComponent
   ]

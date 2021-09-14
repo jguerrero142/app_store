@@ -28,9 +28,9 @@
         <li>
             
                 <button mat-button class="menu-button"
-                        routerLink="/Pedido">
+                        routerLink="/Reserva">
                     <mat-icon>grading</mat-icon>
-                    <span>Pedidos</span>
+                    <span>Reservas</span>
                 </button>
             
         </li>
@@ -48,6 +48,7 @@
             
                 <button mat-button class="menu-button"
                         routerLink="/Config"
+                        *ngIf="role == 2"
                         >
                     <mat-icon>settings</mat-icon>
                     <span>Config</span>
@@ -58,6 +59,7 @@
             
             <button mat-button class="menu-button"
                     routerLink="/Admin"
+                    *ngIf="role == 2"
                     >
                 <mat-icon>extension</mat-icon>
                 <span>Admin</span>

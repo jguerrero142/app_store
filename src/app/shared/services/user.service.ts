@@ -1,11 +1,11 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { User } from '../shared/models/User';
+import { User } from '../models/User';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { AuthService } from './auth.service';
+import { AuthService } from '../../core/auth/auth.service';
 
 
 
