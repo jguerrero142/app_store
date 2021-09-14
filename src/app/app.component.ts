@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/auth/auth.service';
+import { WebsocketService } from './shared/services/websocket.service';
 
 
 
@@ -19,8 +20,19 @@ export class AppComponent implements OnInit {
 
   
 
-  constructor( public auth: AuthService
-               ) {}
+  constructor( public auth: AuthService,
+               public wsService: WebsocketService ) {
+                this.sendMessage();
+               }
+
+               sendMessage(){
+                const payload = {
+                  de: 'Julian',
+                  cuerpo: 'juli'
+                };
+            
+                this.wsService.emit('mensaje',payload);
+              }
 
   
 
