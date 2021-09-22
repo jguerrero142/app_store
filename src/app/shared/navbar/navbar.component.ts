@@ -27,12 +27,14 @@ export class NavbarComponent implements OnInit {
   constructor( public auth: AuthService,
                public userServices: UsersService,
                private observer: BreakpointObserver
-    ) { }
+    ) { 
+      
+    }
 
   ngOnInit(): void {
-    
-    this.getId();
-    this.getRole();
+    this.userServices.getAuth();
+    //this.getId();
+    //this.getRole();
   }
   getRole(){
     this.userServices.roleS

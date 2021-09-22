@@ -12,4 +12,5 @@ export interface User {
     "updated_at"?: string;
     "email_verified"?: string;
     "role"?: number;
+    "id_empresa"?: number;
 }
