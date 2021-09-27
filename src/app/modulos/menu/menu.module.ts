@@ -1,18 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { MaterialModule } from '../../material.module';
+
 import { MenuListComponent } from './components/menu-list/menu-list.component';
+import { MenuTodayComponent } from './components/menu-today/menu-today.component';
+import { MenuPedidoComponent } from './components/menu-pedido/menu-pedido.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+
 
 
 
 @NgModule({
   declarations: [
-    MenuListComponent
+    MenuListComponent,
+    MenuTodayComponent,
+    MenuPedidoComponent,
+    ProductCardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule 
   ],
   exports:[
-    MenuListComponent
+    MenuListComponent,
+    MenuTodayComponent,
+    MenuPedidoComponent,
+    ProductCardComponent
   ]
 })
 export class MenuModule { }

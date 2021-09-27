@@ -17,8 +17,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatTableModule } from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -30,6 +32,8 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
     MatSidenavModule,
     MatDividerModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
+    MatGridListModule,
 
 
 
@@ -51,6 +55,8 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
   exports:[
     MatToolbarModule,
     BrowserAnimationsModule,
+    MatTabsModule,
+    MatGridListModule,
 
 
     MatButtonModule,    

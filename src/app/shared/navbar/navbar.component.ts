@@ -7,6 +7,7 @@ import { AuthService } from '../../core/auth/auth.service';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { UsersService } from 'src/app/shared/services/user.service';
+import { User } from '../models/User';
 
 @Component({
   selector: 'app-navbar',
@@ -19,9 +20,10 @@ export class NavbarComponent implements OnInit {
   sidenav!: MatSidenav
 
   //Variable Auth0
-  role: number;
-  user: any;
-  id: any;
+  public role: number;
+  public user: User;
+  public id: any;
+  public img: boolean = false;
 
 
   constructor( public auth: AuthService,
@@ -33,25 +35,23 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userServices.getAuth();
-    //this.getId();
-    //this.getRole();
+    this.getAuth();
+    
   }
-  getRole(){
-    this.userServices.roleS
-    .subscribe(res =>{
-      this.role = res;
-      console.log(this.role);
-    })
-  } 
-  getId(){
-    this.userServices.userSID
-    .subscribe(res =>{
-      this.id = res;
-      console.log(this.id);
-    })
-  } 
+  getAuth(){
+    this.userServices.roleS.subscribe(res => {this.role = res;});
+    this.userServices.userSID.subscribe(resp => {this.id = resp;});
+    this.userServices.getUs.subscribe((usr: User) => {
+      this.user = usr;
+      this.img = true;
+    });
+  }
 
   ngAfterViewInit(){
+    this.sidenavObs();
+  }
+
+  sidenavObs(){
     this.observer.observe(['(max-width: 700px)'])
     .subscribe((res) => {
       if(res.matches){

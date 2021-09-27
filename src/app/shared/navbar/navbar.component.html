@@ -1,16 +1,22 @@
-<mat-toolbar class="mat-elevation-z4" >
+<mat-toolbar class="mat-elevation-z8" >
     <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
         <mat-icon *ngIf="sidenav.opened">menu</mat-icon>
     </button>
-    Responsive sidevar  
+    El Fenix Gloton
 </mat-toolbar>
 <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav" class="sidebar mat-elevation-z4">
 
-        <img class="avatar mat-elevation-z8" src="../assets/pro.png">
-        <h4 class="name">John Smith</h4>
-        <p class="designation">Software Enginner</p>
+        <div *ngIf="img == false">
+        <img class="avatar mat-elevation-z8"  src="assets/fenis.png">
+        <h4 class="name"> Bienvenido </h4>
+        <p class="designation">El Fenix Gloton </p></div>
+
+        <div *ngIf="img == true">
+        <img class="avatar mat-elevation-z8"  [src]="user.picture">
+        <h4 class="name">{{ user.name }}</h4>
+        <p class="designation">{{ user.email }}</p> </div>
 
     <mat-divider></mat-divider>
     <ul class="nav-list">
@@ -18,7 +24,9 @@
         <li>
             
                 <button mat-button class="menu-button"
+                        (click)="sidenavObs()"
                         routerLink="/Menu"
+                        
                         >
                     <mat-icon>article</mat-icon>
                     <span>Menu</span>
@@ -28,6 +36,7 @@
         <li>
             
                 <button mat-button class="menu-button"
+                        (click)="sidenavObs()"
                         routerLink="/Reserva">
                     <mat-icon>grading</mat-icon>
                     <span>Reservas</span>
@@ -37,6 +46,7 @@
         <li>
             
                 <button mat-button class="menu-button"
+                        (click)="sidenavObs()"
                         routerLink="/Perfil"
                         >
                     <mat-icon>person</mat-icon>
@@ -47,6 +57,7 @@
         <li>
             
                 <button mat-button class="menu-button"
+                        (click)="sidenavObs()"
                         routerLink="/Config"
                         *ngIf="role == 2"
                         >
@@ -58,6 +69,7 @@
         <li>
             
             <button mat-button class="menu-button"
+                    (click)="sidenavObs()"
                     routerLink="/Admin"
                     *ngIf="role == 2"
                     >
@@ -93,7 +105,9 @@
     <mat-sidenav-content>
         
         <div class="content  mat-elevation-z4">
-            <router-outlet></router-outlet>
-         </div>
+            <div class="row">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
