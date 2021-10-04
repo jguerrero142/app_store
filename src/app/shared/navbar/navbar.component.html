@@ -1,113 +1,102 @@
-<mat-toolbar class="mat-elevation-z8" >
-    <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
-        <mat-icon *ngIf="sidenav.opened">menu</mat-icon>
-    </button>
-    El Fenix Gloton
-</mat-toolbar>
-<mat-sidenav-container>
-    <mat-sidenav #sidenav="matSidenav" class="sidebar mat-elevation-z4">
-
-        <div *ngIf="img == false">
-        <img class="avatar mat-elevation-z8"  src="assets/fenis.png">
-        <h4 class="name"> Bienvenido </h4>
-        <p class="designation">El Fenix Gloton </p></div>
-
-        <div *ngIf="img == true">
-        <img class="avatar mat-elevation-z8"  [src]="user.picture">
-        <h4 class="name">{{ user.name }}</h4>
-        <p class="designation">{{ user.email }}</p> </div>
-
-    <mat-divider></mat-divider>
-    <ul class="nav-list">
+<nz-layout class="app-layout">
+    
+    
+    <nz-sider
+        class="mat-elevation-z4 animated fadeIn fast"
+        nzCollapsible
+        [(nzCollapsed)]="isCollapsed"
+        [nzTrigger]="null"
+        nzBreakpoint="md"    
+        [nzWidth]="sideWith">
         
-        <li>
-            
-                <button mat-button class="menu-button"
-                        (click)="sidenavObs()"
-                        routerLink="/Menu"
+        <!-- <div class="sidebar-logo">
+
+            <a target="_blank">
+            <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+            <h1>Julian Guerrero</h1>
+            </a>
+        </div> -->
+        
+       
+        <div class="container animated fadeIn fast">
+            <nz-avatar [nzSize]="60" nzIcon="user"></nz-avatar>  
                         
-                        >
-                    <mat-icon>article</mat-icon>
+        <ul nz-menu class="menu" nzTheme="dark" nzMode="inline" 
+        [nzInlineCollapsed]="true">
+            
+            
+                <li nz-menu-item  routerLink="/Menu">
+                    <i nz-icon nzType="shop"
+                    ></i>
                     <span>Menu</span>
-                </button>
-            
-        </li>
-        <li>
-            
-                <button mat-button class="menu-button"
-                        (click)="sidenavObs()"
-                        routerLink="/Reserva">
-                    <mat-icon>grading</mat-icon>
+                </li>
+                <li nz-menu-item routerLink="/Reserva">
+                    <i nz-icon nzType="credit-card"></i>
                     <span>Reservas</span>
-                </button>
-            
-        </li>
-        <li>
-            
-                <button mat-button class="menu-button"
-                        (click)="sidenavObs()"
-                        routerLink="/Perfil"
-                        >
-                    <mat-icon>person</mat-icon>
+                </li>
+                <li nz-menu-item routerLink="/Perfil">
+                    <i nz-icon nzType="team"></i>
                     <span>Perfil</span>
-                </button>
-            
-        </li>
-        <li>
-            
-                <button mat-button class="menu-button"
-                        (click)="sidenavObs()"
-                        routerLink="/Config"
-                        *ngIf="role == 2"
-                        >
-                    <mat-icon>settings</mat-icon>
-                    <span>Config</span>
-                </button>
-            
-        </li>
-        <li>
-            
-            <button mat-button class="menu-button"
-                    (click)="sidenavObs()"
-                    routerLink="/Admin"
-                    *ngIf="role == 2"
+                </li>
+                <li nz-menu-item routerLink="/Reporte">
+                    <i nz-icon nzType="bar-chart"></i>
+                    <span>Reportes</span>
+                </li>
+                <li nz-menu-item routerLink="/Config">
+                    <i nz-icon nzType="setting"></i>
+                    <span>Configurar</span>
+                </li>
+                <li nz-menu-item routerLink="/Admin">
+                    <i nz-icon nzType="github"></i>
+                    <span>Admin</span>
+                </li>
+                
+                <li nz-menu-item
+                    class="login"
+                    *ngIf="!auth.loggedIn"
+                    (click) = "auth.login()"
                     >
-                <mat-icon>extension</mat-icon>
-                <span>Admin</span>
-            </button>
-        
-        </li>
-        <mat-divider></mat-divider>
-        <li>
-            
-            
-                <button mat-button class="menu-button"
-                        *ngIf="!auth.loggedIn"
-                        (click) = "auth.login()">
-                    <mat-icon>logout</mat-icon>
+                    <i nz-icon nzType="login"></i>
                     <span>Ingresar</span>
-                </button>
-                <button mat-button class="menu-button"
-                        *ngIf="auth.loggedIn"
-                        (click) = "auth.logout()">
-                    <mat-icon>logout</mat-icon>
+                </li>
+                <li nz-menu-item 
+                    class="login"
+                    *ngIf="auth.loggedIn"
+                    (click) = "auth.logout()"
+                    >
+                    <i nz-icon nzType="login"></i>
                     <span>Salir</span>
-                </button>
+                </li>
             
-            
-        </li>
-    </ul>  
+        </ul>
+       
+    </div>
+      
+    </nz-sider>
 
-</mat-sidenav>
+   
+        <nz-layout>
+                <nz-header class="mat-elevation-z4" >
+                    <i
+                    class="trigger"
+                    nz-icon
+                    [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+                    (click)="isCollapsed = !isCollapsed"
+                    ></i>
+                </nz-header>       
+                
+                <nz-content class="mat-elevation-z4">
+                        
+                        
+                        <div>
+                            <router-outlet></router-outlet>
+                        </div>
 
+                </nz-content>
+                    
+                <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+    
+        </nz-layout>
+    
 
-    <mat-sidenav-content>
-        
-        <div class="content  mat-elevation-z4">
-            <div class="row">
-                <router-outlet></router-outlet>
-            </div>
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+  </nz-layout>

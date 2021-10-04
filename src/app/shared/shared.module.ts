@@ -16,6 +16,7 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
 //Angular Material
 import { MaterialModule } from '../material.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { nzDesingModule } from '../ant-desing.module';
 
 
 
@@ -34,7 +35,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     CommonModule,
     SharedRoutingModule,
     MenuModule,
-    MaterialModule    
+    MaterialModule,
+    nzDesingModule
   ],
   exports: [
     AdminComponent,

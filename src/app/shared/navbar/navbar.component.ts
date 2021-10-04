@@ -4,7 +4,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../core/auth/auth.service';
 
 //Angular Material
-import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { UsersService } from 'src/app/shared/services/user.service';
 import { User } from '../models/User';
@@ -16,8 +15,10 @@ import { User } from '../models/User';
 })
 export class NavbarComponent implements OnInit {
 
-  @ViewChild(MatSidenav)
-  sidenav!: MatSidenav
+  
+  //Variable Navbar
+  public isCollapsed = false;
+  public sideWith: number;
 
   //Variable Auth0
   public role: number;
@@ -35,9 +36,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userServices.getAuth();
-    this.getAuth();
-    
+    this.getAuth();    
   }
+
+  
   getAuth(){
     this.userServices.roleS.subscribe(res => {this.role = res;});
     this.userServices.userSID.subscribe(resp => {this.id = resp;});
@@ -48,18 +50,16 @@ export class NavbarComponent implements OnInit {
   }
 
   ngAfterViewInit(){
-    this.sidenavObs();
+     this.sidenavObs();    
   }
 
   sidenavObs(){
-    this.observer.observe(['(max-width: 700px)'])
+    this.observer.observe(['(max-width: 400px)'])
     .subscribe((res) => {
       if(res.matches){
-        this.sidenav.mode = 'over';
-        this.sidenav.close();
+        this.sideWith = 0;
       } else{
-        this.sidenav.mode = 'side';
-        this.sidenav.open();
+        this.sideWith = 180;
       }
     });
   }

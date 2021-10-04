@@ -12,14 +12,11 @@ import { AuthService } from './core/auth/auth.service';
 })
 export class AppComponent implements OnInit {
 
-  id: number;
-  role: number;
-  user$: any = [];
-  user: any = [];
-
+  
+  
   
 
-  constructor( public auth: AuthService,
+  constructor( public auth: AuthService
                ) { }
     ngOnInit(){
       this.auth.localAuthSetup();
