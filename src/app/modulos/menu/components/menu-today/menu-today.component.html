@@ -1,9 +1,18 @@
 <div class="card-group animated fadeIn fast" >
+    <nz-carousel nzAutoPlay>
+      <div nz-carousel-content *ngFor="let index of array">
+        <h3>{{ index }}</h3>
+      </div>
+    </nz-carousel>
+</div>
+
+
+<!-- <div class="card-group animated fadeIn fast" >
     <mat-card >
         <mat-card-header>
             <!-- <button class="setting">                    
               <mat-icon mat-button color="warn" *ngIf="role == 2" (click)="editProduct(producto.id)">settings</mat-icon></button> -->
-            <mat-card-title></mat-card-title>
+            <!-- <mat-card-title></mat-card-title>
             <mat-card-subtitle class="fw-bold"></mat-card-subtitle>
           </mat-card-header>
           <img mat-card-image src="">
@@ -16,4 +25,4 @@
           <button mat-button class="boton" color="warn" >AÑADIR</button>
             </mat-card-actions>
     </mat-card>
-</div>
+</div> -->

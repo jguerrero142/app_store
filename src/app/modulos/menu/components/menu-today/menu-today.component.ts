@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MenuTodayComponent implements OnInit {
 
-  
+  array = [1, 2, 3, 4];
 
   constructor() { }
 

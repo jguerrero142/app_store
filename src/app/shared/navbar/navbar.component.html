@@ -2,75 +2,126 @@
     
     
     <nz-sider
-        class="mat-elevation-z4 animated fadeIn fast"
+        class="mat-elevation-z8 animated fadeIn fast"
         nzCollapsible
         [(nzCollapsed)]="isCollapsed"
         [nzTrigger]="null"
         nzBreakpoint="md"    
         [nzWidth]="sideWith">
         
-        <!-- <div class="sidebar-logo">
-
-            <a target="_blank">
-            <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-            <h1>Julian Guerrero</h1>
-            </a>
-        </div> -->
         
-       
-        <div class="container animated fadeIn fast">
-            <nz-avatar [nzSize]="60" nzIcon="user"></nz-avatar>  
-                        
-        <ul nz-menu class="menu" nzTheme="dark" nzMode="inline" 
-        [nzInlineCollapsed]="true">
-            
-            
-                <li nz-menu-item  routerLink="/Menu">
-                    <i nz-icon nzType="shop"
-                    ></i>
-                    <span>Menu</span>
-                </li>
-                <li nz-menu-item routerLink="/Reserva">
-                    <i nz-icon nzType="credit-card"></i>
-                    <span>Reservas</span>
-                </li>
-                <li nz-menu-item routerLink="/Perfil">
-                    <i nz-icon nzType="team"></i>
-                    <span>Perfil</span>
-                </li>
-                <li nz-menu-item routerLink="/Reporte">
-                    <i nz-icon nzType="bar-chart"></i>
-                    <span>Reportes</span>
-                </li>
-                <li nz-menu-item routerLink="/Config">
-                    <i nz-icon nzType="setting"></i>
-                    <span>Configurar</span>
-                </li>
-                <li nz-menu-item routerLink="/Admin">
-                    <i nz-icon nzType="github"></i>
-                    <span>Admin</span>
-                </li>
+                <div class="container animated fadeIn fast">
+                    <div  *ngIf="img == false">
+                        <span nz-tooltip
+                              nzTooltipTitle="www.fenis.com">
+                                <nz-avatar class="mat-elevation-z4"
+                                           [nzGap]="4" 
+                                           [nzSize]="60"
+                                           nzSrc="assets/fenis.png">
+                                        
+                                </nz-avatar>
+                        </span>
+                    </div>
+
+                    <div *ngIf="img == true">
+
+                        <span nz-tooltip
+                              [nzTooltipTitle] ="user.email">
+
+                              <nz-avatar class="mat-elevation-z4"
+                                         [nzGap]="4"
+                                         [nzSize]="60"
+                                         [nzSrc]="user.picture">
+
+                                </nz-avatar>
+                         </span>
+                    </div>                    
                 
-                <li nz-menu-item
-                    class="login"
-                    *ngIf="!auth.loggedIn"
-                    (click) = "auth.login()"
-                    >
-                    <i nz-icon nzType="login"></i>
-                    <span>Ingresar</span>
-                </li>
-                <li nz-menu-item 
-                    class="login"
-                    *ngIf="auth.loggedIn"
-                    (click) = "auth.logout()"
-                    >
-                    <i nz-icon nzType="login"></i>
-                    <span>Salir</span>
-                </li>
-            
-        </ul>
+                    <mat-divider></mat-divider>
+
+                    <ul nz-menu class="menu"
+                        nzTheme="dark"
+                        nzMode="inline" 
+                        [nzInlineCollapsed]="true"
+                        >
+                    
+                    
+                        <li nz-menu-item
+                            routerLink="/Menu"
+                            nz-tooltip
+                            nzTooltipPlacement ="right"
+                            nzTooltipTitle ="Menu">
+                            <i nz-icon nzType="shop"
+                            ></i>
+                            <span>Menu</span>
+                        </li>
+                        <li nz-menu-item
+                            nz-tooltip
+                            nzTooltipPlacement ="right"
+                            nzTooltipTitle ="Reservas"
+                            routerLink="/Reserva">
+                            <i nz-icon nzType="credit-card"></i>
+                            <span>Reservas</span>
+                        </li>
+                        <li nz-menu-item
+                            nz-tooltip
+                            nzTooltipPlacement ="right"
+                            nzTooltipTitle ="Perfil"
+                            routerLink="/Perfil">
+                            <i nz-icon nzType="team"></i>
+                            <span>Perfil</span>
+                        </li>
+                        <li nz-menu-item
+                            nz-tooltip
+                            nzTooltipPlacement ="right"
+                            nzTooltipTitle ="Reportes"
+                            routerLink="/Reporte">
+                            <i nz-icon nzType="bar-chart"></i>
+                            <span>Reportes</span>
+                        </li>
+                        <li nz-menu-item
+                            nz-tooltip
+                            nzTooltipPlacement ="right"
+                            nzTooltipTitle ="Configuracion"
+                            routerLink="/Config">
+                            <i nz-icon nzType="setting"></i>
+                            <span>Configurar</span>
+                        </li>
+                        <li nz-menu-item
+                            nz-tooltip
+                            nzTooltipPlacement ="right"
+                            nzTooltipTitle ="Administrar"
+                            routerLink="/Admin">
+                            <i nz-icon nzType="github"></i>
+                            <span>Admin</span>
+                        </li>
+                        
+                        <li nz-menu-item
+                            nz-tooltip
+                            nzTooltipPlacement ="right"
+                            nzTooltipTitle ="Ingresar"
+                            class="login"
+                            *ngIf="!auth.loggedIn"
+                            (click) = "auth.login()"
+                            >
+                            <i nz-icon nzType="login"></i>
+                            <span>Ingresar</span>
+                        </li>
+                        <li nz-menu-item
+                            nz-tooltip
+                            nzTooltipPlacement ="right"
+                            nzTooltipTitle ="Salir"
+                            class="login"
+                            *ngIf="auth.loggedIn"
+                            (click) = "auth.logout()"
+                            >
+                            <i nz-icon nzType="login"></i>
+                            <span>Salir</span>
+                        </li>
+                    
+                    </ul>
        
-    </div>
+                </div>
       
     </nz-sider>
 

@@ -12,6 +12,8 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline];
 
@@ -22,7 +24,9 @@ const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline
     NzMenuModule,
     NzBreadCrumbModule,
     NzDrawerModule,
-    NzAvatarModule
+    NzAvatarModule,
+    NzToolTipModule,
+    NzCarouselModule
      ],
   exports: [
     NzIconModule,
@@ -30,7 +34,9 @@ const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline
     NzMenuModule,
     NzBreadCrumbModule,
     NzDrawerModule,
-    NzAvatarModule
+    NzAvatarModule,
+    NzToolTipModule,
+    NzCarouselModule
   ],
   providers: [
     { provide: NZ_ICONS, useValue: icons }
