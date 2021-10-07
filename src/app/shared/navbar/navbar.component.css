@@ -17,6 +17,7 @@ nz-sider{
 
 
 nz-content {
+  width: 96%;
   margin: 20px 16px 0;
   height: 100%;
   padding: 2px;
@@ -66,7 +67,7 @@ nz-footer {
 }
 
 mat-divider{
-  width: auto;
+  
   margin: 16px;
   background-color: rgba(255, 225, 225, 0.5);
 }

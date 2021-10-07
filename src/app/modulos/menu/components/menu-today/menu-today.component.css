@@ -2,8 +2,8 @@
     text-align: center;
     height: 160px;
     line-height: 160px;
-    background: #364d79;
-    color: #fff;
+    background: white;
+    color: rgb(241, 8, 8);
     border-radius: 5%;
   }
 
@@ -12,7 +12,7 @@
   }
 
   h3 {
-    color: #fff;
+    color: rgb(241, 8, 8);
     user-select: none;
   }
  

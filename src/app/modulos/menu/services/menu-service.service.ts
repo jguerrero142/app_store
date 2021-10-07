@@ -1,7 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { TipoProducto } from '../../../shared/models/Tipo-producto';
 import { Producto } from '../../../shared/models/Producto';
@@ -9,10 +7,14 @@ import { Producto } from '../../../shared/models/Producto';
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class MenuService {
 
   API_URI = 'http://localhost:3000/api';
-
+  
+  public ticketAdd = new EventEmitter<boolean>();
   public tipo:string;
   public tipos: TipoProducto;
   constructor(private http: HttpClient) {
@@ -24,12 +26,24 @@ export class MenuService {
   
    getProductos(tipoProduct: number){
     return this.http.get<Producto[]>( `${this.API_URI}/producto/tipo/producto/${tipoProduct}`);
-    // .pipe(
-    //   map((resp: TipoProducto) => {
-    //     this.tipo = resp.name_tipo;
-    //     return this.tipo;
-    //   })
-    // )
+  }
+
+  // Obtienes los ticket en estado true.
+  getData(id: number){
+    return this.http.get(`${this.API_URI}/ticket/data/ticket/${id}`)
+  }
+   //Obtiene el valor total de los ticket en estado true.
+   inData(id: number){
+    return this.http.get(`${this.API_URI}/ticket/data/total/${id}`)
+  }
+
+  //Obtiene los tickets de un pedido en especifico.
+  userTickets(id: number){
+    return this.http.get( `${this.API_URI}/ticket/ticketPedido/${id}`);
+  }
+
+  putEstado( id: number , pedido: string ){
+    return this.http.put(`${this.API_URI}/ticket/pedido/id/${id}`, pedido );
   }
 
 

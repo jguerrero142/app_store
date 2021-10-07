@@ -10,33 +10,11 @@ import { Observable, Subject } from 'rxjs';
 })
 export class TicketsService {
   
-  private tick: Ticket[];
-  private tick$: Subject<Ticket[]>;
-  
-  ticketAdd = new EventEmitter<boolean>();
   Tick: Ticket[] = [];
 
   API_URI = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) { }
-
-  // Obtienes los ticket en estado true.
-  getData(id: number){
-    return this.http.get(`${this.API_URI}/ticket/data/ticket/${id}`)
-  }
-   //Obtiene el valor total de los ticket en estado true.
-   inData(id: number){
-    return this.http.get(`${this.API_URI}/ticket/data/total/${id}`)
-  }
-
-  //Obtiene los tickets de un pedido en especifico.
-  userTickets(id: number){
-    return this.http.get( `${this.API_URI}/ticket/ticketPedido/${id}`);
-  }
-
-  putEstado( id: number , pedido: string ){
-    return this.http.put(`${this.API_URI}/ticket/pedido/id/${id}`, pedido );
-  }
 
   // CRUD Tickets
 

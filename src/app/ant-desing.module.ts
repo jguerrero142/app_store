@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { NZ_ICONS, NzIconModule } from 'ng-zorro-antd/icon';
 
+
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
@@ -14,6 +15,7 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline];
 
@@ -26,7 +28,8 @@ const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline
     NzDrawerModule,
     NzAvatarModule,
     NzToolTipModule,
-    NzCarouselModule
+    NzCarouselModule,
+    NzCardModule
      ],
   exports: [
     NzIconModule,
@@ -36,7 +39,8 @@ const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline
     NzDrawerModule,
     NzAvatarModule,
     NzToolTipModule,
-    NzCarouselModule
+    NzCarouselModule,
+    NzCardModule
   ],
   providers: [
     { provide: NZ_ICONS, useValue: icons }
