@@ -1,9 +1,5 @@
 
-mat-card{    
-    
-    margin: 3%
-         
-} /*
+
 .container{
     display: flex; 
 }
@@ -12,48 +8,4 @@ mat-card{
     width: 100%;
     align-content: center;
 }
-.setting{
-    background-color: transparent;
-    border: none;
-} 
  
-@media (max-width:1000px) {
-    mat-card{
-        margin-left: 0%;
-        align-items: center;
-        width: 40%;
-        display: block;
-        margin-bottom: 5%;
-        
-        
-    }
-    mat-card img{
-        align-content:  center;
-        width: 100%;
-        display: block;
-        margin-left: 0%;
-        
-        
-        
-    }
-}
-@media (max-width:640px) {
-    mat-card{
-        margin-left: 0%;
-        align-items: center;
-        width: 100%;
-        display: block;
-        margin-bottom: 5%;
-        
-        
-    }
-    mat-card img{
-        align-content:  center;
-        width: 100%;
-        display: block;
-        margin-left: 0%;
-        
-        
-        
-    }
-} */

@@ -7,7 +7,7 @@ import { PedidoService } from 'src/app/shared/services/pedido.service';
 import { Pedido } from 'src/app/shared/models/Pedido';
 import { UsersService } from 'src/app/shared/services/user.service';
 import { MenuService } from '../../services/menu-service.service';
-import { TicketsService } from '../../../../shared/services/ticket.service';
+import { TicketsService } from 'src/app/shared/services/ticket.service';
 @Component({
   selector: 'app-menu-pedido',
   templateUrl: './menu-pedido.component.html',
@@ -24,12 +24,9 @@ export class MenuPedidoComponent implements OnInit {
   //Variable del valor total tickets
   public totals: any = 0 ;
   
-  public new: any = [];
-  
   public pedido: Pedido;
-  public idpedido: any = [];
-  
-  public texto:any; 
+  public idpedido: any = [];  
+  public texto:any = 0;
   public ticket$: Ticket[] = [];
  
   constructor(public auth: AuthService,
@@ -46,7 +43,11 @@ export class MenuPedidoComponent implements OnInit {
   //Obtnemos el role del usuario
   getAuth(){
     this.userServices.roleS.subscribe(res => {this.role = res;});
-    this.userServices.userSID.subscribe(resp => {this.id = resp;this.getData();});
+    this.userServices.userSID.subscribe(resp => {
+      this.id = resp;
+      this.getData();
+      console.log(this.id)
+    });
   }
   //Escuchamos el evento Agregar ticket
   getEvent(){
@@ -57,16 +58,16 @@ export class MenuPedidoComponent implements OnInit {
   getData(){
       this.menuServices.getData(this.id)
       .subscribe((res: Ticket) => {this.tickets = res;
-        this.ticket$.push(res);
             //Validamos el texto a mostrar
             if(this.tickets.length > 0){this.texto = 1;}
             if(this.tickets.length == 0){this.texto = 0;}
             //Obtenemos el valor total de los tickets
             this.inTotal();
-          }),err => console.log(err)}
+          }),err => console.log(err)
+        }
  
   //Obtiene el valor total de los tickets en true.
-  inTotal(){      
+  inTotal(){   
       this.menuServices.inData(this.id).subscribe(res =>{this.totals = res;});
   }
   //Agrega el pedido al dar clic en el boton.

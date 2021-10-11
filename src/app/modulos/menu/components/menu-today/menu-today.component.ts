@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Menu } from 'src/app/shared/models/Menu';
+import { MenuService } from '../../services/menu-service.service';
 
 @Component({
   selector: 'app-menu-today',
@@ -7,12 +9,19 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MenuTodayComponent implements OnInit {
 
-  array = [1, 2, 3, 4];
+  public menu: Menu [] = [];
 
-  constructor() { }
+  constructor( public menuServices: MenuService) { }
 
   ngOnInit(): void {
-    
+    this.getMenu();
   }
-
+  getMenu(){
+    this.menuServices.getMenu()
+    .subscribe(
+      (resp: Menu[]) =>{
+        this.menu = resp
+        console.log(this.menu)
+      });
+  }
 }

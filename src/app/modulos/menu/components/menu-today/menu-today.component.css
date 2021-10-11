@@ -1,22 +1,50 @@
 [nz-carousel-content] {
-    text-align: center;
-    height: 160px;
-    line-height: 160px;
-    background: white;
-    color: rgb(241, 8, 8);
-    border-radius: 5%;
-  }
-
-  .card-group{
-    margin: 0%;
-  }
-
-  h3 {
-    color: rgb(241, 8, 8);
-    user-select: none;
-  }
- 
- 
-@media (max-width:400px) {
-    
+  text-align: center;
+  height: 140px;
+  line-height: 160px;
+  color: #fff;
+  
 }
+@media (max-width:900px) {
+  
+  [nz-carousel-content] {
+    text-align: center;
+    height: 100px; 
+  }
+}
+
+@media (max-width:640px) {
+  
+  [nz-carousel-content] {
+    text-align: center;
+    height: 90px;
+    line-height: 60px;
+    
+  }
+}
+@media (max-width:400px) {
+  
+  [nz-carousel-content] {
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    
+  }
+}
+ 
+ /* [nz-carousel-content] {
+  height: 400px;
+  line-height: 160px;
+  width: 100px;
+    
+  }
+
+  @media(min-width: 640px){
+    [nz-carousel-content] {
+      height: 20px;
+      line-height: 20px;
+      width: 100px;
+        
+      }
+  } */
+  

@@ -24,6 +24,8 @@
     "@angular/router": "~11.2.8",
     "@auth0/auth0-angular": "^1.5.0",
     "@ngrx/store": "^12.2.0",
+    "@tailwindcss/forms": "^0.3.4",
+    "@tailwindcss/typography": "^0.4.1",
     "hammerjs": "^2.0.8",
     "ng-zorro-antd": "^11.4.2",
     "ngx-socket-io": "^4.1.0",

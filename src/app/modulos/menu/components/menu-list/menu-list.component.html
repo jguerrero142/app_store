@@ -1,6 +1,6 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
+<div class="container ">
+    <div class="row justify-items-center">
+        <div class="col-md-8 justify-center">
                      <app-menu-today></app-menu-today> 
                     <mat-tab-group dynamicHeight>                    
                         <mat-tab  *ngFor = "let tipo of tipos" [label]="tipo.name_tipo">                    
@@ -10,7 +10,7 @@
                     </mat-tab-group>                
         </div>
         
-        <div class="col-md-4 text-center" >
+        <div class="col-md-4 text-center justify-center" >
             <app-menu-pedido></app-menu-pedido>
         </div>
     </div>

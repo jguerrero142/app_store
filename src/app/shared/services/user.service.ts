@@ -23,9 +23,10 @@ export class UsersService {
   getImg = new EventEmitter<string>();
 
   //Variable Auth0
-  user: User;
-  role: any;
-  id: any;
+  public user: User;
+  public role: any;
+  public id: any;
+  public userId: number;
   
   
   API_URI = 'http://localhost:3000/api';
@@ -53,6 +54,7 @@ export class UsersService {
         return this.http.put(`${this.API_URI}/user/${id}`, updateUser)
         .pipe(map((res: User)=>{
           this.id = res.id_user;
+          this.userId = this.id;
           this.userSID.emit(this.id);
           this.role = res.role;
           this.roleS.emit(this.role);

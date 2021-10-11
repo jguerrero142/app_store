@@ -22,7 +22,7 @@ nz-content {
   height: 100%;
   padding: 2px;
   background: #fff;
-  min-height: 360px;
+  min-height: 500px;
   z-index: 1; 
   border-radius: 10px; 
 }

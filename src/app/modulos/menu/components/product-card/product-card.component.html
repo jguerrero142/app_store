@@ -1,21 +1,25 @@
 
-    <div class="row">
-        <div class="col-md-4 animated fadeIn fast" *ngFor = "let producto of productos[0]">
-            <mat-card >
-                <mat-card-header>            
+    <div class="row justify-items-stretch ml-1 md:ml-2" >
+        <mat-card class="flex w-full sm:w-60 md:w-52 p-0 m-2 md:m-3 animated fadeIn fast cursor-pointer mat-elevation-z2"  
+                  (click)="saveTicket(producto.id)"
+                  *ngFor = "let producto of productos[0]">
+                     
+            <mat-card-content>
+                <img class="m-0 p-0 rounded-b-sm" [src]="producto.image">
+                <div class="m-2">
                     <mat-card-title>{{producto.name}}</mat-card-title>
                     <mat-card-subtitle class="fw-bold">$ {{producto.valor}}</mat-card-subtitle>
-                </mat-card-header>
-                <img mat-card-image [src]="producto.image">
-                <mat-card-content>
-                    <p class="fw-bold">
+                </div>
+                <div class="m-2">
+                    <p class="m-2">
                         {{producto.descripcion}}
                     </p>
-                </mat-card-content>
-                <mat-card-actions >
-                    <button mat-button class="boton" color="warn"
-                    (click)="saveTicket(producto.id)" >RESERVAR</button>
-                </mat-card-actions>
-            </mat-card>
-        </div>
+                </div>
+                
+            </mat-card-content>
+           
+        </mat-card> 
+                                
     </div>
+
+   

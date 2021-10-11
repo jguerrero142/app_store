@@ -21,7 +21,11 @@
                                         
                                 </nz-avatar>
                         </span>
+                                                   
+                        
                     </div>
+
+                        
 
                     <div *ngIf="img == true">
 
@@ -35,8 +39,13 @@
 
                                 </nz-avatar>
                          </span>
-                    </div>                    
-                
+                    </div>
+                    <div class=" w-11 text-sm my-3 ml-5" >
+                    <nz-tag  *ngIf = "role == 1" [nzColor]="'#f50'">Super</nz-tag>
+                    <nz-tag  *ngIf = "role == 2" [nzColor]="'#2db7f5'">Admin</nz-tag>
+                    <nz-tag  *ngIf = "role == 3"[nzColor]="'#87d068'">User</nz-tag>
+                    <nz-tag  *ngIf = "role == 4" [nzColor]="'#108ee9'">VIP</nz-tag>
+                    </div>
                     <mat-divider></mat-divider>
 
                     <ul nz-menu class="menu"

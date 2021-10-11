@@ -2,7 +2,7 @@ import { Injectable,EventEmitter } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import { TipoProducto } from '../../../shared/models/Tipo-producto';
-import { Producto } from '../../../shared/models/Producto';
+import { Producto } from 'src/app/shared/models/Producto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,15 +17,22 @@ export class MenuService {
   public ticketAdd = new EventEmitter<boolean>();
   public tipo:string;
   public tipos: TipoProducto;
+  
+
   constructor(private http: HttpClient) {
 
    }
-   getTipos(){
+
+  getTipos(){
     return this.http.get<TipoProducto[]>( `${this.API_URI}/producto/tipo/producto/`); 
   }
   
    getProductos(tipoProduct: number){
     return this.http.get<Producto[]>( `${this.API_URI}/producto/tipo/producto/${tipoProduct}`);
+  }
+
+  getMenu(){
+    return this.http.get<Producto[]>( `${this.API_URI}/producto/store/menu`);
   }
 
   // Obtienes los ticket en estado true.

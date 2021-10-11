@@ -15,6 +15,7 @@ export class ProductCardComponent implements OnInit {
   @Input() tipoPro: number;
   public productos: Producto[] = [];
   public resx: any ;
+  public valid: boolean = false;
 
   //Variables Auth
   public role: number;
@@ -47,6 +48,9 @@ export class ProductCardComponent implements OnInit {
     this.menuServices.getProductos(this.tipoPro)
     .subscribe( resp => {
       this.resx = resp
+      if(this.resx){
+        this.valid = true;
+      }
       this.productos.push(this.resx)
     })
   }
