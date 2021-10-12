@@ -15,7 +15,8 @@ export class ProductCardComponent implements OnInit {
   @Input() tipoPro: number;
   public productos: Producto[] = [];
   public resx: any ;
-  public valid: boolean = false;
+  public valid: boolean;
+  public alert: boolean;
 
   //Variables Auth
   public role: number;
@@ -28,14 +29,18 @@ export class ProductCardComponent implements OnInit {
   public ticket: any = [];
   constructor( public menuServices: MenuService,
                public ticketServices: TicketsService,
-               public userServices: UsersService) { 
-    
-  }
+               public userServices: UsersService)
+               {
+                 
+                 }
 
   ngOnInit(): void {
     this.userServices.getAuth();
     this.getTipoProductos();
     this.getAuth();
+  }
+  afterClose(): void {
+    this.alert = false;
   }
 
   getAuth(){
@@ -58,12 +63,17 @@ export class ProductCardComponent implements OnInit {
   }
 
   saveTicket(id: number){
-    this.ticket = {
-              user_ticket: this.id,
-              producto: id,
-          }       
-    this.ticketServices.saveTicket(this.ticket)
-    .subscribe(resp =>{this.menuServices.ticketAdd.emit(true); });
+    if(this.id){
+      this.ticket = {
+      user_ticket: this.id,
+      producto: id,
+      }       
+      this.ticketServices.saveTicket(this.ticket)
+      .subscribe(resp =>{this.menuServices.ticketAdd.emit(true); });
+    }else{
+      this.alert = true;
+    }
+     
   }
 
 }

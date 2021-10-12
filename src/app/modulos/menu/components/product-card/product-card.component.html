@@ -1,6 +1,13 @@
+<nz-alert
+      class="m-2"
+      nzType="warning"
+      nzCloseable
+      nzMessage="Ingresa como usuario para poder reservar"
+      (nzOnClose)="afterClose()"
+      *ngIf="alert == true"
+    ></nz-alert>
 
-<nz-spin nzSimple [nzSize]="'large'"></nz-spin>
-<div class="row justify-items-stretch ml-1 md:ml-2" *ngIf="valid === true">
+<div class="container flex flex-wrap justify-around justify-items-stretch ml-1 md:ml-2">
     <mat-card
       class="flex w-full sm:w-60 md:w-52 p-0 m-2 md:m-3 animated fadeIn fast cursor-pointer mat-elevation-z2"
       (click)="saveTicket(producto.id)"
@@ -22,9 +29,8 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div class="row justify-items-stretch ml-1 md:ml-2" *ngIf="valid === false">
-    <mat-card
-      class="flex w-full sm:w-60 md:w-52 p-0 m-2 md:m-3 animated fadeIn fast mat-elevation-z2"
+  <div class="container flex flex-wrap justify-around ml-1 md:ml-2" *ngIf="valid == false">
+    <mat-card class="flex w-full sm:w-60 md:w-52 p-0 m-2 md:m-3 animated fadeIn fast mat-elevation-z2"
       *ngFor="let producto of productos[0]"
     >
       <mat-card-content>
@@ -44,4 +50,3 @@
     </mat-card>
   </div>
   
-   

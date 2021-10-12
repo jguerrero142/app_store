@@ -1,20 +1,30 @@
-<div class="container ">
+<div class="container px-0">
+
     <div class="row justify-items-center">
-        <div class="col-md-8 justify-center">
-                     <app-menu-today></app-menu-today> 
-                    <mat-tab-group dynamicHeight>                    
-                        <mat-tab  *ngFor = "let tipo of tipos" [label]="tipo.name_tipo">                    
-                               
-                            <app-product-card [tipoPro]="tipo.id_tipo"></app-product-card>                    
-                        </mat-tab>
-                    </mat-tab-group>                
-        </div>
+
+                <div class="col-md-8 justify-center">
+
+                            <div class="container">
+                                <app-menu-today></app-menu-today>
+                            </div>
+                                
+                            <div>
+                                <mat-tab-group dynamicHeight>                    
+                                    <mat-tab  *ngFor = "let tipo of tipos" [label]="tipo.name_tipo">                    
+                                        
+                                        <app-product-card [tipoPro]="tipo.id_tipo"></app-product-card>                    
+                                    </mat-tab>
+                                </mat-tab-group> 
+                            </div>                             
+                                           
+                </div>
         
-        <div class="col-md-4 text-center justify-center" >
-            <app-menu-pedido></app-menu-pedido>
-        </div>
+                <div class="col-md-4 text-center justify-center" >
+                    <app-menu-pedido></app-menu-pedido>
+                </div>
+
     </div>
     
 
-</div>
+</div> 
    

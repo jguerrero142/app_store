@@ -9,6 +9,7 @@
   
   [nz-carousel-content] {
     text-align: center;
+    line-height: 160px;
     height: 100px; 
   }
 }
@@ -31,20 +32,3 @@
     
   }
 }
- 
- /* [nz-carousel-content] {
-  height: 400px;
-  line-height: 160px;
-  width: 100px;
-    
-  }
-
-  @media(min-width: 640px){
-    [nz-carousel-content] {
-      height: 20px;
-      line-height: 20px;
-      width: 100px;
-        
-      }
-  } */
-  
