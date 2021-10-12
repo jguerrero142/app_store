@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { MenuModule } from './modulos/menu/menu.module';
+import { ReservaModule } from './modulos/reserva/reserva.module';
 
 
 // Modulos librearias
@@ -22,6 +23,7 @@ import { nzDesingModule } from './ant-desing.module';
 import { MaterialModule } from './material.module';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
+
 
 
 
@@ -43,6 +45,7 @@ registerLocaleData(es);
     CoreModule,
     SharedModule,
     MenuModule,
+    ReservaModule,
     MaterialModule,
     FormsModule,
     BrowserAnimationsModule,

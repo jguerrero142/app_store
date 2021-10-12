@@ -20,6 +20,11 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+
 
 const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline];
 
@@ -37,7 +42,11 @@ const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline
     NzEmptyModule,
     NzTagModule,
     NzPageHeaderModule,
-    NzBackTopModule
+    NzBackTopModule,
+    NzSpinModule,
+    NzStatisticModule,
+    NzGridModule,
+    NzCollapseModule
      ],
   exports: [
     NzIconModule,
@@ -52,7 +61,11 @@ const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline
     NzEmptyModule,
     NzTagModule,
     NzPageHeaderModule,
-    NzBackTopModule
+    NzBackTopModule,
+    NzSpinModule,
+    NzStatisticModule,
+    NzGridModule,
+    NzCollapseModule
   ],
   providers: [
     { provide: NZ_ICONS, useValue: icons }

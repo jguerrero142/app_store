@@ -21,6 +21,7 @@ export class ProductCardComponent implements OnInit {
   public role: number;
   public user: User;
   public id: any;
+  
 
 
   //Variables del componente
@@ -32,13 +33,14 @@ export class ProductCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userServices.getAuth();
     this.getTipoProductos();
     this.getAuth();
   }
 
   getAuth(){
     this.userServices.roleS.subscribe(res => {this.role = res;});
-    this.userServices.userSID.subscribe(resp => {this.id = resp;});
+    this.userServices.userSID.subscribe(resp => {this.id = resp;this.valid = true});
     this.userServices.getUs.subscribe((usr: User) => {
       this.user = usr;
     });

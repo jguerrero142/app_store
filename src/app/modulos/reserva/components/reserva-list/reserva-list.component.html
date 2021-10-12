@@ -1,0 +1,24 @@
+<div class="container ">
+    <div class="row justify-items-center">
+
+          <app-title></app-title>
+
+    </div>
+    <div class="row justify-items-center">
+
+        <div class="col-md-8 justify-center">
+            <nz-collapse nzAccordion>
+                <nz-collapse-panel *ngFor="let panel of panels" [nzHeader]="panel.name" [nzActive]="panel.active">
+                  <p>{{ panel.name }} content</p>
+                </nz-collapse-panel>
+              </nz-collapse>          
+        </div>
+        
+        <div class="col-md-4 text-center justify-center" >
+            <app-reserva-factura></app-reserva-factura>
+        </div>
+
+    </div>
+    
+
+</div>

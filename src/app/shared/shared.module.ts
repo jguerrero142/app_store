@@ -17,6 +17,7 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
 import { MaterialModule } from '../material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { nzDesingModule } from '../ant-desing.module';
+import { ReservaModule } from '../modulos/reserva/reserva.module';
 
 
 
@@ -35,6 +36,7 @@ import { nzDesingModule } from '../ant-desing.module';
     CommonModule,
     SharedRoutingModule,
     MenuModule,
+    ReservaModule,
     MaterialModule,
     nzDesingModule
   ],
