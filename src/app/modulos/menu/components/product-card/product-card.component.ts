@@ -31,7 +31,7 @@ export class ProductCardComponent implements OnInit {
                public ticketServices: TicketsService,
                public userServices: UsersService)
                {
-                 
+                 this.valid = false
                  }
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class ProductCardComponent implements OnInit {
 
   getAuth(){
     this.userServices.roleS.subscribe(res => {this.role = res;});
-    this.userServices.userSID.subscribe(resp => {this.id = resp;this.valid = true});
+    this.userServices.userSID.subscribe(resp => {this.id = resp;});
     this.userServices.getUs.subscribe((usr: User) => {
       this.user = usr;
     });
@@ -54,11 +54,14 @@ export class ProductCardComponent implements OnInit {
   getTipoProductos(){
     this.menuServices.getProductos(this.tipoPro)
     .subscribe( resp => {
-      this.resx = resp
-      if(this.resx){
+      this.resx = resp      
+      this.productos.push(this.resx);
+      if(this.productos['0'].length > 0){
+        console.log(this.productos[0])
+      }else{
         this.valid = true;
       }
-      this.productos.push(this.resx)
+        
     })
   }
 
