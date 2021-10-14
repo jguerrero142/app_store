@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 //Servicios
 import { AuthService } from '../../core/auth/auth.service';
+import { CoreService, Users } from 'src/app/core/core.service';
+import { Observable } from 'rxjs';
 
 //Angular Material
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -25,13 +27,16 @@ export class NavbarComponent implements OnInit {
   public user: User;
   public id: any;
   public img: boolean = false;
-
+  // private data$: Observable<User>;
 
   constructor( public auth: AuthService,
                public userServices: UsersService,
-               private observer: BreakpointObserver
+               private observer: BreakpointObserver,
+               private coreService: CoreService
     ) { 
-      
+      // this.data$ =  coreService.userObservable;
+      // const name = this.data$['source']['value'].name;
+      // console.log(name);
     }
 
   ngOnInit(): void {
@@ -46,6 +51,10 @@ export class NavbarComponent implements OnInit {
     this.userServices.getUs.subscribe((usr: User) => {
       this.user = usr;
       this.img = true;
+      // this.coreService.userData = {name:'guerrero'};
+      // this.data$ =  this.coreService.userObservable;
+      // const name = this.data$['source']['value'].name;
+      // console.log(name);
     });
   }
 
