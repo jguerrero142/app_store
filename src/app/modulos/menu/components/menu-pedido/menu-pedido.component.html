@@ -12,11 +12,11 @@
                     </div>
                     
                     
-                    <div class="bton fw-bold aling-text" *ngIf = "texto == 0"> Que quieres comer hoy?</div>
+                    
                                     <ul class="list-group" *ngFor ="let total of totals">
                                                 
                                         <li class="list-group-item d-flex justify-content-between m-2">
-                                            
+                                            <div class="bton fw-bold aling-text" *ngIf = "texto == 0"> Que deseas reservar hoy?</div>
                                             <div class="bton fw-bold" *ngIf = "texto == 1"> TOTAL: $ {{ total.Total }}</div>
                                         </li>
                                     

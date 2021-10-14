@@ -8,14 +8,14 @@
                                 <app-menu-today></app-menu-today>
                             </div>
                                 
-                            <div class="flex flex-wrap">
+                            
                                 <mat-tab-group dynamicHeight>                    
                                     <mat-tab  *ngFor = "let tipo of tipos" [label]="tipo.name_tipo">                    
                                         
                                         <app-product-card [tipoPro]="tipo.id_tipo"></app-product-card>                    
                                     </mat-tab>
                                 </mat-tab-group> 
-                            </div>                             
+                                                        
                                            
                 </div>
         

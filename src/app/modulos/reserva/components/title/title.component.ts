@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from 'src/app/shared/services/user.service';
+import { User } from 'src/app/shared/models/User';
 
 @Component({
   selector: 'app-title',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TitleComponent implements OnInit {
 
-  constructor() { }
+  public valid: boolean = false;
+
+  //Variables Auth
+  public role: number;
+  public user: User;
+  public id: any;
+
+  constructor(public userServices: UsersService) { }
 
   ngOnInit(): void {
+    this.getAuth();
+  }
+
+  getAuth(){
+    this.userServices.roleS.subscribe(res => {this.role = res;});
+    this.userServices.userSID.subscribe(resp => {this.id = resp;});
+    this.userServices.getUs.subscribe((usr: User) => {this.user = usr;console.log(this.user); this.valid = true;});
   }
 
 }

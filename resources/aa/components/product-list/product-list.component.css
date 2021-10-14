@@ -1,0 +1,26 @@
+mat-card,mat-card-header{
+    margin: auto;
+    width: 100%;
+    display: block;
+    margin-top: 2rem;
+} 
+
+p {
+    margin: 0;
+  }
+  .pedido-text{
+      
+      font-size: 24px;
+      font-style: oblique;
+      font-display: flex;
+  }
+  .img{
+      padding-bottom: 10%;
+  }
+
+  .list-group{
+      padding-top: 7%;
+  }
+  .bton{
+      padding-left: 18%;
+  }

@@ -26,6 +26,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 
 const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline];
@@ -50,7 +51,8 @@ const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline
     NzGridModule,
     NzCollapseModule,
     NzAlertModule,
-    NzTypographyModule
+    NzTypographyModule,
+    NzSkeletonModule
      ],
   exports: [
     NzIconModule,
@@ -71,7 +73,8 @@ const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline
     NzGridModule,
     NzCollapseModule,
     NzAlertModule,
-    NzTypographyModule
+    NzTypographyModule,
+    NzSkeletonModule
   ],
   providers: [
     { provide: NZ_ICONS, useValue: icons }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from 'src/app/shared/services/user.service';
+import { User } from 'src/app/shared/models/User';
+import { ReservaService } from '../../services/reserva.service';
 
 @Component({
   selector: 'app-reserva-list',
@@ -6,31 +9,55 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reserva-list.component.css']
 })
 export class ReservaListComponent implements OnInit {
-  
-  panels = [
-    {
-      active: true,
-      name: 'This is panel header 1',
-      childPanel: [
-        {
-          active: false,
-          name: 'This is panel header 1-1'
-        }
-      ]
-    },
-    {
-      active: false,
-      name: 'This is panel header 2'
-    },
-    {
-      active: false,
-      name: 'This is panel header 3'
-    }
-  ];
+   //Variables Auth
+   public role: number;
+   public user: User;
+   public id: any;
 
-  constructor() { }
+
+   public reserva
+  
+  // pedidos = [
+  //   {
+  //     active: true,
+  //     name: 'This is panel header 1',
+  //     childPanel: [
+  //       {
+  //         active: false,
+  //         name: 'This is panel header 1-1'
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     active: false,
+  //     name: 'This is panel header 2'
+  //   },
+  //   {
+  //     active: false,
+  //     name: 'This is panel header 3'
+  //   }
+  // ];
+
+  constructor( public userServices: UsersService,
+               public reservaServices:ReservaService) { }
 
   ngOnInit(): void {
+    this.userServices.getAuth();
+    this.getAuth();
+    
   }
+  getAuth(){
+    this.userServices.roleS.subscribe(res => {this.role = res;});
+    this.userServices.userSID.subscribe(resp => {this.id = resp;});
+    this.userServices.getUs.subscribe((usr: User) => {this.user = usr;});
+  }
+
+  getPedidosUser(){
+    this.reservaServices.getUserPedidos(this.id)
+    .subscribe(resp =>{
+
+    });
+  }
+
 
 }
