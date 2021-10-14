@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/models/User';
+import { Reserva } from 'src/app/shared/models/Reserva';
 import { ReservaService } from '../../services/reserva.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class ReservaListComponent implements OnInit {
    public id: any;
 
 
-   public reserva
+   public reservas:Reserva[] = [];
   
   // pedidos = [
   //   {
@@ -45,18 +46,23 @@ export class ReservaListComponent implements OnInit {
     this.userServices.getAuth();
     this.getAuth();
     
+    
   }
   getAuth(){
     this.userServices.roleS.subscribe(res => {this.role = res;});
-    this.userServices.userSID.subscribe(resp => {this.id = resp;});
+    this.userServices.userSID.subscribe(resp => {this.id = resp;this.getPedidosUser();});
     this.userServices.getUs.subscribe((usr: User) => {this.user = usr;});
   }
 
   getPedidosUser(){
     this.reservaServices.getUserPedidos(this.id)
-    .subscribe(resp =>{
-
+    .subscribe((resp: Reserva[]) =>{
+      this.reservas = resp;
+      console.log(this.reservas)
     });
+  }
+  getTickets(id:number){
+    console.log(id)
   }
 
 

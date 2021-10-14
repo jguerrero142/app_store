@@ -24,6 +24,7 @@ export class ReservaService {
     return this.http.get( `${this.API_URI}/pedido/user/${id}`);
   }
 
+    
     getUserPedidos(id: number){
     return this.http.get( `${this.API_URI}/pedido/dataPedido/${id}`);
   }
