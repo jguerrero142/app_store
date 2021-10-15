@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AuthService } from '../../core/auth/auth.service';
+import { CoreService } from '../../core/core.service';
 
 
 
@@ -32,7 +33,9 @@ export class UsersService {
   API_URI = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient,
-              private auth: AuthService,){}
+              private auth: AuthService,
+              private coreService: CoreService 
+              ){}
   
   //Validamos el usuario Auth
   getAuth(){
@@ -40,7 +43,7 @@ export class UsersService {
         this.user = perfil;   
         if(this.user){
           this.loginUser(this.user.sub,this.user).subscribe(resp=>{})
-          this.updateUser(this.user.sub,this.user).subscribe(res=>{this.getUs.emit(res);})              
+          this.updateUser(this.user.sub,this.user).subscribe(res=>{})              
         }
       });
     }
@@ -52,14 +55,11 @@ export class UsersService {
 
   updateUser(id: string | number, updateUser: User){
         return this.http.put(`${this.API_URI}/user/${id}`, updateUser)
-        .pipe(map((res: User)=>{
-          this.id = res.id_user;
-          this.userId = this.id;
-          this.userSID.emit(this.id);
-          this.role = res.role;
-          this.roleS.emit(this.role);
-          return res;
-        }));
+          .pipe(map((res: User) => {
+            this.coreService.userSetObs = res;
+            this.roleS.emit(res.role);
+            return res;
+          }));
   }
 
 
@@ -94,5 +94,8 @@ export class UsersService {
   // updateUser(id: string | number, updateUser: User): Observable<User>{
   //     return this.http.put(`${this.API_URI}/user/${id}`, updateUser);
   //   }
+  // this.id = res.id_user;
+  // this.userId = this.id;
+  // this.userSID.emit(this.id);this.getUs.emit(res);
     
 }

@@ -11,7 +11,7 @@
         
         
                 <div class="container animated fadeIn fast">
-                    <div  *ngIf="img == false">
+                    <div *ngIf="img == false">
                         <span nz-tooltip
                               nzTooltipTitle="www.fenis.com">
                                 <nz-avatar class="mat-elevation-z4"
@@ -21,7 +21,8 @@
                                         
                                 </nz-avatar>
                         </span>
-                                                   
+                        <div class=" w-11 text-sm my-2 ml-4" >
+                        <nz-tag  [nzColor]="'#f50'">Hola!</nz-tag></div>                   
                         
                     </div>
 
@@ -30,12 +31,12 @@
                     <div *ngIf="img == true">
 
                         <span nz-tooltip
-                              [nzTooltipTitle] ="user.email">
+                              [nzTooltipTitle] ="(data$ | async).email">
 
                               <nz-avatar class="mat-elevation-z4"
                                          [nzGap]="4"
                                          [nzSize]="60"
-                                         [nzSrc]="user.picture">
+                                         [nzSrc]="(data$ | async).picture">
 
                                 </nz-avatar>
                          </span>
@@ -43,7 +44,7 @@
                     <div class=" w-11 text-sm my-3 ml-5" >
                     <nz-tag  *ngIf = "role == 1" [nzColor]="'#f50'">Super</nz-tag>
                     <nz-tag  *ngIf = "role == 2" [nzColor]="'#2db7f5'">Admin</nz-tag>
-                    <nz-tag  *ngIf = "role == 3"[nzColor]="'#87d068'">User</nz-tag>
+                    <nz-tag  *ngIf = "role == 3" [nzColor]="'#87d068'">User</nz-tag>
                     <nz-tag  *ngIf = "role == 4" [nzColor]="'#108ee9'">VIP</nz-tag>
                     </div>
                     <mat-divider></mat-divider>

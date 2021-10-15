@@ -2,13 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 //Servicios
 import { AuthService } from '../../core/auth/auth.service';
-import { CoreService, Users } from 'src/app/core/core.service';
+import { CoreService } from 'src/app/core/core.service';
 import { Observable } from 'rxjs';
 
 //Angular Material
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { UsersService } from 'src/app/shared/services/user.service';
 import { User } from '../models/User';
+import { map } from 'rxjs/operators';
+import { Users } from '../models/User.class';
 
 @Component({
   selector: 'app-navbar',
@@ -24,38 +26,30 @@ export class NavbarComponent implements OnInit {
 
   //Variable Auth0
   public role: number;
+  public role$: User;
   public user: User;
   public id: any;
   public img: boolean = false;
-  // private data$: Observable<User>;
+  public data$: Observable<User>;
+  
 
   constructor( public auth: AuthService,
                public userServices: UsersService,
                private observer: BreakpointObserver,
                private coreService: CoreService
-    ) { 
-      // this.data$ =  coreService.userObservable;
-      // const name = this.data$['source']['value'].name;
-      // console.log(name);
-    }
+    ) { }
 
   ngOnInit(): void {
     this.userServices.getAuth();
-    this.getAuth();    
+    this.getAuth();      
   }
 
   
-  getAuth(){
-    this.userServices.roleS.subscribe(res => {this.role = res;});
-    this.userServices.userSID.subscribe(resp => {this.id = resp;});
-    this.userServices.getUs.subscribe((usr: User) => {
-      this.user = usr;
-      this.img = true;
-      // this.coreService.userData = {name:'guerrero'};
-      // this.data$ =  this.coreService.userObservable;
-      // const name = this.data$['source']['value'].name;
-      // console.log(name);
-    });
+   getAuth(){
+    this.data$ =  this.coreService.userGetObs;
+    console.log(this.data$)
+    this.userServices.roleS.subscribe(res => {this.role = res;this.img = true;});
+    
   }
 
   ngAfterViewInit(){
