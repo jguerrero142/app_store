@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/shared/services/user.service';
-import { User } from 'src/app/shared/models/User';
-import { Reserva } from 'src/app/shared/models/Reserva';
+import { User } from 'src/app/shared/models/index.models';
+import { Reserva } from 'src/app/shared/models/Reserva.model';
 import { ReservaService } from '../../services/reserva.service';
 
 @Component({
   selector: 'app-reserva-list',
   templateUrl: './reserva-list.component.html',
-  styleUrls: ['./reserva-list.component.css']
+  styleUrls: ['./reserva-list.component.css'],
 })
 export class ReservaListComponent implements OnInit {
-   //Variables Auth
-   public role: number;
-   public user: User;
-   public id: any;
+  //Variables Auth
+  public role: number;
+  public user: User;
+  public id: any;
 
+  public reservas: Reserva[] = [];
 
-   public reservas:Reserva[] = [];
-  
   // pedidos = [
   //   {
   //     active: true,
@@ -39,31 +38,37 @@ export class ReservaListComponent implements OnInit {
   //   }
   // ];
 
-  constructor( public userServices: UsersService,
-               public reservaServices:ReservaService) { }
+  constructor(
+    public userServices: UsersService,
+    public reservaServices: ReservaService
+  ) {}
 
   ngOnInit(): void {
     this.userServices.getAuth();
     this.getAuth();
-    
-    
   }
-  getAuth(){
-    this.userServices.roleS.subscribe(res => {this.role = res;});
-    this.userServices.userSID.subscribe(resp => {this.id = resp;this.getPedidosUser();});
-    this.userServices.getUs.subscribe((usr: User) => {this.user = usr;});
-  }
-
-  getPedidosUser(){
-    this.reservaServices.getUserPedidos(this.id)
-    .subscribe((resp: Reserva[]) =>{
-      this.reservas = resp;
-      console.log(this.reservas)
+  getAuth() {
+    this.userServices.roleS.subscribe((res) => {
+      this.role = res;
+    });
+    this.userServices.userSID.subscribe((resp) => {
+      this.id = resp;
+      this.getPedidosUser();
+    });
+    this.userServices.getUs.subscribe((usr: User) => {
+      this.user = usr;
     });
   }
-  getTickets(id:number){
-    console.log(id)
+
+  getPedidosUser() {
+    this.reservaServices
+      .getUserPedidos(this.id)
+      .subscribe((resp: Reserva[]) => {
+        this.reservas = resp;
+        console.log(this.reservas);
+      });
   }
-
-
+  getTickets(id: number) {
+    console.log(id);
+  }
 }

@@ -1,163 +1,159 @@
 <nz-layout class="app-layout">
-    
-    
-    <nz-sider
-        class="mat-elevation-z8 animated fadeIn fast"
-        nzCollapsible
-        [(nzCollapsed)]="isCollapsed"
-        [nzTrigger]="null"
-        nzBreakpoint="md"    
-        [nzWidth]="sideWith">
-        
-        
-                <div class="container animated fadeIn fast">
-                    <div *ngIf="img == false">
-                        <span nz-tooltip
-                              nzTooltipTitle="www.fenis.com">
-                                <nz-avatar class="mat-elevation-z4"
-                                           [nzGap]="4" 
-                                           [nzSize]="60"
-                                           nzSrc="assets/fenis.png">
-                                        
-                                </nz-avatar>
-                        </span>
-                        <div class=" w-11 text-sm my-2 ml-4" >
-                        <nz-tag  [nzColor]="'#f50'">Hola!</nz-tag></div>                   
-                        
-                    </div>
+  <nz-sider
+    class="mat-elevation-z8 animated fadeIn fast"
+    nzCollapsible
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+    nzBreakpoint="md"
+    [nzWidth]="sideWith"
+  >
+    <div class="container animated fadeIn fast">
+      <div *ngIf="img == false">
+        <span nz-tooltip nzTooltipTitle="www.fenis.com">
+          <nz-avatar
+            class="mat-elevation-z4"
+            [nzGap]="4"
+            [nzSize]="60"
+            nzSrc="assets/fenis.png"
+          >
+          </nz-avatar>
+        </span>
+        <div class="w-11 text-sm my-2 ml-4">
+          <nz-tag [nzColor]="'#f50'">Hola!</nz-tag>
+        </div>
+      </div>
 
-                        
+      <div *ngIf="img == true">
+        <span nz-tooltip [nzTooltipTitle]="(data$ | async).email">
+          <nz-avatar
+            class="mat-elevation-z4"
+            [nzGap]="4"
+            [nzSize]="60"
+            [nzSrc]="(data$ | async).picture"
+          >
+          </nz-avatar>
+        </span>
+      </div>
+      <div class="w-11 text-sm my-3 ml-5">
+        <nz-tag *ngIf="role == 1" [nzColor]="'#f50'">Super</nz-tag>
+        <nz-tag *ngIf="role == 2" [nzColor]="'#2db7f5'">Admin</nz-tag>
+        <nz-tag *ngIf="role == 3" [nzColor]="'#87d068'">User</nz-tag>
+        <nz-tag *ngIf="role == 4" [nzColor]="'#108ee9'">VIP</nz-tag>
+      </div>
+      <mat-divider></mat-divider>
 
-                    <div *ngIf="img == true">
+      <ul
+        nz-menu
+        class="menu"
+        nzTheme="dark"
+        nzMode="inline"
+        [nzInlineCollapsed]="true"
+      >
+        <li
+          nz-menu-item
+          routerLink="/Menu"
+          nz-tooltip
+          nzTooltipPlacement="right"
+          nzTooltipTitle="Menu"
+        >
+          <i nz-icon nzType="shop"></i>
+          <span>Menu</span>
+        </li>
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          nzTooltipTitle="Reservas"
+          routerLink="/Reserva"
+        >
+          <i nz-icon nzType="credit-card"></i>
+          <span>Reservas</span>
+        </li>
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          nzTooltipTitle="Perfil"
+          routerLink="/Perfil"
+        >
+          <i nz-icon nzType="team"></i>
+          <span>Perfil</span>
+        </li>
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          nzTooltipTitle="Reportes"
+          routerLink="/Reporte"
+        >
+          <i nz-icon nzType="bar-chart"></i>
+          <span>Reportes</span>
+        </li>
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          nzTooltipTitle="Configuracion"
+          routerLink="/Config"
+        >
+          <i nz-icon nzType="setting"></i>
+          <span>Configurar</span>
+        </li>
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          nzTooltipTitle="Administrar"
+          routerLink="/Admin"
+        >
+          <i nz-icon nzType="github"></i>
+          <span>Admin</span>
+        </li>
 
-                        <span nz-tooltip
-                              [nzTooltipTitle] ="(data$ | async).email">
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          nzTooltipTitle="Ingresar"
+          class="login"
+          *ngIf="!auth.loggedIn"
+          (click)="auth.login()"
+        >
+          <i nz-icon nzType="login"></i>
+          <span>Ingresar</span>
+        </li>
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          nzTooltipTitle="Salir"
+          class="login"
+          *ngIf="auth.loggedIn"
+          (click)="auth.logout()"
+        >
+          <i nz-icon nzType="login"></i>
+          <span>Salir</span>
+        </li>
+      </ul>
+    </div>
+  </nz-sider>
 
-                              <nz-avatar class="mat-elevation-z4"
-                                         [nzGap]="4"
-                                         [nzSize]="60"
-                                         [nzSrc]="(data$ | async).picture">
+  <nz-layout>
+    <nz-header class="mat-elevation-z4">
+      <i
+        class="trigger"
+        nz-icon
+        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="isCollapsed = !isCollapsed"
+      ></i>
+    </nz-header>
 
-                                </nz-avatar>
-                         </span>
-                    </div>
-                    <div class=" w-11 text-sm my-3 ml-5" >
-                    <nz-tag  *ngIf = "role == 1" [nzColor]="'#f50'">Super</nz-tag>
-                    <nz-tag  *ngIf = "role == 2" [nzColor]="'#2db7f5'">Admin</nz-tag>
-                    <nz-tag  *ngIf = "role == 3" [nzColor]="'#87d068'">User</nz-tag>
-                    <nz-tag  *ngIf = "role == 4" [nzColor]="'#108ee9'">VIP</nz-tag>
-                    </div>
-                    <mat-divider></mat-divider>
+    <nz-content class="mat-elevation-z4">
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
 
-                    <ul nz-menu class="menu"
-                        nzTheme="dark"
-                        nzMode="inline" 
-                        [nzInlineCollapsed]="true"
-                        >
-                    
-                    
-                        <li nz-menu-item
-                            routerLink="/Menu"
-                            nz-tooltip
-                            nzTooltipPlacement ="right"
-                            nzTooltipTitle ="Menu">
-                            <i nz-icon nzType="shop"
-                            ></i>
-                            <span>Menu</span>
-                        </li>
-                        <li nz-menu-item
-                            nz-tooltip
-                            nzTooltipPlacement ="right"
-                            nzTooltipTitle ="Reservas"
-                            routerLink="/Reserva">
-                            <i nz-icon nzType="credit-card"></i>
-                            <span>Reservas</span>
-                        </li>
-                        <li nz-menu-item
-                            nz-tooltip
-                            nzTooltipPlacement ="right"
-                            nzTooltipTitle ="Perfil"
-                            routerLink="/Perfil">
-                            <i nz-icon nzType="team"></i>
-                            <span>Perfil</span>
-                        </li>
-                        <li nz-menu-item
-                            nz-tooltip
-                            nzTooltipPlacement ="right"
-                            nzTooltipTitle ="Reportes"
-                            routerLink="/Reporte">
-                            <i nz-icon nzType="bar-chart"></i>
-                            <span>Reportes</span>
-                        </li>
-                        <li nz-menu-item
-                            nz-tooltip
-                            nzTooltipPlacement ="right"
-                            nzTooltipTitle ="Configuracion"
-                            routerLink="/Config">
-                            <i nz-icon nzType="setting"></i>
-                            <span>Configurar</span>
-                        </li>
-                        <li nz-menu-item
-                            nz-tooltip
-                            nzTooltipPlacement ="right"
-                            nzTooltipTitle ="Administrar"
-                            routerLink="/Admin">
-                            <i nz-icon nzType="github"></i>
-                            <span>Admin</span>
-                        </li>
-                        
-                        <li nz-menu-item
-                            nz-tooltip
-                            nzTooltipPlacement ="right"
-                            nzTooltipTitle ="Ingresar"
-                            class="login"
-                            *ngIf="!auth.loggedIn"
-                            (click) = "auth.login()"
-                            >
-                            <i nz-icon nzType="login"></i>
-                            <span>Ingresar</span>
-                        </li>
-                        <li nz-menu-item
-                            nz-tooltip
-                            nzTooltipPlacement ="right"
-                            nzTooltipTitle ="Salir"
-                            class="login"
-                            *ngIf="auth.loggedIn"
-                            (click) = "auth.logout()"
-                            >
-                            <i nz-icon nzType="login"></i>
-                            <span>Salir</span>
-                        </li>
-                    
-                    </ul>
-       
-                </div>
-      
-    </nz-sider>
-
-   
-        <nz-layout>
-                <nz-header class="mat-elevation-z4" >
-                    <i
-                    class="trigger"
-                    nz-icon
-                    [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-                    (click)="isCollapsed = !isCollapsed"
-                    ></i>
-                </nz-header>       
-                
-                <nz-content class="mat-elevation-z4">
-                        
-                        
-                        <div>
-                            <router-outlet></router-outlet>
-                        </div>
-
-                </nz-content>
-                    
-                <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
-    
-        </nz-layout>
-    
-
+    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
   </nz-layout>
+</nz-layout>
