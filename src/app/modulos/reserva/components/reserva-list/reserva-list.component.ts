@@ -48,16 +48,7 @@ export class ReservaListComponent implements OnInit {
     this.getAuth();
   }
   getAuth() {
-    this.userServices.roleS.subscribe((res) => {
-      this.role = res;
-    });
-    this.userServices.userSID.subscribe((resp) => {
-      this.id = resp;
-      this.getPedidosUser();
-    });
-    this.userServices.getUs.subscribe((usr: User) => {
-      this.user = usr;
-    });
+    
   }
 
   getPedidosUser() {

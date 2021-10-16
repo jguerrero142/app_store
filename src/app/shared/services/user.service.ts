@@ -11,20 +11,19 @@ import { AuthService } from '../../core/auth/auth.service';
 import { CoreService } from '../../core/core.service';
 import { environment } from 'src/environments/environment';
 
+
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  roleS = new EventEmitter<number>();
-  userSID = new EventEmitter<number>();
-  getUs = new EventEmitter<User>();
-  getImg = new EventEmitter<string>();
-
+  
   //Variable Auth0
   public user: User;
   public role: any;
   public id: any;
   public userId: number;
+  public aut: any;
+  public au:User;
 
   private API_URI = environment.wsUrl;
 
@@ -32,7 +31,9 @@ export class UsersService {
     private http: HttpClient,
     private auth: AuthService,
     private coreService: CoreService
-  ) {}
+  ) { 
+    this.getAuth();
+  }
 
   //Validamos el usuario Auth
   getAuth() {
@@ -53,22 +54,11 @@ export class UsersService {
     return this.http.put<User>(`${this.API_URI}/user/${id}`, updateUser).pipe(
       map((res) => {
         this.coreService.userSetObs = res;
-
-        this.roleS.emit(res.role);
         return res;
       })
     );
   }
 
-  // updateUser(id: string | number, updateUser: User) {this.coreService.roleSetObs = res.role;
-  //   return this.http.put(`${this.API_URI}/user/${id}`, updateUser).pipe(
-  //     map((res: User) => {
-  //       this.coreService.userSetObs = res;
-  //       this.roleS.emit(res.role);
-  //       return res;
-  //     })
-  //   );
-  // }
 
   // CRUD user.
   //Obetenemos todos los usuarios.
@@ -96,11 +86,4 @@ export class UsersService {
     return this.http.post(`${this.API_URI}/user`, user);
   }
 
-  //Actualizamos usuario.
-  // updateUser(id: string | number, updateUser: User): Observable<User>{
-  //     return this.http.put(`${this.API_URI}/user/${id}`, updateUser);
-  //   }
-  // this.id = res.id_user;
-  // this.userId = this.id;
-  // this.userSID.emit(this.id);this.getUs.emit(res);
 }

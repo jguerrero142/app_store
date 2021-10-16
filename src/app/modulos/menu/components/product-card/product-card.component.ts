@@ -4,6 +4,7 @@ import { Producto } from 'src/app/shared/models/Producto.model';
 import { TicketsService } from 'src/app/shared/services/ticket.service';
 import { UsersService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/models/index.models';
+import { CoreService } from 'src/app/core/core.service';
 
 @Component({
   selector: 'app-product-card',
@@ -13,7 +14,6 @@ import { User } from 'src/app/shared/models/index.models';
 export class ProductCardComponent implements OnInit {
   @Input() tipoPro: number;
   public productos: Producto[] = [];
-  public resx: any;
   public valid: boolean;
   public alert: boolean;
 
@@ -21,20 +21,22 @@ export class ProductCardComponent implements OnInit {
   public role: number;
   public user: User;
   public id: any;
+  public data: any;
+  public pro: any;
 
   //Variables del componente
   public ticket: any = [];
   constructor(
     public menuServices: MenuService,
     public ticketServices: TicketsService,
-    public userServices: UsersService
+    public coreService: CoreService
+    
   ) {
     this.valid = false;
   }
 
   ngOnInit(): void {
-    this.userServices.getAuth();
-    this.getTipoProductos();
+    this.getProductos();
     this.getAuth();
   }
   afterClose(): void {
@@ -42,22 +44,21 @@ export class ProductCardComponent implements OnInit {
   }
 
   getAuth() {
-    this.userServices.roleS.subscribe((res) => {
-      this.role = res;
-    });
-    this.userServices.userSID.subscribe((resp) => {
-      this.id = resp;
-    });
-    this.userServices.getUs.subscribe((usr: User) => {
-      this.user = usr;
-    });
+   this.coreService.getUser.subscribe(d=>{
+     if(d){
+       this.user = d;
+       this.role = d.role;
+       this.id = d.id_user;
+     }
+   })
   }
 
-  getTipoProductos() {
+  getProductos() {
     this.menuServices.getProductos(this.tipoPro).subscribe((resp) => {
-      this.resx = resp;
-      this.productos.push(this.resx);
-      if (this.productos['0'].length > 0) {
+      this.data = resp;
+      this.productos.push(this.data);
+      this.pro = this.productos['0'];
+      if (this.pro.length > 0) {
         console.log(this.productos[0]);
       } else {
         this.valid = true;
@@ -66,6 +67,7 @@ export class ProductCardComponent implements OnInit {
   }
 
   saveTicket(id: number) {
+    console.log(this.id,id)
     if (this.id) {
       this.ticket = {
         user_ticket: this.id,

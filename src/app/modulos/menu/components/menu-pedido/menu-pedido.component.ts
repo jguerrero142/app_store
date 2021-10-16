@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 import { UsersService } from 'src/app/shared/services/user.service';
 import { MenuService } from '../../services/menu-service.service';
 import { TicketsService } from 'src/app/shared/services/ticket.service';
+import { CoreService } from '../../../../core/core.service';
 @Component({
   selector: 'app-menu-pedido',
   templateUrl: './menu-pedido.component.html',
@@ -35,23 +36,21 @@ export class MenuPedidoComponent implements OnInit {
     private menuServices: MenuService,
     public pedidoServices: PedidoService,
     public ticketsService: TicketsService,
-    public userServices: UsersService
+    public coreService: CoreService
   ) {}
 
   ngOnInit(): void {
-    this.getAuth();
+    //this.getAuth();
     this.getEvent();
   }
   //Obtnemos el role del usuario
   getAuth() {
-    this.userServices.roleS.subscribe((res) => {
-      this.role = res;
-    });
-    this.userServices.userSID.subscribe((resp) => {
-      this.id = resp;
-      this.getData();
-      console.log(this.id);
-    });
+    this.coreService.getUser.subscribe((data =>{
+      if(data){
+        this.id = data.id_user;
+        this.role = data.role;
+      }
+    }))
   }
   //Escuchamos el evento Agregar ticket
   getEvent() {

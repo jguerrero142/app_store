@@ -24,12 +24,12 @@
       </div>
 
       <div *ngIf="img == true">
-        <span nz-tooltip [nzTooltipTitle]="(data$ | async).email">
+        <span nz-tooltip [nzTooltipTitle]="user.email">
           <nz-avatar
             class="mat-elevation-z4"
             [nzGap]="4"
             [nzSize]="60"
-            [nzSrc]="(data$ | async).picture"
+            [nzSrc]="user.picture"
           >
           </nz-avatar>
         </span>

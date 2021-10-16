@@ -1,17 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 //Modelos
 import { User } from '../models/index.models';
 
 //Servicios
-import { AuthService } from '../../core/auth/auth.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { CoreService } from 'src/app/core/core.service';
-import { UsersService } from 'src/app/shared/services/user.service';
-import { Users } from '../Class/User.class';
-import { __values } from 'tslib';
 
 @Component({
   selector: 'app-navbar',
@@ -24,31 +19,31 @@ export class NavbarComponent implements OnInit {
   public sideWith: number;
 
   //Variable Auth0
-  public role: number;
-  public role$: any;
   public user: User;
-  public id: any;
+  public role: number;
+  
+  //Valida vista de usuario
   public img: boolean = false;
-  public data$: Observable<Users>;
+  
 
-  constructor(
-    public auth: AuthService,
-    public userServices: UsersService,
-    private observer: BreakpointObserver,
-    private coreService: CoreService
-  ) {}
+          constructor(
+            public auth: AuthService,
+            private observer: BreakpointObserver,
+            private coreService: CoreService
+          ) {}
 
   ngOnInit(): void {
-    this.userServices.getAuth();
     this.getAuth();
   }
+  
 
   getAuth() {
-    this.data$ = this.coreService.userGetObs;
-    this.userServices.roleS.subscribe((res) => {
-      this.role = res;
-      console.log(res);
-      this.img = true;
+    this.coreService.getUser.subscribe(data =>{
+      if(data){
+        this.user = data;
+        this.role = data.role;
+        this.img = true;
+      }
     });
   }
 
@@ -66,6 +61,3 @@ export class NavbarComponent implements OnInit {
     });
   }
 }
-
-// this.role$ = await this.coreService.roleGetObs;
-//     console.log(this.role$);

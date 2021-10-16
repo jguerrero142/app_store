@@ -1,14 +1,15 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { TipoProducto } from '../../../shared/models/Tipo-producto.model';
-import { Producto } from 'src/app/shared/models/index.models';
+//Modelos
+import { Producto, TipoProducto } from 'src/app/shared/models/index.models';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MenuService {
-  API_URI = 'http://localhost:3000/api';
+  API_URI = environment.wsUrl;
 
   public ticketAdd = new EventEmitter<boolean>();
   public tipo: string;

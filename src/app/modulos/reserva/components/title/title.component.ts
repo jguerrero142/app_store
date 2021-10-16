@@ -22,16 +22,6 @@ export class TitleComponent implements OnInit {
   }
 
   getAuth() {
-    this.userServices.roleS.subscribe((res) => {
-      this.role = res;
-    });
-    this.userServices.userSID.subscribe((resp) => {
-      this.id = resp;
-    });
-    this.userServices.getUs.subscribe((usr: User) => {
-      this.user = usr;
-      console.log(this.user);
-      this.valid = true;
-    });
+    
   }
 }

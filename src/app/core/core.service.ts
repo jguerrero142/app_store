@@ -6,14 +6,13 @@ import { Users } from '../shared/Class/User.class';
 
 @Injectable()
 export class CoreService {
+  
   public role: number;
   private userObservable: BehaviorSubject<User> = new BehaviorSubject<User>(
     null
   );
-  private roleObservable: BehaviorSubject<number> = new BehaviorSubject<number>(
-    null
-  );
-
+  
+  getUser = this.userObservable.asObservable();
   get userGetObs() {
     return this.userObservable.asObservable().pipe(
       map((d) => {
@@ -41,45 +40,4 @@ export class CoreService {
     this.userObservable.next(data);
   }
 
-  //   get userGetObs(){
-  //     return this.userObservable.asObservable();
-  //   }
-
-  //   set userSetObs(data: User) {
-  //     this.userObservable.next(data);
-  //   }
-
-  //   get roleGetObs(): Observable<number> {
-  //     return this.roleObservable.asObservable();
-  //   }
-
-  //   set roleSetObs(data: number) {
-  //     this.roleObservable.next(data);
-  //   }
-
-  // get userRoleObs(): Observable<User>{
-  //     return this.userObservable.asObservable()
-  //     .pipe(map( d  => new Users (d.role) ))
-
-  // }
 }
-
-// export interface Users{
-//     name: string
-// }
-
-// @Injectable()
-// export class CoreService {
-//     private sharingObservable: BehaviorSubject<Users> =
-//     new BehaviorSubject<Users>({name:'julian andres'})
-
-//     get userObservable(){
-//         return this.sharingObservable.asObservable();
-//     }
-
-//     set userData(data: Users){
-
-//         this.sharingObservable.next(data);
-//     }
-
-// }
