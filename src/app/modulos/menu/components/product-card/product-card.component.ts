@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MenuService } from '../../services/menu-service.service';
 import { Producto } from 'src/app/shared/models/Producto.model';
 import { TicketsService } from 'src/app/shared/services/ticket.service';
-import { UsersService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/models/index.models';
 import { CoreService } from 'src/app/core/core.service';
 
@@ -30,27 +29,25 @@ export class ProductCardComponent implements OnInit {
     public menuServices: MenuService,
     public ticketServices: TicketsService,
     public coreService: CoreService
-    
   ) {
     this.valid = false;
   }
 
   ngOnInit(): void {
     this.getProductos();
-    this.getAuth();
   }
   afterClose(): void {
     this.alert = false;
   }
 
   getAuth() {
-   this.coreService.getUser.subscribe(d=>{
-     if(d){
-       this.user = d;
-       this.role = d.role;
-       this.id = d.id_user;
-     }
-   })
+    this.coreService.getUser.subscribe((d) => {
+      if (d) {
+        this.user = d;
+        this.role = d.role;
+        this.id = d.id_user;
+      }
+    });
   }
 
   getProductos() {
@@ -67,7 +64,8 @@ export class ProductCardComponent implements OnInit {
   }
 
   saveTicket(id: number) {
-    console.log(this.id,id)
+    this.getAuth();
+    console.log(this.id, id);
     if (this.id) {
       this.ticket = {
         user_ticket: this.id,

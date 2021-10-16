@@ -1,13 +1,11 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
 // Interfaces
-import { Ticket } from 'src/app/shared/models/index.models';
-import { Pedido } from 'src/app/shared/models/Pedido.model';
+import { Ticket, Pedido } from 'src/app/shared/models/index.models';
 
 // Servicios
 import { PedidoService } from 'src/app/shared/services/pedido.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { UsersService } from 'src/app/shared/services/user.service';
 import { MenuService } from '../../services/menu-service.service';
 import { TicketsService } from 'src/app/shared/services/ticket.service';
 import { CoreService } from '../../../../core/core.service';
@@ -28,7 +26,7 @@ export class MenuPedidoComponent implements OnInit {
 
   public pedido: Pedido;
   public idpedido: any = [];
-  public texto: any = 0;
+  public texto: any;
   public ticket$: Ticket[] = [];
 
   constructor(
@@ -37,24 +35,26 @@ export class MenuPedidoComponent implements OnInit {
     public pedidoServices: PedidoService,
     public ticketsService: TicketsService,
     public coreService: CoreService
-  ) {}
+  ) {
+    this.texto = 0;
+  }
 
   ngOnInit(): void {
-    //this.getAuth();
     this.getEvent();
   }
   //Obtnemos el role del usuario
   getAuth() {
-    this.coreService.getUser.subscribe((data =>{
-      if(data){
+    this.coreService.getUser.subscribe((data) => {
+      if (data) {
         this.id = data.id_user;
         this.role = data.role;
       }
-    }))
+    });
   }
   //Escuchamos el evento Agregar ticket
   getEvent() {
     this.menuServices.ticketAdd.subscribe((res) => {
+      this.getAuth();
       this.getData();
     });
   }

@@ -44,12 +44,9 @@ export class ReservaListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userServices.getAuth();
     this.getAuth();
   }
-  getAuth() {
-    
-  }
+  getAuth() {}
 
   getPedidosUser() {
     this.reservaServices

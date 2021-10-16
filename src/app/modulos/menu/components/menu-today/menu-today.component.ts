@@ -9,7 +9,7 @@ import { MenuService } from '../../services/menu-service.service';
 })
 export class MenuTodayComponent implements OnInit {
   public menu: Menu[] = [];
-
+  public img: boolean = false;
   constructor(public menuServices: MenuService) {}
 
   ngOnInit(): void {
@@ -18,6 +18,7 @@ export class MenuTodayComponent implements OnInit {
   getMenu() {
     this.menuServices.getMenu().subscribe((resp: Menu[]) => {
       this.menu = resp;
+      this.img = true;
       console.log(this.menu);
     });
   }

@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { NZ_ICONS, NzIconModule } from 'ng-zorro-antd/icon';
 
-
 import {
   MenuFoldOutline,
   MenuUnfoldOutline,
   FormOutline,
-  DashboardOutline
+  DashboardOutline,
 } from '@ant-design/icons-angular/icons';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
@@ -27,9 +26,16 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
-
-const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline];
+const icons = [
+  MenuFoldOutline,
+  MenuUnfoldOutline,
+  DashboardOutline,
+  FormOutline,
+];
 
 @NgModule({
   imports: [
@@ -52,8 +58,11 @@ const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline
     NzCollapseModule,
     NzAlertModule,
     NzTypographyModule,
-    NzSkeletonModule
-     ],
+    NzSkeletonModule,
+    NzModalModule,
+    NzButtonModule,
+    NzSwitchModule,
+  ],
   exports: [
     NzIconModule,
     NzLayoutModule,
@@ -74,11 +83,11 @@ const icons = [MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline
     NzCollapseModule,
     NzAlertModule,
     NzTypographyModule,
-    NzSkeletonModule
+    NzSkeletonModule,
+    NzModalModule,
+    NzButtonModule,
+    NzSwitchModule,
   ],
-  providers: [
-    { provide: NZ_ICONS, useValue: icons }
-  ]
+  providers: [{ provide: NZ_ICONS, useValue: icons }],
 })
-export class nzDesingModule {
-}
+export class nzDesingModule {}

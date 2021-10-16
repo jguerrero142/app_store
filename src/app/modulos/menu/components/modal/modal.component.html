@@ -1,0 +1,32 @@
+<!-- <a class="btn btn-danger fw-bold" *ngIf="texto == 0"> Añade un producto</a> -->
+<!-- <a class="btn btn-danger fw-bold" (click)="showModal()"> </a> -->
+<button nz-button nzType="primary" (click)="showModal()">
+  Realizar Pedido
+</button>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Confirma Tu Pedido"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-container *nzModalContent>
+    <p>Content one</p>
+    <p>Content two</p>
+    <p>Content three</p>
+  </ng-container>
+  <ng-template #modalFooter>
+    <div class="m-2">
+      <span>Pedido a Domicilio:</span>
+      <nz-switch [(ngModel)]="switchValue" nzType="danger"></nz-switch>
+    </div>
+    <button
+      nz-button
+      nzType="primary"
+      (click)="handleOk()"
+      [nzLoading]="isConfirmLoading"
+    >
+      Custom Submit
+    </button>
+  </ng-template>
+</nz-modal>

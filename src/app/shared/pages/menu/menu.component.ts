@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
+import { UsersService } from '../../services/user.service';
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './menu.component.html'
+  templateUrl: './menu.component.html',
 })
 export class MenuComponent implements OnInit {
-  
-  constructor() {}
+  constructor(private userServices: UsersService) {}
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    this.userServices.getAuth();
+  }
 }

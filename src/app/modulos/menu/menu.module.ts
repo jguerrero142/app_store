@@ -4,33 +4,26 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../material.module';
 import { nzDesingModule } from '../../ant-desing.module';
 
-import { MenuListComponent } from './components/menu-list/menu-list.component';
 import { MenuTodayComponent } from './components/menu-today/menu-today.component';
 import { MenuPedidoComponent } from './components/menu-pedido/menu-pedido.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
-
-
-
-
-
+import { MenuHomeComponent } from './components/menu-home/menu-home.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
-    MenuListComponent,
+    MenuHomeComponent,
     MenuTodayComponent,
     MenuPedidoComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ModalComponent,
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    nzDesingModule
-  ],
-  exports:[
-    MenuListComponent,
+  imports: [CommonModule, MaterialModule, nzDesingModule],
+  exports: [
+    MenuHomeComponent,
     MenuTodayComponent,
     MenuPedidoComponent,
-    ProductCardComponent
-  ]
+    ProductCardComponent,
+  ],
 })
-export class MenuModule { }
+export class MenuModule {}
