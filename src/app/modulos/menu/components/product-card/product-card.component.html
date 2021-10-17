@@ -6,14 +6,14 @@
       (nzOnClose)="afterClose()"
       *ngIf="alert == true"
     ></nz-alert>
-    <div class="h-90 m-12" *ngIf ="valid == true">
+    <div class="h-90 m-12" *ngIf ="noData == true">
       <nz-empty></nz-empty>
     </div>
     
 <div class="container flex flex-wrap justify-around justify-items-stretch ml-1 md:ml-2">
 
      <mat-card class="flex w-full sm:w-60 md:w-52 p-0 m-2 md:m-3 animated fadeIn fast cursor-pointer mat-elevation-z2"
-              (click)="saveTicket(producto.id)" *ngFor="let producto of productos[0]">
+              (click)="saveTicket(producto)" *ngFor="let producto of productos">
               
 
           <mat-card-content>

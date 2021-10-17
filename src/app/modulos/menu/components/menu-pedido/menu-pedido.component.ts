@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
 // Interfaces
-import { Ticket, Pedido } from 'src/app/shared/models/index.models';
+import { Ticket, Pedido, Producto} from 'src/app/shared/models/index.models';
 
 // Servicios
 import { PedidoService } from 'src/app/shared/services/pedido.service';
@@ -27,7 +27,7 @@ export class MenuPedidoComponent implements OnInit {
   public pedido: Pedido;
   public idpedido: any = [];
   public texto: any;
-  public ticket$: Ticket[] = [];
+  public ticket$: Producto[] = [];
 
   constructor(
     public auth: AuthService,
@@ -41,7 +41,19 @@ export class MenuPedidoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEvent();
+    this.getTicket();
   }
+
+  getTicket(){
+    this.menuServices.getTickets.subscribe(data =>{
+      this.ticket$ = data;
+      console.log(this.ticket$)
+    })
+  }
+
+
+
+
   //Obtnemos el role del usuario
   getAuth() {
     this.coreService.getUser.subscribe((data) => {

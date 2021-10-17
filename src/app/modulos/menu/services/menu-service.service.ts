@@ -1,21 +1,42 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 //Modelos
 import { Producto, TipoProducto } from 'src/app/shared/models/index.models';
 import { environment } from 'src/environments/environment';
 
+
 @Injectable({
   providedIn: 'root',
 })
 export class MenuService {
+
+  public tickets: Producto [] = []
+
+  private ticketObservable: BehaviorSubject <Producto[]> = new BehaviorSubject<Producto[]>(
+    null
+  );
+
+  getTickets = this.ticketObservable.asObservable();
+  set setTickets(data: Producto){
+    this.tickets.push(data)
+    this.ticketObservable.next(this.tickets)
+  }
+
   API_URI = environment.wsUrl;
 
   public ticketAdd = new EventEmitter<boolean>();
   public tipo: string;
   public tipos: TipoProducto;
+  public producto: Producto[] = []
 
   constructor(private http: HttpClient) {}
+
+  setTicket(data: Producto){
+    this.setTickets = data;
+  }
 
   getTipos() {
     return this.http.get<TipoProducto[]>(
@@ -23,14 +44,14 @@ export class MenuService {
     );
   }
 
-  getProductos(tipoProduct: number) {
+  getProductos(tipoProduct: number):Observable<Producto[]> {
     return this.http.get<Producto[]>(
       `${this.API_URI}/producto/tipo/producto/${tipoProduct}`
-    );
+    )
   }
 
   getMenu() {
-    return this.http.get<Producto[]>(`${this.API_URI}/producto/store/menu`);
+    return this.http.get<Producto[]>(`${this.API_URI}/producto/store/menu`);;
   }
 
   // Obtienes los ticket en estado true.

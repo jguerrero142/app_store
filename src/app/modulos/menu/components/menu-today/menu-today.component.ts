@@ -19,7 +19,6 @@ export class MenuTodayComponent implements OnInit {
     this.menuServices.getMenu().subscribe((resp: Menu[]) => {
       this.menu = resp;
       this.img = true;
-      console.log(this.menu);
     });
   }
 }

@@ -14,26 +14,7 @@ export class CoreService {
   
   getUser = this.userObservable.asObservable();
   get userGetObs() {
-    return this.userObservable.asObservable().pipe(
-      map((d) => {
-        return new Users(
-          d.id_user,
-          d.sub,
-          d.name,
-          d.picture,
-          d.email,
-          d.created_at,
-          d.given_name,
-          d.family_name,
-          d.nickname,
-          d.locale,
-          d.updated_at,
-          d.email_verified,
-          d.role,
-          d.id_empresa
-        );
-      })
-    );
+    return this.userObservable.asObservable();
   }
 
   set userSetObs(data: User) {

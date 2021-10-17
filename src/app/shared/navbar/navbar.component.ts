@@ -39,14 +39,14 @@ export class NavbarComponent implements OnInit {
 
   getAuth() {
     this.coreService.getUser.subscribe(data =>{
-      if(data){
+       if(data){
         this.user = data;
         this.role = data.role;
         this.img = true;
       }
     });
   }
-
+  
   ngAfterViewInit() {
     this.sidenavObs();
   }

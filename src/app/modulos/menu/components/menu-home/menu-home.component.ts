@@ -16,7 +16,6 @@ export class MenuHomeComponent implements OnInit {
     this.menuService.getTipos().subscribe((res: TipoProducto[]) => {
       this.tipos = res;
       this.tipos.map((res) => (this.idtipo = res.id_tipo));
-      console.log(this.tipos);
     });
   }
 }
