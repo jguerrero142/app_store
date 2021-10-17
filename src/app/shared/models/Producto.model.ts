@@ -5,5 +5,6 @@ export interface Producto {
     create_at?: Date;
     image?: string;
     descripcion?: string;
+    producto_tipo?: number;
     menu?:boolean;
 }

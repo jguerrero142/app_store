@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 //Modelos
@@ -14,61 +13,103 @@ import { environment } from 'src/environments/environment';
 export class MenuService {
 
   public tickets: Producto [] = []
+  public productos: Producto [] = []
+  public tipoProducto: TipoProducto [] = []
 
+  //PRODUCTOS observable
+  private tiposObservable: BehaviorSubject <TipoProducto[]> = new BehaviorSubject<TipoProducto[]>(
+    null
+  );
+
+  //TIPOS observable
+  private productoObservable: BehaviorSubject <Producto[]> = new BehaviorSubject<Producto[]>(
+    null
+  );
+
+  //TICKETS bservable
   private ticketObservable: BehaviorSubject <Producto[]> = new BehaviorSubject<Producto[]>(
     null
   );
 
+  //TOTAL bservable
+  private totalObservable: BehaviorSubject <number> = new BehaviorSubject<number>(
+    null
+  );
+
+  //MENU observable
+  private menuObservable: BehaviorSubject <Producto[]> = new BehaviorSubject<Producto[]>(
+    null
+  );
+
+  // Obtenemos el observable
+  getTipo = this.tiposObservable.asObservable();
+  getProducto = this.productoObservable.asObservable();
   getTickets = this.ticketObservable.asObservable();
-  set setTickets(data: Producto){
-    this.tickets.push(data)
-    this.ticketObservable.next(this.tickets)
+  getTotal = this.totalObservable.asObservable();
+  getMenus = this.menuObservable.asObservable();
+  
+  // Enviamos el TIPO al arreglo 
+  set setTipo(tipo: TipoProducto[]){
+    this.tiposObservable.next(tipo)
   }
 
+  // Enviamos el PRODUCTO al arreglo 
+  set setProducto(producto: Producto[]){
+    this.productoObservable.next(producto);
+  }
+
+  // Enviamos los TICKET al arreglo 
+  set setTickets(data: Producto){
+    this.tickets.push(data);
+    this.ticketObservable.next(this.tickets);
+    this.setTotal(this.tickets)
+  }
+
+  // Enviamos el MENU al arreglo 
+  set setMenu(menu: Producto[]){
+    this.menuObservable.next(menu);
+  }
+
+
+  // Url api
   API_URI = environment.wsUrl;
 
-  public ticketAdd = new EventEmitter<boolean>();
-  public tipo: string;
-  public tipos: TipoProducto;
-  public producto: Producto[] = []
-
-  constructor(private http: HttpClient) {}
-
-  setTicket(data: Producto){
-    this.setTickets = data;
+  constructor(private http: HttpClient) {
+    this.getProductos();
+    this.getTipos();
+    
   }
 
+  setTotal(data: Producto[]){
+    const total = data.reduce((suma, d) => suma + d.valor, 0);
+    this.totalObservable.next(total);
+  }
+
+  //Obtenemos los tipos de los productos
   getTipos() {
-    return this.http.get<TipoProducto[]>(
-      `${this.API_URI}/producto/tipo/producto/`
-    );
+    return this.http.get<TipoProducto[]>(`${this.API_URI}/producto/tipo/producto/`)
+    .subscribe(tipos => {
+      if(tipos.length > 0){
+        this.setTipo = tipos
+      }});
   }
 
-  getProductos(tipoProduct: number):Observable<Producto[]> {
-    return this.http.get<Producto[]>(
-      `${this.API_URI}/producto/tipo/producto/${tipoProduct}`
-    )
+  //Obetenemos los productos
+  getProductos() {
+    return this.http.get<Producto[]>(`${this.API_URI}/producto`)
+    .subscribe( data =>{
+      if(data.length > 0){
+        this.setProducto = data;
+        this.getMenu(data);
+      }
+    })
   }
 
-  getMenu() {
-    return this.http.get<Producto[]>(`${this.API_URI}/producto/store/menu`);;
+  //Obtenemos el menu activo
+  
+  getMenu(data: Producto[]) {    
+    const menu = data.filter( d => d.menu == true);
+    this.setMenu = menu;    
   }
 
-  // Obtienes los ticket en estado true.
-  getData(id: number) {
-    return this.http.get(`${this.API_URI}/ticket/data/ticket/${id}`);
-  }
-  //Obtiene el valor total de los ticket en estado true.
-  inData(id: number) {
-    return this.http.get(`${this.API_URI}/ticket/data/total/${id}`);
-  }
-
-  //Obtiene los tickets de un pedido en especifico.
-  userTickets(id: number) {
-    return this.http.get(`${this.API_URI}/ticket/ticketPedido/${id}`);
-  }
-
-  putEstado(id: number, pedido: string) {
-    return this.http.put(`${this.API_URI}/ticket/pedido/id/${id}`, pedido);
-  }
 }

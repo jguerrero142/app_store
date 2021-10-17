@@ -19,15 +19,20 @@ export class MenuPedidoComponent implements OnInit {
   public id: number;
   public role: number;
 
-  //Variables Grafica tickets Html
-  public tickets: any;
+  //Variables obetiene tickets
+  public tickets: Producto[] = [];
+
+
   //Variable del valor total tickets
-  public totals: any = 0;
+  public total: number;
+  public texto: boolean = false;
+
+  //Variable del componente
+  public alert: boolean = false;
 
   public pedido: Pedido;
   public idpedido: any = [];
-  public texto: any;
-  public ticket$: Producto[] = [];
+  
 
   constructor(
     public auth: AuthService,
@@ -35,26 +40,34 @@ export class MenuPedidoComponent implements OnInit {
     public pedidoServices: PedidoService,
     public ticketsService: TicketsService,
     public coreService: CoreService
-  ) {
-    this.texto = 0;
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.getEvent();
     this.getTicket();
+    this.getTotal();
+    this.getAuth();
   }
 
+  //Obtenemos los TICKETS
   getTicket(){
     this.menuServices.getTickets.subscribe(data =>{
-      this.ticket$ = data;
-      console.log(this.ticket$)
+      this.tickets = data;
+      
     })
   }
+   // Obtenemos el TOTAL
+  getTotal(){
+     this.menuServices.getTotal.subscribe(total => {
+       if(total > 0){
+        this.total = total;
+        this.texto = true;
+       }else{
+        this.texto = false;
+       }
+     })
+  }
 
-
-
-
-  //Obtnemos el role del usuario
+  //Obtenemos datos del USUARIO
   getAuth() {
     this.coreService.getUser.subscribe((data) => {
       if (data) {
@@ -63,61 +76,70 @@ export class MenuPedidoComponent implements OnInit {
       }
     });
   }
-  //Escuchamos el evento Agregar ticket
-  getEvent() {
-    this.menuServices.ticketAdd.subscribe((res) => {
-      this.getAuth();
-      this.getData();
-    });
+
+  deleteTicket(id: number){
+    this.tickets.splice(id, 1);
+    this.menuServices.setTotal(this.tickets);
   }
+
+  afterClose(): void {
+    this.alert = false;
+}
+  //Escuchamos el evento Agregar ticket
+  // getEvent() {
+  //   this.menuServices.ticketAdd.subscribe((res) => {
+  //     this.getAuth();
+  //     this.getData();
+  //   });
+  // }
 
   //Obtiene todos los tickets en estado true.
-  getData() {
-    this.menuServices.getData(this.id).subscribe((res: Ticket) => {
-      this.tickets = res;
-      //Validamos el texto a mostrar
-      if (this.tickets.length > 0) {
-        this.texto = 1;
-      }
-      if (this.tickets.length == 0) {
-        this.texto = 0;
-      }
-      //Obtenemos el valor total de los tickets
-      this.inTotal();
-    }),
-      (err) => console.log(err);
-  }
+  // getData() {
+  //   this.menuServices.getData(this.id).subscribe((res: Ticket) => {
+  //     this.tickets = res;
+  //     //Validamos el texto a mostrar
+  //     if (this.tickets.length > 0) {
+  //       this.texto = 1;
+  //     }
+  //     if (this.tickets.length == 0) {
+  //       this.texto = 0;
+  //     }
+  //     //Obtenemos el valor total de los tickets
+  //     this.inTotal();
+  //   }),
+  //     (err) => console.log(err);
+  // }
 
   //Obtiene el valor total de los tickets en true.
-  inTotal() {
-    this.menuServices.inData(this.id).subscribe((res) => {
-      this.totals = res;
-    });
-  }
-  //Agrega el pedido al dar clic en el boton.
-  newPedido() {
-    const value = this.totals[0];
-    this.pedido = {
-      id_user: this.id,
-      valor: value.Total,
-    };
-    console.log(this.pedido);
-    this.pedidoServices.savePedido(this.pedido).subscribe((res) => {
-      this.idpedido = res;
-      this.putEstado();
-    });
-  }
-  //Eliminamos el ticket
-  deleteTicket(id: number) {
-    this.ticketsService.deletTicket(id).subscribe((res) => {
-      this.getData();
-    });
-  }
-  //Asignamos true a todos los pedidos en false.
-  putEstado() {
-    const pedido = 'true';
-    this.menuServices.putEstado(this.idpedido.id, pedido).subscribe((res) => {
-      this.getData();
-    });
-  }
+  // inTotal() {
+  //   this.menuServices.inData(this.id).subscribe((res) => {
+  //     this.totals = res;
+  //   });
+  // }
+  // //Agrega el pedido al dar clic en el boton.
+  // newPedido() {
+  //   const value = this.totals[0];
+  //   this.pedido = {
+  //     id_user: this.id,
+  //     valor: value.Total,
+  //   };
+  //   console.log(this.pedido);
+  //   this.pedidoServices.savePedido(this.pedido).subscribe((res) => {
+  //     this.idpedido = res;
+  //     this.putEstado();
+  //   });
+  // }
+  // //Eliminamos el ticket
+  // deleteTicket(id: number) {
+  //   this.ticketsService.deletTicket(id).subscribe((res) => {
+  //     this.getData();
+  //   });
+  // }
+  // //Asignamos true a todos los pedidos en false.
+  // putEstado() {
+  //   const pedido = 'true';
+  //   this.menuServices.putEstado(this.idpedido.id, pedido).subscribe((res) => {
+  //     this.getData();
+  //   });
+  // }
 }

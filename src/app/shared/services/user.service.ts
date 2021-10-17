@@ -19,11 +19,7 @@ export class UsersService {
   
   //Variable Auth0
   public user: User;
-  public role: any;
-  public id: any;
-  public userId: number;
-  public aut: any;
-  public au:User;
+  
 
   private API_URI = environment.wsUrl;
 
