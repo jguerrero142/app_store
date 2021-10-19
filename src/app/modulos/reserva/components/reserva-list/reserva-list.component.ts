@@ -6,24 +6,28 @@ import { Pedido } from '../../../../shared/models/Pedido.model';
 import { AuthService } from '../../../../core/auth/auth.service';
 
 @Component({
-  selector: 'app-reserva-home',
-  templateUrl: './reserva-home.component.html',
-  styleUrls: ['./reserva-home.component.css'],
+  selector: 'app-reserva-list',
+  templateUrl: './reserva-list.component.html',
+  styleUrls: ['./reserva-list.component.css']
 })
-export class ReservaHomeComponent implements OnInit {
-  
+export class ReservaListComponent implements OnInit {
+
   //Variables Auth
   public role: number;
   public user: User;
   public id: any;
 
+  public valid: boolean = false;
+
+  public reservas: Pedido[] = [];
+
   constructor(public auth: AuthService, 
               public reservaServices: ReservaService,
-               public storeServices: StoreService
-  ) {}
+              public storeServices: StoreService) { }
 
   ngOnInit(): void {
     this.getAuth();
+    this.getPedidos();
   }
 
   getAuth() {
@@ -32,11 +36,20 @@ export class ReservaHomeComponent implements OnInit {
         this.user = d;
         this.id = d.id_user;
         this.role = d.role;
-        this.storeServices.getUserPedidos(this.id);
+        
+        
       }
     });
   }
-  
+  getPedidos(){
+    this.storeServices.getPedidos.subscribe(d=>{
+      this.valid = true;   
+      if(d.length > 0){
+        this.reservas = d;
+        
+      }
+      
+    })
+  }
 
-  
 }

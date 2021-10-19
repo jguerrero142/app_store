@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 //Modales
-import { Pedido, Ticket, Pedidoo } from '../../../shared/models/index.models';
+import { Pedido, Ticket } from '../../../shared/models/index.models';
 import { environment } from 'src/environments/environment';
 
 //Servicios
@@ -42,19 +42,20 @@ export class ReservaService {
   constructor(private http: HttpClient,
               private storeService: StoreService) 
               {
-                this.getAuth();
+                
+                // this.getAuth();
               }
 
 
-   getAuth() {
-    this.alert = this.storeService.getUser.subscribe((d) => {
-      if (d.id_user > 0 ) {          
-        this.user = d.id_user;
-        this.getUserTickets(this.user);
-        this.getUserPedidos(this.user); 
-      }
-    });
-  }
+  //  getAuth() {
+  //   this.alert = this.storeService.getUser.subscribe((d) => {
+  //     if (d.id_user > 0 ) {          
+  //       this.user = d.id_user;
+  //       this.getUserTickets(this.user);
+  //       this.getUserPedidos(this.user); 
+  //     }
+  //   });
+  // }
   //Obtiene los TICKETS del USUARIO
   getUserTickets(id: number){
     return this.http.get<Ticket[]>(`${this.API_URI}/ticket/user/${id}`)
@@ -70,7 +71,7 @@ export class ReservaService {
    // Obtenemos los pedidos del USUARIO
    getUserPedidos(id: number){      
     this.pedidos = [];
-    return this.http.get<Pedidoo[]>( `${this.API_URI}/pedido/get/${id}`).subscribe(data =>{
+    return this.http.get<Pedido[]>( `${this.API_URI}/pedido/get/${id}`).subscribe(data =>{
     if(data.length > 0 ){
       data.forEach( (item, index, arr)=>{
           const i = this.tickets.filter( d=> d.id_pedido == item.id)

@@ -7,6 +7,7 @@ import { nzDesingModule } from '../../ant-desing.module';
 import { TitleComponent } from './components/title/title.component';
 import { ReservaHomeComponent } from './components/reserva-home/reserva-home.component';
 import { ReservaFacturaComponent } from './components/reserva-factura/reserva-factura.component';
+import { ReservaListComponent } from './components/reserva-list/reserva-list.component';
 
 
 
@@ -17,7 +18,8 @@ import { ReservaFacturaComponent } from './components/reserva-factura/reserva-fa
   declarations: [
     TitleComponent,
     ReservaHomeComponent,
-    ReservaFacturaComponent
+    ReservaFacturaComponent,
+    ReservaListComponent
   ],
   imports: [
     CommonModule,

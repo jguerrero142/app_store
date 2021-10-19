@@ -1,7 +1,11 @@
 
- <nz-skeleton [nzActive]="true" *ngIf="valid == false"></nz-skeleton>
+ <div>
+    <nz-skeleton [nzActive]="true" *ngIf="valid == false"></nz-skeleton>
+ </div>
+ 
 
  <div *ngIf="valid == true">
+     
         <nz-page-header nzBackIcon >
             <nz-page-header-title>{{user.name}}</nz-page-header-title>
             <!-- <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle> -->
