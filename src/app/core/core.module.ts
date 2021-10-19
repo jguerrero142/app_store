@@ -5,22 +5,12 @@ import { StoreService } from './store.service';
 
 // AngularMaterial
 import { MaterialModule } from '../material.module';
-
-
+import { nzDesingModule } from '../ant-desing.module';
 
 @NgModule({
-  declarations: [
-    CallbackComponent
-  ],
-  imports: [
-    CommonModule,
-    MaterialModule
-  ],
-  providers:[
-    StoreService
-  ],
-  exports:[
-    CallbackComponent
-  ]
+  declarations: [CallbackComponent],
+  imports: [CommonModule, MaterialModule, nzDesingModule],
+  providers: [StoreService],
+  exports: [CallbackComponent],
 })
-export class CoreModule { }
+export class CoreModule {}

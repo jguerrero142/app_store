@@ -8,10 +8,9 @@ import { AuthService } from '../../../../core/auth/auth.service';
 @Component({
   selector: 'app-reserva-list',
   templateUrl: './reserva-list.component.html',
-  styleUrls: ['./reserva-list.component.css']
+  styleUrls: ['./reserva-list.component.css'],
 })
 export class ReservaListComponent implements OnInit {
-
   //Variables Auth
   public role: number;
   public user: User;
@@ -21,9 +20,11 @@ export class ReservaListComponent implements OnInit {
 
   public reservas: Pedido[] = [];
 
-  constructor(public auth: AuthService, 
-              public reservaServices: ReservaService,
-              public storeServices: StoreService) { }
+  constructor(
+    public auth: AuthService,
+    public reservaServices: ReservaService,
+    public storeServices: StoreService
+  ) {}
 
   ngOnInit(): void {
     this.getAuth();
@@ -32,24 +33,19 @@ export class ReservaListComponent implements OnInit {
 
   getAuth() {
     this.storeServices.getUser.subscribe((d) => {
-      if (d != null) {          
+      if (d != null) {
         this.user = d;
         this.id = d.id_user;
         this.role = d.role;
-        
-        
       }
     });
   }
-  getPedidos(){
-    this.storeServices.getPedidos.subscribe(d=>{
-      this.valid = true;   
-      if(d.length > 0){
+  getPedidos() {
+    this.storeServices.getPedidos.subscribe((d) => {
+      if (d.length > 0) {
         this.reservas = d;
-        
+        this.valid = true;
       }
-      
-    })
+    });
   }
-
 }

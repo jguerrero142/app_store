@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Ticket } from '../models/index.models';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { Observable, Subject } from 'rxjs';
 export class TicketsService {
   Tick: Ticket[] = [];
 
-  API_URI = 'http://localhost:3000/api';
+  API_URI = environment.wsUrl;
 
   constructor(private http: HttpClient) {}
 

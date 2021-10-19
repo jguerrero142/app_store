@@ -1,11 +1,11 @@
-.container{
-    margin: 1%;
-    padding: 0px;
+.container {
+  margin: 1%;
+  padding: 0px;
 }
 
-@media (max-width:640px) {
-    .container{
-        padding: 0%;
-        margin-left: 0%;
-    }
+@media (max-width: 640px) {
+  .container {
+    padding: 0%;
+    margin-left: 0%;
+  }
 }
