@@ -1,8 +1,10 @@
-<div>
-  <nz-skeleton [nzActive]="true" *ngIf="valid == false"></nz-skeleton>
-</div>
+<ng-container *ngIf="user == null; else table">
+  <div>
+    <nz-skeleton [nzActive]="true"></nz-skeleton>
+  </div>
+</ng-container>
 
-<div *ngIf="valid == true">
+<ng-template #table>
   <nz-page-header nzBackIcon>
     <nz-page-header-title>{{ user.name }}</nz-page-header-title>
     <!-- <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle> -->
@@ -31,4 +33,4 @@
       </nz-row>
     </nz-page-header-content>
   </nz-page-header>
-</div>
+</ng-template>

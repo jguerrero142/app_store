@@ -1,30 +1,34 @@
-<div class="flex justify-center content-center" *ngIf="valid == false">
-  <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
-</div>
-
-<div *ngIf="valid == true">
-  <nz-collapse>
-    <nz-collapse-panel
-      *ngFor="let panel of reservas"
-      [nzHeader]="'ID #' + panel.id + ' ' + 'Valor:' + panel.valor"
-      [nzActive]="panel.active"
-    >
-      <p>{{ panel.name }}</p>
-      <div *ngIf="panel.ticket && panel.ticket.length > 0">
-        <nz-collapse>
-          <nz-collapse-panel
-            *ngFor="let childPanel of panel.ticket"
-            [nzHeader]="childPanel.producto"
-            [nzActive]="childPanel.active"
-          >
-            <p>
-              A dog is a type of domesticated animal. Known for its loyalty and
-              faithfulness, it can be found as a welcome guest in many
-              households across the world.
-            </p>
-          </nz-collapse-panel>
-        </nz-collapse>
-      </div>
-    </nz-collapse-panel>
-  </nz-collapse>
-</div>
+<ng-container *ngIf="reservas.length == 0; else table">
+  <div class="flex justify-center content-center">
+    <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+  </div>
+</ng-container>
+<ng-template #tagg><nz-tag [nzColor]="'magenta'">magenta</nz-tag></ng-template>
+<ng-template #table>
+  <div>
+    <nz-collapse>
+      <nz-collapse-panel
+        *ngFor="let panel of reservas"
+        [nzHeader]="'ID #' + panel.id + ' ' + 'Valor:' + panel.valor"
+        [nzActive]="panel.active"
+      >
+        <p>{{ panel.name }}</p>
+        <div *ngIf="panel.ticket && panel.ticket.length > 0">
+          <nz-collapse>
+            <nz-collapse-panel
+              *ngFor="let childPanel of panel.ticket"
+              [nzHeader]="childPanel.producto"
+              [nzActive]="childPanel.active"
+            >
+              <p>
+                A dog is a type of domesticated animal. Known for its loyalty
+                and faithfulness, it can be found as a welcome guest in many
+                households across the world.
+              </p>
+            </nz-collapse-panel>
+          </nz-collapse>
+        </div>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </div>
+</ng-template>
