@@ -1,4 +1,6 @@
-export interface Pedido {
+import { Ticket } from './Ticket.model';
+
+export interface Pedidoo {
     id?: number;
     id_user?: number;
     valor?: number;
@@ -6,6 +8,6 @@ export interface Pedido {
     value_pedido?: boolean;
     servicio?: boolean;
     estado_valor?: number;
-    pedido_estado?: number;  
+    pedido_estado?: number;
+    ticket?: Ticket[];
 }
-

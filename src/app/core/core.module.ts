@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CallbackComponent } from './callback/callback.component';
-import { CoreService } from './core.service';
+import { StoreService } from './store.service';
 
 // AngularMaterial
 import { MaterialModule } from '../material.module';
@@ -17,7 +17,7 @@ import { MaterialModule } from '../material.module';
     MaterialModule
   ],
   providers:[
-    CoreService
+    StoreService
   ],
   exports:[
     CallbackComponent

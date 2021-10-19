@@ -3,6 +3,6 @@ export interface Ticket {
     user_ticket?: number;
     Producto?: number;
     created_at?: Date;
-    id_pedido?: string;
+    id_pedido?: number;
     estado?: true;
 }

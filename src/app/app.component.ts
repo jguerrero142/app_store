@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/auth/auth.service';
+import { StoreService } from './core/store.service';
 
 
 
@@ -16,9 +17,11 @@ export class AppComponent implements OnInit {
   
   
 
-  constructor( public auth: AuthService
+  constructor( private auth: AuthService,
+               private store: StoreService
                ) { }
     ngOnInit(){
+      this.store.getAuth();
       this.auth.localAuthSetup();
     }
 

@@ -25,7 +25,7 @@ export class PedidoService {
   }
 
   savePedido(pedido: Pedido) {
-    return this.http.post(`${this.API_URI}/pedido`, pedido);
+    return this.http.post(`${this.API_URI}/pedido`, pedido)
   }
 
   updatePedido(id: string | number, updatePedido: Pedido): Observable<Pedido> {

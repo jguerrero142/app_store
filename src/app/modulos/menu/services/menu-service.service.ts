@@ -27,7 +27,7 @@ export class MenuService {
   );
 
   //TICKETS bservable
-  private ticketObservable: BehaviorSubject <Producto[]> = new BehaviorSubject<Producto[]>(
+  public ticketObservable: BehaviorSubject <Producto[]> = new BehaviorSubject<Producto[]>(
     null
   );
 
@@ -78,6 +78,11 @@ export class MenuService {
     this.getProductos();
     this.getTipos();
     
+  }
+  setTicket(){
+    this.tickets = []
+    this.ticketObservable.next(this.tickets)
+    this.setTotal(this.tickets)
   }
 
   setTotal(data: Producto[]){

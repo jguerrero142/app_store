@@ -5,7 +5,7 @@ import { MaterialModule } from '../../material.module';
 import { nzDesingModule } from '../../ant-desing.module';
 
 import { TitleComponent } from './components/title/title.component';
-import { ReservaListComponent } from './components/reserva-list/reserva-list.component';
+import { ReservaHomeComponent } from './components/reserva-home/reserva-home.component';
 import { ReservaFacturaComponent } from './components/reserva-factura/reserva-factura.component';
 
 
@@ -16,7 +16,7 @@ import { ReservaFacturaComponent } from './components/reserva-factura/reserva-fa
 @NgModule({
   declarations: [
     TitleComponent,
-    ReservaListComponent,
+    ReservaHomeComponent,
     ReservaFacturaComponent
   ],
   imports: [
@@ -26,7 +26,7 @@ import { ReservaFacturaComponent } from './components/reserva-factura/reserva-fa
   ],
   exports:[
     TitleComponent,
-    ReservaListComponent,
+    ReservaHomeComponent,
     ReservaFacturaComponent
   ]
 })

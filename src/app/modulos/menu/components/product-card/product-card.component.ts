@@ -3,7 +3,7 @@ import { MenuService } from '../../services/menu-service.service';
 import { Producto } from 'src/app/shared/models/Producto.model';
 import { TicketsService } from 'src/app/shared/services/ticket.service';
 import { User } from 'src/app/shared/models/index.models';
-import { CoreService } from 'src/app/core/core.service';
+import { StoreService } from 'src/app/core/store.service';
 
 @Component({
   selector: 'app-product-card',
@@ -30,7 +30,7 @@ export class ProductCardComponent implements OnInit {
             constructor(
               public menuServices: MenuService,
               public ticketServices: TicketsService,
-              public coreService: CoreService
+              public storeService: StoreService
             ) {
               this.noData = false;
             }
@@ -42,10 +42,11 @@ export class ProductCardComponent implements OnInit {
  
       //Obtenemos las variables del usuario
       getAuth() {
-        this.coreService.getUser.subscribe((d) => {
+        this.storeService.getUser.subscribe((d) => {
           if (d) {
             this.user = d;
             this.role = d.role;
+            this.alert = false;
           }
         });
       }

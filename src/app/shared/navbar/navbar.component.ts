@@ -6,7 +6,7 @@ import { User } from '../models/index.models';
 
 //Servicios
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { CoreService } from 'src/app/core/core.service';
+import { StoreService } from 'src/app/core/store.service';
 
 @Component({
   selector: 'app-navbar',
@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
           constructor(
             public auth: AuthService,
             private observer: BreakpointObserver,
-            private coreService: CoreService
+            private storeService: StoreService
           ) {}
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
   
 
   getAuth() {
-    this.coreService.getUser.subscribe(data =>{
+    this.storeService.getUser.subscribe(data =>{
        if(data){
         this.user = data;
         this.role = data.role;

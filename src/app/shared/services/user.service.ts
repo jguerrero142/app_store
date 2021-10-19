@@ -8,7 +8,6 @@ import { User } from '../models/index.models';
 
 //Servicios
 import { AuthService } from '../../core/auth/auth.service';
-import { CoreService } from '../../core/core.service';
 import { environment } from 'src/environments/environment';
 
 
@@ -25,35 +24,32 @@ export class UsersService {
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService,
-    private coreService: CoreService
+    private auth: AuthService
   ) { 
-    this.getAuth();
   }
 
   //Validamos el usuario Auth
-  getAuth() {
-    this.auth.userProfile$.subscribe((perfil: User) => {
-      this.user = perfil;
-      if (this.user) {
-        this.loginUser(this.user.sub, this.user).subscribe((resp) => {});
-        this.updateUser(this.user.sub, this.user).subscribe((res) => {});
-      }
-    });
-  }
+  // getAuth() {
+  //   this.auth.userProfile$.subscribe((perfil: User) => {
+  //     this.user = perfil;
+  //     if (this.user) {
+  //       this.loginUser(this.user.sub, this.user).subscribe((resp) => {});
+  //       this.updateUser(this.user.sub, this.user).subscribe((res) => {});
+  //     }
+  //   });
+  // }
 
-  loginUser(id: string | number, updateUser: User): Observable<User> {
-    return this.http.post<User>(`${this.API_URI}/user/login/${id}`, updateUser);
-  }
+  // loginUser(id: string | number, updateUser: User): Observable<User> {
+  //   return this.http.post<User>(`${this.API_URI}/user/login/${id}`, updateUser);
+  // }
 
-  updateUser(id: string | number, updateUser: User) {
-    return this.http.put<User>(`${this.API_URI}/user/${id}`, updateUser).pipe(
-      map((res) => {
-        this.coreService.userSetObs = res;
-        return res;
-      })
-    );
-  }
+  // updateUser(id: string | number, updateUser: User) {
+  //   return this.http.put<User>(`${this.API_URI}/user/${id}`, updateUser).pipe(
+  //     map((res) => {
+  //       return res;
+  //     })
+  //   );
+  // }
 
 
   // CRUD user.

@@ -1,5 +1,18 @@
 <main>
   <div class="container">
+    <div *ngIf='alert == true'>
+      <nz-alert
+        [ngClass]="alertOk == true"
+        class="m-2"
+        nzType="success"
+        nzCloseable
+        nzMessage="Tu pedido fue agregado exitosamente"
+        (nzOnClose)="afterClose()"
+        
+      ></nz-alert>
+    </div>
+
+
     <div class="card-group animated fadeIn fast">
       <mat-card>
         <mat-card-header>
@@ -12,41 +25,50 @@
             <span class="text-pedido fw-bold"> Mi Pedido </span>
           </div>
           <ul class="list-group" *ngIf="texto == false">
-            <li class="list-group-item d-flex justify-content-between m-2">
-              <div class="bton fw-bold aling-text" *ngIf="texto == 0">
+            <li class="list-group-item  m-2">
+              <div class="bton fw-bold aling-text justify-center" *ngIf="texto == 0">
                 Que deseas reservar hoy?
               </div>
             </li>
           </ul>
           <ul class="list-group" *ngIf="texto == true">
-            <li class="list-group-item d-flex justify-content-between m-2">
-              <div class="bton fw-bold" >
-                TOTAL: $ {{ total }}
-              </div>
+            <li class="list-group-item  m-2">
+              <span class="justify-center" nz-typography><strong> TOTAL: </strong></span>
+              <nz-tag  class="fw-bold" [nzColor]="'green'">{{ total | currency }}</nz-tag>
             </li>
           </ul>
 
-          <ul class="list-group list-group-numbered">
+          <ul class="list-group list-group-numbered ">
+            
             <li
               class="
                 list-group-item
                 d-flex
-                justify-content-between
+                justify-center
                 align-items-start
-              "
-              *ngFor="let ticket of tickets ; index as i"
-            >
-              <div class="ms-2 me-auto">
-                <div class="fw-bold">{{ ticket.name }}</div>
-                <div class="fw-bold">{{ "$" }} {{ ticket.valor }}</div>
-              </div>
-              <a
-                class="btn btn-danger"
-                (click)="deleteTicket(i)"
-                *ngIf="auth.loggedIn"
-                ><i class="far fa-trash-alt"></i
-              ></a>
+                w-auto
+                "
+                *ngFor="let ticket of tickets ; index as i">
+              <div class="grid grid-cols-5 rounded-lg flex-wrap" >
+                <div class="col-span-4">
+                  <div class="grid grid-rows-2">
+                    <span class="row-span-1" nz-typography><strong>{{ ticket.name }}</strong></span>
+                    <nz-tag  class="fw-bold" [nzColor]="'gold'">{{ ticket.valor | currency }}</nz-tag>
+                  </div>
+                  
+                </div>
+                <div class="col-span-1 ">
+                  <button  (click)="deleteTicket(i)"
+                      *ngIf="auth.loggedIn"
+                      nz-button nzType="primary">
+                      <i class="far fa-trash-alt "></i>
+                    </button>
+                </div>
+              </div>            
+                 
+              
             </li>
+          
           </ul>
           <div class="botn m-2" *ngIf="texto == false" (click)="alert = true">
             <button nz-button nzType="primary">Agrega productos</button>
@@ -64,7 +86,7 @@
           </div>
           
           <div class="botn m-2" *ngIf="texto == true">
-            <app-modal></app-modal>
+            <app-modal [idUser]="id"></app-modal>
           </div>
         </mat-card-content>
       </mat-card>
