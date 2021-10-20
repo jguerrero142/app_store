@@ -34,12 +34,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatProgressSpinnerModule,
     MatTabsModule,
     MatGridListModule,
-
-
-
-    
-
-    MatButtonModule,    
+     MatButtonModule,    
     MatIconModule,
     MatCardModule,
     MatTooltipModule,
@@ -57,8 +52,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
     BrowserAnimationsModule,
     MatTabsModule,
     MatGridListModule,
-
-
     MatButtonModule,    
     MatIconModule,
     MatCardModule,

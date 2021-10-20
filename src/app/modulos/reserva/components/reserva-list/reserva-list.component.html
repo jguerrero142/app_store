@@ -4,31 +4,48 @@
   </div>
 </ng-container>
 <ng-template #tagg><nz-tag [nzColor]="'magenta'">magenta</nz-tag></ng-template>
+
+
 <ng-template #table>
-  <div>
-    <nz-collapse>
-      <nz-collapse-panel
-        *ngFor="let panel of reservas"
-        [nzHeader]="'ID #' + panel.id + ' ' + 'Valor:' + panel.valor"
-        [nzActive]="panel.active"
-      >
-        <p>{{ panel.name }}</p>
-        <div *ngIf="panel.ticket && panel.ticket.length > 0">
-          <nz-collapse>
-            <nz-collapse-panel
-              *ngFor="let childPanel of panel.ticket"
-              [nzHeader]="childPanel.producto"
-              [nzActive]="childPanel.active"
-            >
-              <p>
-                A dog is a type of domesticated animal. Known for its loyalty
-                and faithfulness, it can be found as a welcome guest in many
-                households across the world.
-              </p>
-            </nz-collapse-panel>
-          </nz-collapse>
-        </div>
-      </nz-collapse-panel>
-    </nz-collapse>
+  <div *ngFor="let panel of reservas" >
+    <div class="m-2 bg-gray-50 p-0.5 rounded-md" >
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel>
+        
+          <mat-expansion-panel-header>
+            <mat-panel-title >
+              <nz-tag [nzColor]="'red'" > # ID {{ panel.id }}</nz-tag>
+            </mat-panel-title>
+            <mat-panel-description>
+              <div>
+                <nz-tag [nzColor]="'green'">{{" "}}.{{ panel.valor | currency }}</nz-tag>
+              </div>
+              <div>{{panel.created_at | date}}</div>
+              
+              <div *ngIf="panel.servicio == 0">                
+                  <mat-icon>store</mat-icon>                
+              </div>
+              <div  *ngIf="panel.servicio == 1" class="flex rounded-lg items-center w-6 h-7">
+                <nz-tag [nzColor]="'red'" ><mat-icon>delivery_dining</mat-icon></nz-tag>
+              </div>
+              
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+       
+        
+          
+                  <div class="flex flex-wrap justify-start p-0 ">
+                    
+                      <mat-card class="m-1" *ngFor="let childPanel of panel.ticket">
+                        
+                        <mat-label class="m-1 font-semibold" nz-typography>{{ childPanel.name }}</mat-label>                        
+                        <mat-label class="m-1" nz-typography><nz-tag [nzColor]="'gold'">{{ childPanel.valor | currency }}</nz-tag> </mat-label>
+                      </mat-card>    
+                  </div>
+    
+      </mat-expansion-panel>
+      
+    </mat-accordion>
+  </div>
   </div>
 </ng-template>

@@ -8,4 +8,5 @@ export interface Ticket {
   name?: string;
   valor?: number;
   descripcion?: string;
+  image?: string;
 }
