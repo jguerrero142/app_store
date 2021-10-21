@@ -41,7 +41,7 @@ export class AdminComponent implements OnInit {
     }
 
   getPedidos(id: number){
-    this.storeServices.getUserPedidos(id);
+    this.storeServices.getUserPedidos();
     this.storeServices.getPedidos.subscribe(d=>{
       this.valid = true;   
       if(d.length > 0){

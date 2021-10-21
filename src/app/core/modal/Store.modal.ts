@@ -1,3 +1,5 @@
+import { Pedido, Factura } from '../../shared/models/index.models'
+
 export interface Store{
 
     id_user?: number;
@@ -14,5 +16,7 @@ export interface Store{
     email_verified?: string;
     role?: number;
     id_empresa?: number;
+    pedido?: Pedido[];
+    factura?: Factura[];
 
 }

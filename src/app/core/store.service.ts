@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 //Modals
-import { User, Pedido, Ticket } from '../shared/models/index.models';
+import { User, Pedido, Ticket,Factura } from '../shared/models/index.models';
 import { environment } from 'src/environments/environment';
 
 //Servicios
@@ -20,32 +20,34 @@ export class StoreService {
   private store: Store[] = [];
   public pedidos: Pedido[] = [];
   public tickets: Ticket[] = [];
+  public facturas: Factura[] = [];
 
+   //////////////////////Observable Store /////////////////////////////////////////////
   private storeObservable: BehaviorSubject<Store[]> = new BehaviorSubject<
     Store[]
   >(null);
 
-  private userObservable: BehaviorSubject<User> = new BehaviorSubject<User>(
-    null
-  );
-
-  getStore = this.storeObservable.asObservable();
-  getUser = this.userObservable.asObservable();
-  // get userGetObs() {
-  //   return this.userObservable.asObservable();
-  // }
-
+  get getStore(){
+    return this.storeObservable.asObservable();
+  } 
   set setStore(store: Store) {
     this.store.push(store);
     this.storeObservable.next(this.store);
     console.log(this.store);
   }
+   //////////////////////Observable Usuario /////////////////////////////////////////////
 
+  private userObservable: BehaviorSubject<User> = new BehaviorSubject<User>(
+    null
+  );
+
+  getUser = this.userObservable.asObservable();
+  
   set userSetObs(data: User) {
     this.userObservable.next(data);
   }
 
-  //////////////////////Observable Usuario /////////////////////////////////////////////
+  //////////////////////Observable Pedido /////////////////////////////////////////////
 
   private pedidoObservable: BehaviorSubject<Pedido[]> = new BehaviorSubject<
     Pedido[]
@@ -53,12 +55,40 @@ export class StoreService {
 
   getPedidos = this.pedidoObservable.asObservable();
 
-  // Enviamos los PEDIDO al arreglo
   set setPedidos(pedido: Pedido[]) {
     this.pedidos = pedido;
     this.pedidoObservable.next(this.pedidos);
-    console.log(this.pedidos);
   }
+
+   //////////////////////Observable Ticket /////////////////////////////////////////////
+
+   private ticketObservable: BehaviorSubject<Ticket[]> = new BehaviorSubject<
+   Ticket[]
+  >(null);
+
+  get getTickets(){
+    return this.ticketObservable.asObservable();
+  } 
+
+  set setTickets(ticket: Ticket[]) {
+    this.tickets = ticket;
+    this.ticketObservable.next(this.tickets);
+  }
+
+  //////////////////////Observable Ticket /////////////////////////////////////////////
+
+  private facturaObservable: BehaviorSubject<Factura[]> = new BehaviorSubject<
+  Factura[]
+ >(null);
+
+ get getFactura(){
+   return this.facturaObservable.asObservable();
+ } 
+
+ set setFactura(factura: Factura[]) {
+   this.facturas = factura;
+   this.facturaObservable.next(this.facturas);
+ }
 
   // Url api
   API_URI = environment.wsUrl;
@@ -74,7 +104,7 @@ export class StoreService {
             this.id = s.id_user;
             this.userSetObs = s;
             this.setStore = s;
-            this.getUserPedidos(this.id);
+            this.getStoreState();
           }
         });
       }
@@ -85,23 +115,28 @@ export class StoreService {
     return this.http.post<User>(`${this.API_URI}/user/login/${id}`, updateUser);
   }
 
+  getStoreState(){
+    this.getUserTickets();
+    this.getUserPedidos();
+    this.getUserFacturas();
+  }
+
   //Obtiene los TICKETS del USUARIO
-  getUserTickets(id: number) {
+  getUserTickets() { 
     return this.http
-      .get<Ticket[]>(`${this.API_URI}/ticket/user/${id}`)
+      .get<Ticket[]>(`${this.API_URI}/ticket/user/${this.id}`)
       .subscribe((d) => {
         if (d != null) {
-          this.tickets = d;
+          this.setTickets = d
         }
       });
   }
 
   // Obtenemos los pedidos del USUARIO
-  getUserPedidos(id: number) {
+  getUserPedidos() {
     this.pedidos = [];
-    this.getUserTickets(id);
     return this.http
-      .get<Pedido[]>(`${this.API_URI}/pedido/get/${id}`)
+      .get<Pedido[]>(`${this.API_URI}/pedido/get/${this.id}`)
       .subscribe((data) => {
         if (data.length > 0) {
           data.forEach((item, index, arr) => {
@@ -109,7 +144,26 @@ export class StoreService {
             data[index].ticket = i;
           });
           this.setPedidos = data;
+          this.store.forEach((item,index) => {
+            const p = this.pedidos.filter((p)=> p.id_user == item.id_user);
+            this.store[index].pedido = p  
+          })
+
         }
       });
+  }
+
+  getUserFacturas() {
+    this.facturas = [];
+    return this.http
+      .get<Factura[]>(`${this.API_URI}/factura/get/${this.id}`)
+      .subscribe((data) =>{
+        this.store.forEach((item, index) =>{
+          const f = data.filter((f) => f.id_user == item.id_user);
+          this.store[index].factura = f
+        })
+        this.setFactura = data
+      })
+    
   }
 }
