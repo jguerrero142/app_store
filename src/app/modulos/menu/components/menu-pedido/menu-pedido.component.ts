@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 import { MenuService } from '../../services/menu-service.service';
 import { TicketsService } from 'src/app/shared/services/ticket.service';
 import { StoreService } from '../../../../core/store.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-menu-pedido',
   templateUrl: './menu-pedido.component.html',
@@ -36,7 +38,8 @@ export class MenuPedidoComponent implements OnInit {
     public pedidoServices: PedidoService,
     public ticketsService: TicketsService,
     public storeService: StoreService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.getTicket();

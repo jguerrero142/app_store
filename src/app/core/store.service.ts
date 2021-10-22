@@ -8,7 +8,10 @@ import { environment } from 'src/environments/environment';
 
 //Servicios
 import { AuthService } from './auth/auth.service';
-import { Store } from './modal/Store.modal';
+import { Store } from './model/Store.model';
+import { PedidoService } from '../shared/services/pedido.service';
+;
+
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +19,7 @@ import { Store } from './modal/Store.modal';
 export class StoreService {
   //Variable Auth0
   public user: User;
+  public use: User[] = [];
   private id: number;
   private store: Store[] = [];
   public pedidos: Pedido[] = [];
@@ -30,10 +34,9 @@ export class StoreService {
   get getStore(){
     return this.storeObservable.asObservable();
   } 
-  set setStore(store: Store) {
-    this.store.push(store);
-    this.storeObservable.next(this.store);
-    console.log(this.store);
+  set setStore(store: Store[]) {
+    this.storeObservable.next(store);
+    console.log(store);
   }
    //////////////////////Observable Usuario /////////////////////////////////////////////
 
@@ -58,6 +61,36 @@ export class StoreService {
   set setPedidos(pedido: Pedido[]) {
     this.pedidos = pedido;
     this.pedidoObservable.next(this.pedidos);
+  }
+
+  private ped: number
+
+  set sendPedido( pedidox: Pedido){
+    this.pedidoService.savePedido(pedidox).subscribe(d=>{});
+    this.store.filter(s=>{
+      s.pedido.map( p => {
+        this.ped = Math.max(p.id)
+      })      
+    })
+    this.store.forEach((ite, index)=>{
+      pedidox.created_at = new Date();
+      pedidox.estado_valor = 1;
+      pedidox.value_pedido = false;
+      pedidox.pedido_estado = 1;
+      pedidox.id = this.ped + 1;
+      ite.pedido.push(pedidox);
+      
+    })
+    console.log(this.store)
+    // this.store.filter(d=> {
+    //   d.pedido.map(p => {
+    //     const ma = Math.max(p.id)
+    //     pedidox.id = ma + 1;
+    //     d.pedido.push(pedidox)
+    //   })
+    // })
+    
+    this.setStore = this.store
   }
 
    //////////////////////Observable Ticket /////////////////////////////////////////////
@@ -93,7 +126,8 @@ export class StoreService {
   // Url api
   API_URI = environment.wsUrl;
 
-  constructor(private auth: AuthService, private http: HttpClient) {}
+  constructor(private auth: AuthService, private http: HttpClient,
+    private pedidoService: PedidoService) {}
 
   getAuth() {
     this.auth.userProfile$.subscribe((perfil: User) => {
@@ -103,7 +137,7 @@ export class StoreService {
           if (s != null) {
             this.id = s.id_user;
             this.userSetObs = s;
-            this.setStore = s;
+            this.store.push(s);
             this.getStoreState();
           }
         });
@@ -116,54 +150,82 @@ export class StoreService {
   }
 
   getStoreState(){
-    this.getUserTickets();
     this.getUserPedidos();
     this.getUserFacturas();
+    this.getUserTickets();
+    this.setStore = this.store
+   
+    
+    // 
   }
 
-  //Obtiene los TICKETS del USUARIO
-  getUserTickets() { 
-    return this.http
-      .get<Ticket[]>(`${this.API_URI}/ticket/user/${this.id}`)
-      .subscribe((d) => {
-        if (d != null) {
-          this.setTickets = d
-        }
-      });
-  }
-
-  // Obtenemos los pedidos del USUARIO
-  getUserPedidos() {
+  //Obtenemos los pedidos del USUARIO
+   getUserPedidos() {
     this.pedidos = [];
     return this.http
       .get<Pedido[]>(`${this.API_URI}/pedido/get/${this.id}`)
       .subscribe((data) => {
-        if (data.length > 0) {
-          data.forEach((item, index, arr) => {
-            const i = this.tickets.filter((d) => d.id_pedido == item.id);
-            data[index].ticket = i;
-          });
-          this.setPedidos = data;
-          this.store.forEach((item,index) => {
-            const p = this.pedidos.filter((p)=> p.id_user == item.id_user);
-            this.store[index].pedido = p  
+        if(data.length > 0){
+          this.store.forEach((item, index)=>{
+            const p = data.filter((d) => d.id_user == item.id_user);
+            this.store[index].pedido = p; 
           })
-
+          
         }
-      });
-  }
-
-  getUserFacturas() {
-    this.facturas = [];
-    return this.http
-      .get<Factura[]>(`${this.API_URI}/factura/get/${this.id}`)
-      .subscribe((data) =>{
-        this.store.forEach((item, index) =>{
-          const f = data.filter((f) => f.id_user == item.id_user);
-          this.store[index].factura = f
-        })
-        this.setFactura = data
       })
-    
-  }
+    }
+
+    // Obtenemos los pedidos del USUARIO
+    getUserFacturas() {
+      this.facturas = [];
+      return this.http
+        .get<Factura[]>(`${this.API_URI}/factura/get/${this.id}`)
+        .subscribe((data) =>{
+          this.store.forEach((item, index) =>{
+            const f = data.filter((f) => f.id_user == item.id_user);
+            this.store[index].factura = f
+          })
+        })
+      
+    }
+
+    //Obtiene los TICKETS del USUARIO
+      getUserTickets() { 
+        return this.http
+          .get<Ticket[]>(`${this.API_URI}/ticket/user/${this.id}`)
+          .subscribe((data) => {
+            if (data.length > 0){
+              this.store.forEach((store, index) =>{
+                store.pedido.forEach((item, index)=>{
+                  const t = data.filter(d=> d.id_pedido == item.id)
+                  store.pedido[index].ticket = t;
+                })
+                // item.pedido[index].ticket = data.filter(d=> d.id_pedido == item.pedido.)
+              })
+            }
+          });
+      }
+
+  // Obtenemos los pedidos del USUARIO
+  // getUserPedidos() {
+  //   this.pedidos = [];
+  //   return this.http
+  //     .get<Pedido[]>(`${this.API_URI}/pedido/get/${this.id}`)
+  //     .subscribe((data) => {
+  //       if (data.length > 0) {
+  //         data.forEach((item, index, arr) => {
+  //           const i = this.tickets.filter((d) => d.id_pedido == item.id);
+  //           data[index].ticket = i;
+  //         });
+  //         this.setPedidos = data;
+  //         this.store.forEach((item,index) => {
+  //           const p = this.pedidos.filter((p)=> p.id_user == item.id_user);
+  //           this.store[index].pedido = p  
+  //         })
+
+  //       }
+  //     });
+  // }
+
+  
 }

@@ -7,6 +7,7 @@ import { Ticket, Pedido, Producto } from 'src/app/shared/models/index.models';
 import { MenuService } from '../../services/menu-service.service';
 import { PedidoService } from 'src/app/shared/services/pedido.service';
 import { TicketsService } from 'src/app/shared/services/ticket.service';
+import { StoreService } from '../../../../core/store.service';
 
 @Component({
   selector: 'app-modal',
@@ -31,7 +32,8 @@ export class ModalComponent implements OnInit {
   constructor(
     private menuServices: MenuService,
     public pedidoServices: PedidoService,
-    private ticketServices: TicketsService
+    private ticketServices: TicketsService,
+    private storeService: StoreService
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +75,28 @@ export class ModalComponent implements OnInit {
   }
 
   //Agrega el pedido al dar clic en el boton.
+  private pedidox: Pedido[] = [];
+
+
+  sendPedido(){
+    this.pedido = {
+      id_user: this.idUser,
+      valor: this.total,
+      servicio: this.switchValue,
+      ticket: this.tickets
+    }
+    
+    this.storeService.sendPedido = this.pedido
+    this.isVisible = false;
+    this.tickets = []
+    this.menuServices.setTicket();
+    
+  }
+
+
+
+
+
   setPedido(){
     
     this.pedido = {

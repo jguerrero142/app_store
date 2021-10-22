@@ -1,18 +1,17 @@
 <main>
   <div class="container">
-    <div *ngIf='alert == true'>
-      <nz-alert
-        [ngClass]="alertOk == true"
-        class="m-2"
-        nzType="success"
-        nzCloseable
-        nzMessage="Tu pedido fue agregado exitosamente"
-        (nzOnClose)="afterClose()"
-        
-      ></nz-alert>
-    </div>
-
-
+    <ng-template>
+      <div>           
+        <nz-alert
+          class="m-2"
+          nzType="warning"
+          nzCloseable
+          nzMessage="Agrega almenos un producto"
+          (nzOnClose)="afterClose()"          
+        ></nz-alert>
+      </div>
+    </ng-template>
+    
     <div class="card-group animated fadeIn fast">
       <mat-card>
         <mat-card-header>
@@ -72,17 +71,6 @@
           </ul>
           <div class="botn m-2" *ngIf="texto == false" (click)="alert = true">
             <button nz-button nzType="primary">Agrega productos</button>
-          </div>
-          <div *ngIf='alert == true'>
-            <nz-alert
-              [ngClass]="alert == true"
-              class="m-2"
-              nzType="warning"
-              nzCloseable
-              nzMessage="Agrega almenos un producto"
-              (nzOnClose)="afterClose()"
-              
-            ></nz-alert>
           </div>
           
           <div class="botn m-2" *ngIf="texto == true">
