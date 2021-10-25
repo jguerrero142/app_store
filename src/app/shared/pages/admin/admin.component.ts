@@ -25,32 +25,31 @@ export class AdminComponent implements OnInit {
     public storeServices: StoreService) { }
 
   ngOnInit(): void {
-    this.getAuth(); 
     }
 
-    getAuth() {
-      this.storeServices.getUser.subscribe((d) => {
-        if (d != null) {          
-          this.user = d;
-          this.id = d.id_user;
-          this.role = d.role;
-          this.getPedidos(this.id);
+    // getAuth() {
+    //   this.storeServices.getUser.subscribe((d) => {
+    //     if (d != null) {          
+    //       this.user = d;
+    //       this.id = d.id_user;
+    //       this.role = d.role;
+    //       this.getPedidos(this.id);
           
-        }
-      });
-    }
+    //     }
+    //   });
+    // }
 
-  getPedidos(id: number){
-    this.storeServices.getUserPedidos();
-    this.storeServices.getPedidos.subscribe(d=>{
-      this.valid = true;   
-      if(d.length > 0){
-        this.reservas = d;
+  // getPedidos(id: number){
+  //   this.storeServices.getUserPedidos();
+  //   this.storeServices.getPedidos.subscribe(d=>{
+  //     this.valid = true;   
+  //     if(d.length > 0){
+  //       this.reservas = d;
         
-      }
+  //     }
       
-    })
-  }
+  //   })
+  // }
   
 
 }

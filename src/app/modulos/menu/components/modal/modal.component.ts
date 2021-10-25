@@ -5,9 +5,8 @@ import { Ticket, Pedido, Producto } from 'src/app/shared/models/index.models';
 
 // Servicios
 import { MenuService } from '../../services/menu-service.service';
-import { PedidoService } from 'src/app/shared/services/pedido.service';
-import { TicketsService } from 'src/app/shared/services/ticket.service';
 import { StoreService } from '../../../../core/store.service';
+import { StoreEffects } from 'src/app/core/effects/Store.effect';
 
 @Component({
   selector: 'app-modal',
@@ -17,13 +16,14 @@ import { StoreService } from '../../../../core/store.service';
 export class ModalComponent implements OnInit {
 
   // Obtiene id USER
-  @Input() idUser: number;
+  
 
   //Variables obetiene tickets
   public tickets: Producto[] = [];
   public ticket: Ticket;
   public pedido: Pedido;
   public total: number;
+  public idUser: number;
 
   switchValue = false;
   loading = false;
@@ -31,20 +31,30 @@ export class ModalComponent implements OnInit {
 
   constructor(
     private menuServices: MenuService,
-    public pedidoServices: PedidoService,
-    private ticketServices: TicketsService,
+    private storeEffects: StoreEffects,   
     private storeService: StoreService
   ) {}
 
   ngOnInit(): void {
-    
+    this.getAuth();
   }
 
+  //Obtiene el usuario
+  getAuth() {
+    this.storeService.getUser.subscribe((data) => {
+      if (data) {
+        this.idUser = data.id_user;
+      }
+    });
+  }
+
+  //Activa la vision de la mdoal
   showModal(): void {
     this.isVisible = true;
     this.getTicket();
   }
 
+  //Obtiene los tickets en el array
   getTicket(){
     this.menuServices.getTickets.subscribe(data =>{
       if(data.length > 0){
@@ -54,7 +64,7 @@ export class ModalComponent implements OnInit {
             
     })
   }
-
+  //Obtiene el total de arrayl
   getTotal(){
     this.menuServices.getTotal.subscribe( total =>{
       if(total > 0){
@@ -63,6 +73,7 @@ export class ModalComponent implements OnInit {
     })
   }
 
+  //Captura el valor del servicio 
   clickSwitch(): void {    
     if (!this.loading) {
       this.loading = true;
@@ -75,54 +86,20 @@ export class ModalComponent implements OnInit {
   }
 
   //Agrega el pedido al dar clic en el boton.
-  private pedidox: Pedido[] = [];
-
 
   sendPedido(){
     this.pedido = {
       id_user: this.idUser,
       valor: this.total,
       servicio: this.switchValue,
-      ticket: this.tickets
     }
-    
-    this.storeService.sendPedido = this.pedido
+    this.storeEffects.sendPedidos(this.pedido,this.tickets);
     this.isVisible = false;
     this.tickets = []
-    this.menuServices.setTicket();
-    
+    this.menuServices.resetTicket();
   }
 
-
-
-
-
-  setPedido(){
-    
-    this.pedido = {
-      id_user: this.idUser,
-      valor: this.total,
-      servicio: this.switchValue,
-    }
-    this.pedidoServices.savePedido(this.pedido).subscribe(id => {
-      const pedido = id['id']
-        this.tickets.map( d=> {
-          this.ticket = {
-            user_ticket: this.idUser,
-            Producto: d.id,
-            id_pedido: pedido
-          }
-          this.ticketServices.saveTicket(this.ticket).subscribe(resp =>
-            {
-              this.isVisible = false;
-              this.tickets = []
-              this.menuServices.setTicket();
-            }
-          );
-        })
-      });
-  }
-  
+  //Funciones de vista
   handleOk(): void {
     this.isVisible = false;
   }

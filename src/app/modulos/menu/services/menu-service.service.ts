@@ -79,7 +79,7 @@ export class MenuService {
     this.getTipos();
     
   }
-  setTicket(){
+  resetTicket(){
     this.tickets = []
     this.ticketObservable.next(this.tickets)
     this.setTotal(this.tickets)

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy} from '@angular/core';
 
 // Interfaces
 import { Ticket, Pedido, Producto} from 'src/app/shared/models/index.models';
@@ -16,7 +16,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './menu-pedido.component.html',
   styleUrls: ['./menu-pedido.component.css'],
 })
-export class MenuPedidoComponent implements OnInit {
+export class MenuPedidoComponent implements OnInit, OnDestroy{
   //Variables Auth
   public id: number;
   public role: number;
@@ -87,5 +87,6 @@ export class MenuPedidoComponent implements OnInit {
   afterClose(): void {
     this.alert = false;
 }
+ngOnDestroy(){}
 
 }

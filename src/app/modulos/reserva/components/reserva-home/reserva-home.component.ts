@@ -32,7 +32,6 @@ export class ReservaHomeComponent implements OnInit {
         this.user = d;
         this.id = d.id_user;
         this.role = d.role;
-        this.storeServices.getUserPedidos();
       }
     });
   }

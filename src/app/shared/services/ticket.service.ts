@@ -28,7 +28,7 @@ export class TicketsService {
     return this.http.delete(`${this.API_URI}/ticket/${id}`);
   }
   saveTicket(ticket: Ticket) {
-    return this.http.post(`${this.API_URI}/ticket`, ticket);
+    return this.http.post<Ticket[]>(`${this.API_URI}/ticket`, ticket);
   }
 
   updateTicket(id: string | number, updateTicket: Ticket): Observable<Ticket> {

@@ -5,14 +5,26 @@ import { StoreService } from '../../../../core/store.service';
 import { Pedido } from '../../../../shared/models/Pedido.model';
 import { AuthService } from '../../../../core/auth/auth.service';
 import {MatAccordion} from '@angular/material/expansion';
+import { StoreEffects } from '../../../../core/effects/Store.effect';
+
+
+
 
 @Component({
   selector: 'app-reserva-list',
   templateUrl: './reserva-list.component.html',
   styleUrls: ['./reserva-list.component.css'],
 })
+
+
 export class ReservaListComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
+
+  displayedColumns: string[] = ['Producto', 'Valor'];
+
+  
+  
+  
   //Variables Auth
   public role: number;
   public user: User;
@@ -24,7 +36,8 @@ export class ReservaListComponent implements OnInit {
   constructor(
     public auth: AuthService,
     public reservaServices: ReservaService,
-    public storeServices: StoreService
+    public storeServices: StoreService,
+    public storeEffects: StoreEffects
   ) {}
 
   ngOnInit(): void {
@@ -41,12 +54,16 @@ export class ReservaListComponent implements OnInit {
       }
     });
   }
+
   getPedidos() {
-    this.storeServices.getPedidos.subscribe((d) => {
+    this.storeServices.getStore.subscribe((d) => {
       if (d.length > 0) {
-        this.reservas = d;
+        d.map(d=> this.reservas = d.pedido)
         this.valid = true;
       }
     });
+  }
+  deletPedido(index:number,pedido:number){
+    this.storeEffects.deletePedidos(index,pedido);
   }
 }
