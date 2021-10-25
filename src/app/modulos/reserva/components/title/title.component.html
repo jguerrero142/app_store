@@ -25,18 +25,17 @@
         </nz-page-header-extra>
         <nz-page-header-content>
           <nz-row nzType="flex">
-            <nz-statistic nzTitle="Status" nzValue="Pending"></nz-statistic>
+            <nz-statistic nzTitle="Estado" nzValue="Pendiente"></nz-statistic>
             <nz-statistic
-              nzTitle="Price"
-              [nzValue]="568.08"
-              nzPrefix="$"
+              nzTitle="Precio"
+              [nzValue]="(total | currency)"
               style="margin: 0 32px"
             ></nz-statistic>
-            <nz-statistic
+            <!-- <nz-statistic
               nzTitle="Balance"
               [nzValue]="3345.08"
               nzPrefix="$"
-            ></nz-statistic>
+            ></nz-statistic> -->
           </nz-row>
         </nz-page-header-content>
       </nz-page-header>

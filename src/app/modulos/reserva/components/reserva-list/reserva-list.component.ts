@@ -42,7 +42,7 @@ export class ReservaListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAuth();
-    this.getPedidos();
+    this.getStore();
   }
 
   getAuth() {
@@ -55,14 +55,18 @@ export class ReservaListComponent implements OnInit {
     });
   }
 
-  getPedidos() {
+  getStore() {
     this.storeServices.getStore.subscribe((d) => {
       if (d.length > 0) {
-        d.map(d=> this.reservas = d.pedido)
+        d.map(s => {
+          this.reservas = s.pedido.filter( p => p.estado_valor == 1);
+        })
         this.valid = true;
       }
     });
+    
   }
+
   deletPedido(index:number,pedido:number){
     this.storeEffects.deletePedidos(index,pedido);
   }

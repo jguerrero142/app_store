@@ -12,17 +12,19 @@ export class TitleComponent implements OnInit {
 
   //Variables Auth
   public role: number;
+  public total: number = 0;
   public user: User;
   public id: any;
 
-  constructor(public storeService: StoreService) {}
+  constructor(public storeServices: StoreService) {}
 
   ngOnInit(): void {
     this.getAuth();
+    this.getTotalReservas();
   }
 
   getAuth() {
-    this.storeService.getUser.subscribe((d) => {
+    this.storeServices.getUser.subscribe((d) => {
       if (d.id_user > 0) {
         this.user = d;
         this.role = d.role;
@@ -30,4 +32,14 @@ export class TitleComponent implements OnInit {
       }
     });
   }
+
+  getTotalReservas(){
+    this.storeServices.getStore.subscribe(s=>{
+      s.map(store => {
+        this.total = store.pedido.reduce((suma,d)=> suma + d.valor, 0);
+      })
+    })
+  }
+
+  
 }

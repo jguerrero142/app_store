@@ -21,18 +21,21 @@ export class ReservaService {
   public user: number;
   alert: any;
 
+  public valid: boolean = false;
+  public reservas: Pedido[] = [];
+
   
 
-  private pedidoObservable: BehaviorSubject <Pedido[]> = new BehaviorSubject<Pedido[]>(
-    null
+  private reservaObservable: BehaviorSubject <Pedido[]> = new BehaviorSubject<Pedido[]>(
+   null
   );
 
-  getPedidos = this.pedidoObservable.asObservable();
+  getReserva = this.reservaObservable.asObservable();
 
-  // Enviamos los PEDIDO al arreglo 
-  set setPedidos(pedido: Pedido[]){
+  // Enviamos los RESERVAS al arreglo 
+  set setReservas(reserva: Pedido[]){
     // this.pedidos = pedido;
-    this.pedidoObservable.next(pedido);
+    this.reservaObservable.next(reserva);
     
   }
 
@@ -40,47 +43,19 @@ export class ReservaService {
   
 
   constructor(private http: HttpClient,
-              private storeService: StoreService) 
+              private storeServices: StoreService) 
               {
                 
-                // this.getAuth();
+                this.getAuth();
               }
 
 
-  //  getAuth() {
-  //   this.alert = this.storeService.getUser.subscribe((d) => {
-  //     if (d.id_user > 0 ) {          
-  //       this.user = d.id_user;
-  //       this.getUserTickets(this.user);
-  //       this.getUserPedidos(this.user); 
-  //     }
-  //   });
-  // }
-  //Obtiene los TICKETS del USUARIO
-  getUserTickets(id: number){
-    return this.http.get<Ticket[]>(`${this.API_URI}/ticket/user/${id}`)
-    .subscribe(d => {
-      if(d != null){
-        this.tickets = d
+   getAuth() {
+    this.storeServices.getUser.subscribe((d) => {
+      if (d.id_user > 0 ) {          
+        this.user = d.id_user;
       }
-      
-    })
+    });
   }
-
-   
-   // Obtenemos los pedidos del USUARIO
-   getUserPedidos(id: number){      
-    this.pedidos = [];
-    return this.http.get<Pedido[]>( `${this.API_URI}/pedido/get/${id}`).subscribe(data =>{
-    if(data.length > 0 ){
-      data.forEach( (item, index, arr)=>{
-          const i = this.tickets.filter( d=> d.id_pedido == item.id)
-          data[index].ticket = i
-     });
-      this.pedidos = data;
-      this.setPedidos = data;
-    }  
-  });
-}   
   
 }
