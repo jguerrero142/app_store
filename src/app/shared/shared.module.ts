@@ -18,6 +18,8 @@ import { MaterialModule } from '../material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { nzDesingModule } from '../ant-desing.module';
 import { ReservaModule } from '../modulos/reserva/reserva.module';
+import { CajaModule } from '../modulos/caja/caja.module';
+import { CajaComponent } from './pages/caja/caja.component';
 
 
 
@@ -28,6 +30,7 @@ import { ReservaModule } from '../modulos/reserva/reserva.module';
     AdminComponent,
     InventarioComponent,
     MenuComponent,
+    CajaComponent,
     ReservaComponent,
     EmpresaComponent,
     NavbarComponent
@@ -37,6 +40,7 @@ import { ReservaModule } from '../modulos/reserva/reserva.module';
     SharedRoutingModule,
     MenuModule,
     ReservaModule,
+    CajaModule,
     MaterialModule,
     nzDesingModule
   ],
@@ -44,6 +48,7 @@ import { ReservaModule } from '../modulos/reserva/reserva.module';
     AdminComponent,
     InventarioComponent,
     MenuComponent,
+    CajaComponent,
     ReservaComponent,
     EmpresaComponent,
     NavbarComponent

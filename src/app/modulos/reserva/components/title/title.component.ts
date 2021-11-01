@@ -16,7 +16,7 @@ export class TitleComponent implements OnInit {
   public user: User;
   public id: any;
 
-  constructor(public storeServices: StoreService) {}
+  constructor(private storeServices: StoreService) {}
 
   ngOnInit(): void {
     this.getAuth();
@@ -35,9 +35,8 @@ export class TitleComponent implements OnInit {
 
   getTotalReservas(){
     this.storeServices.getStore.subscribe(s=>{
-      s.map(store => {
-        this.total = store.pedido.reduce((suma,d)=> suma + d.valor, 0);
-      })
+      const p = s.pedido.filter(d=> d.pedido_estado == 1 )
+      this.total = p.reduce((suma,d)=> suma + d.valor, 0);
     })
   }
 

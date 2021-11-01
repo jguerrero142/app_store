@@ -9,5 +9,6 @@ export interface Pedido {
     servicio?: boolean;
     estado_valor?: number;
     pedido_estado?: number;
+    name?: string;
     ticket?: Ticket[];
 }

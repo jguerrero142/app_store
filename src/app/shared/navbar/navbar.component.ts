@@ -60,7 +60,7 @@ export class NavbarComponent implements OnInit {
       if (res.matches) {
         this.sideWith = 0;
       } else {
-        this.sideWith = 180;
+        this.sideWith = 140;
       }
     });
   }

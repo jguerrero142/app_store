@@ -1,6 +1,6 @@
 import { Pedido, Factura } from '../../shared/models/index.models'
 
-export interface Store{
+export class Store{
 
     id_user?: number;
     sub?: string;

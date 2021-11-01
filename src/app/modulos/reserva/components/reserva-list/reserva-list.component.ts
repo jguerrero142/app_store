@@ -1,12 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { User } from 'src/app/shared/models/index.models';
+
+
+
+import { User, Pedido, Factura } from 'src/app/shared/models/index.models';
+import {MatAccordion} from '@angular/material/expansion';
+
+
 import { ReservaService } from '../../services/reserva.service';
 import { StoreService } from '../../../../core/store.service';
-import { Pedido } from '../../../../shared/models/Pedido.model';
 import { AuthService } from '../../../../core/auth/auth.service';
-import {MatAccordion} from '@angular/material/expansion';
 import { StoreEffects } from '../../../../core/effects/Store.effect';
-import { Factura } from '../../../../shared/models/Factura.model';
 
 
 
@@ -45,10 +48,7 @@ export class ReservaListComponent implements OnInit {
     this.getAuth();
     this.getStore();
   }
-  keyup(event){
-    console.log(event)
-  }
-
+  
   getAuth() {
     this.storeServices.getUser.subscribe((d) => {
       if (d != null) {
@@ -61,19 +61,13 @@ export class ReservaListComponent implements OnInit {
 
   getStore() {
     this.storeServices.getStore.subscribe((d) => {
-      if (d.length > 0) {
-        d.map(s => {
-          this.reservas = s.pedido.filter( p => p.estado_valor == 1);
-        })
+      if (d != null) {
+        this.reservas = d.pedido.filter( p => p.pedido_estado == 1);
         this.valid = true;
       }
     });
     
   }
-
-  
-
-
   deletPedido(index:number,pedido:number){
     this.reservaServices.getStatdoPedido(pedido)
     .subscribe(res => {
@@ -84,7 +78,6 @@ export class ReservaListComponent implements OnInit {
           this.reservaServices.warningState();
       }
     })
-    // this.storeEffects.deletePedidos(index,pedido);
   }
 
   facturarPedido(pedido: Factura){

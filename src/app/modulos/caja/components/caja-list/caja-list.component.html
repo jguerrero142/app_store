@@ -1,0 +1,164 @@
+<ng-container *ngIf="!valid; else table">
+    <div class="flex justify-center content-center m-12">
+      <nz-spin class="mr-6" nzSimple [nzSize]="'large'"></nz-spin>
+      <div nz-typography><h5>Esperando Pedidos...</h5></div>
+      
+    </div>
+  </ng-container>
+
+<ng-template #table>
+
+    <nz-table #nzTable [nzData]="reservas"  nzTableLayout="fixed"[nzPageSize]="10">
+        <thead>
+
+                <tr>
+                    <th></th>
+                    <th># ID</th>
+                    <th>Usuario</th>
+                    <th>Creado </th>
+                    <th>Servicio</th>
+                    <th>Valor</th>
+                    <th>Facturar</th>
+                </tr>
+        </thead>
+        <tbody>
+                <ng-container *ngFor="let data of nzTable.data">
+                        <tr>
+                            <td [nzExpand]="expandSet.has(data.id)"
+                            (nzExpandChange)="onExpandChange(data, $event)"
+                            ></td>
+                            <td>{{ data.id }}</td>
+                            <td>{{ data.name }}</td>
+                            <td>{{ (data.created_at | date) }}</td>
+                            <td>{{ data.servicio }}</td>
+                            <td>{{ (data.valor | currency) }}</td>
+                            <td></td>
+                        </tr>
+                        <tr [nzExpand]="expandSet.has(data.id)">
+                            
+                                <table class="w-screen">
+                                    <tbody> 
+                                        <tr>
+                                            <th>#ID</th>
+                                            <th>Producto</th>
+                                            <th>Valor</th>
+                                        </tr>
+                                    
+                                     
+                                        <tr *ngFor="let data of ticket">
+                                            <td>{{ data.id_ticket }}</td>
+                                            <td>{{ data.name }}</td>
+                                            <td>{{ data.valor }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </tr>
+
+                </ng-container>
+            
+        </tbody>
+
+    </nz-table>
+
+      
+</ng-template>
+
+  <!-- <ng-template #table>
+    <nz-table #filterTable [nzData]="listOfData" nzTableLayout="fixed">
+        <thead>
+          <tr>
+            <th
+              *ngFor="let column of listOfColumns"
+              [nzSortOrder]="column.sortOrder"
+              [nzSortFn]="column.sortFn"
+              [nzSortDirections]="column.sortDirections"
+              [nzFilterMultiple]="column.filterMultiple"
+              [nzFilters]="column.listOfFilter"
+              [nzFilterFn]="column.filterFn"
+            >
+              {{ column.name }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of filterTable.data">
+            <td>{{ data.name }}</td>
+            <td>{{ data.age }}</td>
+            <td>{{ data.address }}</td>
+          </tr>
+          <tr [nzExpand]="expandSet.has(data.id)">
+            <span>{{ data.description }}</span>
+          </tr>
+        </tbody>
+      </nz-table>
+  </ng-template> -->
+
+ 
+
+
+  
+  <!-- <ng-template #table>
+    <div *ngFor="let panel of reservas; index as i" >
+      <div class="grid grid-cols-12 m-2 bg-gray-50 p-0.5 rounded-md items-center justify-center" >
+        <div class="col-span-12">
+          <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel>
+              
+                <mat-expansion-panel-header class="flex  flex-wrap p-1 h-16 md:h-14">
+                   <mat-panel-description  class="flex flex-wrap m-2">
+                    <div class="m-2"><nz-tag [nzColor]="'gold'" > # ID {{ panel.id }}</nz-tag>
+                    </div>
+                    <div>
+                      <nz-tag [nzColor]="'green'">{{" "}}.{{ panel.valor | currency }}</nz-tag>
+                    </div>
+                    <div>{{panel.created_at | date}}</div>
+                    
+                    <div *ngIf="panel.servicio == 0">                
+                        <mat-icon>store</mat-icon>                
+                    </div>
+                    <div  *ngIf="panel.servicio == 1" class="rounded-lg items-center">
+                     <mat-icon>delivery_dining</mat-icon>
+                    </div>
+                    
+                  </mat-panel-description>
+                  
+                       
+                </mat-expansion-panel-header>
+                  
+                    <div class="flex flex-wrap justify-start p-0 ">
+      
+                        <table mat-table [dataSource]="panel.ticket" class="mat-elevation-z2">
+      
+                           Name Column
+                          <ng-container matColumnDef="Producto">
+                            <th mat-header-cell *matHeaderCellDef> Producto </th>
+                            <td mat-cell *matCellDef="let element">{{ element.name }} </td>
+                          </ng-container>
+                        
+                          <!-- valor Column -->
+                          <!-- <ng-container matColumnDef="Valor">
+                            <th mat-header-cell *matHeaderCellDef> Valor </th>
+                            <td mat-cell *matCellDef="let element"> {{ element.valor | currency }} </td>
+                          </ng-container>
+                        
+                                            
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+      
+                    </div>
+                        <div class="flex justify-between mt-2">
+                          <button nz-button nzType="primary" (click)="deletPedido(i,panel.id)">Cancelar</button>
+                          <button nz-button nzType="sucess" (click)="facturarPedido(panel)">Facturar</button>
+                        </div>
+                        
+          
+            </mat-expansion-panel>
+            
+          </mat-accordion>
+        </div>
+    </div>
+            
+    </div>
+  </ng-template> --> 
+  

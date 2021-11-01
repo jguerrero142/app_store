@@ -16,6 +16,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { MenuModule } from './modulos/menu/menu.module';
 import { ReservaModule } from './modulos/reserva/reserva.module';
+import { CajaModule } from './modulos/caja/caja.module';
 
 
 // Modulos librearias
@@ -46,6 +47,7 @@ registerLocaleData(es);
     SharedModule,
     MenuModule,
     ReservaModule,
+    CajaModule,
     MaterialModule,
     FormsModule,
     BrowserAnimationsModule,

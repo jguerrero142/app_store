@@ -8,8 +8,9 @@ import { environment } from 'src/environments/environment';
 
 //Servicios
 import { AuthService } from './auth/auth.service';
-import { Store } from './model/Store.model';
-;
+import { Store } from './class/Store.model';
+import { adStore } from './class/adStore.model';
+import { MenuService } from '../modulos/menu/services/menu-service.service';
 
 
 @Injectable({
@@ -20,27 +21,26 @@ export class StoreService {
   public user: User;
   private id: number;
 
-  private store: Store[] = [];
-  public use: User[] = [];
-  public pedidos: Pedido[] = [];
-  public tickets: Ticket[] = [];
-  public facturas: Factura[] = [];
+  // Variables Store
+  private store: Store = new Store;
+
+  //Variable AdStore
+  private adStore: adStore = new adStore;
+
 
    //////////////////////Observable Store /////////////////////////////////////////////
-  private storeObservable: BehaviorSubject<Store[]> = new BehaviorSubject<
-    Store[]
-  >(null);
+  private storeObservable: BehaviorSubject<Store> = new BehaviorSubject<Store>(this.store);
 
   get getStore(){
     return this.storeObservable.asObservable();
   } 
-  set setStore(store: Store[]) {
+  set setStore(store: Store) {
     this.storeObservable.next(store);
     console.log(store);
   }
    //////////////////////Observable Usuario /////////////////////////////////////////////
 
-  private userObservable: BehaviorSubject<User> = new BehaviorSubject<User>(
+   private userObservable: BehaviorSubject<User> = new BehaviorSubject<User>(
     null
   );
 
@@ -50,28 +50,37 @@ export class StoreService {
     this.userObservable.next(data);
   }
 
-  //////////////////////Observable Pedido /////////////////////////////////////////////
+  //////////////////////Efectos Store /////////////////////////////////////////////
 
   set sendPedido( pedido: Pedido){
-    this.store.map(item => {
-      item.pedido.push(pedido)
-    })
+    this.store.pedido.push(pedido);
     this.setStore = this.store
   }
 
   set deletPedido(index: number){
-    this.store.map(s=>{
-      s.pedido.splice(index,1);
-    })
+    this.store.pedido.splice(index,1);
     this.setStore = this.store
   }
+
+   //////////////////////Observable Admin /////////////////////////////////////////////
+   private adStoreObservable: BehaviorSubject<adStore> = new BehaviorSubject<adStore>(this.adStore);
+
+    get getadStore(){
+      return this.adStoreObservable.asObservable();
+    }
+
+      set setadStore(store: adStore) {
+        this.adStoreObservable.next(store);
+        console.log(store);
+      }
 
 
   // Url api
   API_URI = environment.wsUrl;
 
   constructor(private auth: AuthService, 
-              private http: HttpClient
+              private http: HttpClient,
+              private menuService: MenuService
               ) {}
 
   getAuth() {
@@ -81,8 +90,11 @@ export class StoreService {
         this.loginUser(this.user.sub, this.user).subscribe((s) => {
           if (s != null) {
             this.id = s.id_user;
+            if(s.id_role == 1 || s.id_role == 2 || s.id_role == 5 || s.id_role == 6){
+              this.getAsStore();
+            }
             this.userSetObs = s;
-            this.store.push(s);
+            this.store = s;
             this.getStoreState();
           }
         });
@@ -100,35 +112,23 @@ export class StoreService {
     this.getUserTickets();
     this.setStore = this.store
    
-    
-    // 
   }
 
   //Obtenemos los pedidos del USUARIO
   getUserPedidos() {
-  this.pedidos = [];
   return this.http
     .get<Pedido[]>(`${this.API_URI}/pedido/get/${this.id}`)
-    .subscribe((data) => {
-      
-        this.store.forEach((item, index)=>{
-          const p = data.filter((d) => d.id_user == item.id_user);
-          this.store[index].pedido = p; 
-        })
-        
+    .subscribe((data) => {        
+        this.store.pedido = data;
     })
   }
 
   // Obtenemos los pedidos del USUARIO
   getUserFacturas() {
-    this.facturas = [];
     return this.http
       .get<Factura[]>(`${this.API_URI}/factura/get/${this.id}`)
       .subscribe((data) =>{
-        this.store.forEach((item, index) =>{
-          const f = data.filter((f) => f.id_user == item.id_user);
-          this.store[index].factura = f
-        })
+        this.store.factura = data;
       })
     
   }
@@ -138,15 +138,72 @@ export class StoreService {
       return this.http
         .get<Ticket[]>(`${this.API_URI}/ticket/user/${this.id}`)
         .subscribe((data) => {
-            this.store.forEach((store, index) =>{
-              store.pedido.forEach((item, index)=>{
-                const t = data.filter(d=> d.id_pedido == item.id)
-                store.pedido[index].ticket = t;
-              })
-              // item.pedido[index].ticket = data.filter(d=> d.id_pedido == item.pedido.)
+              this.store.pedido.forEach((item, index)=>{
+              const t = data.filter(d => d.id_pedido == item.id)
+              this.store.pedido[index].ticket = t
             })
-          
         });
   }
+
+  //Obtiene los datos tipo ADMIN
+  getAsStore(){
+    this.getAsProductos();
+    this.getAsUser();
+    this.getAsFacturas();
+    this.getAsPedido();
+    this.getAsTicket();
+    
+    this.setadStore = this.adStore;
+    
+      }
+
+  getAsPedido(){
+      return this.http
+        .get<Pedido[]>(`${this.API_URI}/pedido/`)
+        .subscribe((data) => {
+            this.adStore.pedidos = data;
+        })
+      }
+
+  getAsUser(){
+    return this.http
+      .get<User[]>(`${this.API_URI}/user/`)
+      .subscribe((data) => {
+          this.adStore.users = data;
+      })
+    }
+
+  getAsFacturas(){
+    return this.http
+      .get<Factura[]>(`${this.API_URI}/factura/`)
+      .subscribe((data) => {
+          this.adStore.facturas = data;
+      })
+    }
+
+    getAsProductos(){
+      this.menuService.getProducto.subscribe(d=>{
+        this.adStore.productos = d;
+      });
+      this.menuService.getMenus.subscribe(d=>{
+        this.adStore.menus = d;
+      })
+      this.menuService.getTipo.subscribe(d=>{
+        this.adStore.tipo_producto = d;
+      })
+      }
+
+    
+    getAsTicket(){
+      return this.http
+      .get<Ticket[]>(`${this.API_URI}/ticket/`)
+      .subscribe((data) => {
+            this.adStore.pedidos.forEach((item, index)=>{
+            const ad = data.filter( a => a.id_pedido == item.id);
+            this.adStore.pedidos[index].ticket = ad;
+          })
+      });
+    }
+  
 
 }

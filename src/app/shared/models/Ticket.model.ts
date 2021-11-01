@@ -9,4 +9,5 @@ export interface Ticket {
   valor?: number;
   descripcion?: string;
   image?: string;
+  producto_tipo?: number;
 }
