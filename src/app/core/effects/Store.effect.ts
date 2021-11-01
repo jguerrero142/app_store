@@ -4,6 +4,8 @@ import { TicketsService } from 'src/app/shared/services/ticket.service';
 import { Pedido,Producto } from '../../shared/models/index.models';
 import { StoreService } from '../store.service';
 import { Ticket } from 'src/app/shared/models/index.models';
+import { FacturarService } from 'src/app/shared/services/facturar.service';
+import { Factura } from '../../shared/models/Factura.model';
 
 
 @Injectable({
@@ -13,6 +15,7 @@ export class StoreEffects {
 
    private pedidoId: number;
    private  pedidoDate: Pedido;
+   private factura: Factura;
    
    
    private ticket: Producto[];
@@ -20,7 +23,8 @@ export class StoreEffects {
 
   constructor( private storeServices: StoreService,
                private pedidoServices: PedidoService,
-               private ticketServices: TicketsService) {
+               private ticketServices: TicketsService,
+               private facturarServices: FacturarService) {
                
                   this.storeServices.getUser.subscribe((data) => {
                     if (data) {
@@ -63,6 +67,18 @@ export class StoreEffects {
         this.pedidoServices.deletPedido(pedido).subscribe(d=>{
           
         });
+      }
+
+      setFactura(factura: Factura){
+        console.log(factura)
+          // this.factura = {
+          //   id_user: factura.id_user,
+          //   id_pedido: factura.id_pedido,
+          //   valor: factura.valor,
+          //   observacion: factura.observacion,
+          // // }
+          // console.log(this.factura)
+          this.facturarServices.saveFactura(factura).subscribe(d =>{console.log(d)});
       }
 
 }

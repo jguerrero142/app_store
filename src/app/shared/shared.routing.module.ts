@@ -4,8 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 // Componentes Creados
 import { MenuComponent } from './pages/menu/menu.component';
 import { ReservaComponent } from './pages/reserva/reserva.component';
-import { PerfilComponent } from './pages/perfil/perfil.component';
-import { ConfigComponent } from './pages/config/config.component';
+import { CajaComponent } from './pages/caja/caja.component';
+import { EmpresaComponent } from './pages/enterprise/enterprise.component';
+import { InventarioComponent } from './pages/inventario/inventario.component';
 import { AdminComponent } from './pages/admin/admin.component';
 
 // Auth0
@@ -22,8 +23,9 @@ const routes: Routes = [
         component: ReservaComponent,
         canActivate: [AuthGuard],
       },
-      { path: 'Perfil', component: PerfilComponent },
-      { path: 'Config', component: ConfigComponent },
+      { path: 'Caja', component: CajaComponent },
+      { path: 'Empresa', component: EmpresaComponent },
+      { path: 'Inventario', component: InventarioComponent },
       { path: 'Admin', component: AdminComponent },
       { path: 'callback', component: CallbackComponent },
       { path: '**', redirectTo: 'Menu', pathMatch: 'full' },

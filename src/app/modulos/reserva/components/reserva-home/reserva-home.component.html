@@ -1,14 +1,24 @@
 <div class="container">
-  <div class="row justify-items-center">
-    <app-title></app-title>
+  <div *ngIf="valid == false ; else contenido">
+    <nz-skeleton [nzActive]="true"></nz-skeleton>
   </div>
-  <div class="row justify-items-center">
-    <div class="col-md-7 justify-center">
-      <app-reserva-list></app-reserva-list>
-    </div>
 
-    <div class="col-md-5 text-center justify-center">
-      <app-reserva-factura></app-reserva-factura>
+  <ng-template #contenido>
+    <div class="row justify-items-center">
+      <app-title></app-title>
     </div>
-  </div>
+    <div class="row justify-items-center">
+      <div class="col-md-7 justify-center">
+        <app-reserva-list></app-reserva-list>
+      </div>
+  
+      <div class="col-md-5 text-center justify-center">
+        <app-reserva-factura></app-reserva-factura>
+      </div>
+    </div>
+  </ng-template>
+
+  
+
+
 </div>

@@ -1,13 +1,17 @@
 import { Injectable,EventEmitter } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 //Modales
 import { Pedido, Ticket } from '../../../shared/models/index.models';
 import { environment } from 'src/environments/environment';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 //Servicios
 import { StoreService } from 'src/app/core/store.service';
+import { StatePedido } from '../models/pedido.state';
+import { StoreEffects } from '../../../core/effects/Store.effect';
 
 
 @Injectable({
@@ -43,7 +47,9 @@ export class ReservaService {
   
 
   constructor(private http: HttpClient,
-              private storeServices: StoreService) 
+              private storeServices: StoreService,
+              private storeEffects: StoreEffects,
+              private modal: NzModalService) 
               {
                 
                 this.getAuth();
@@ -57,5 +63,32 @@ export class ReservaService {
       }
     });
   }
+
+  getStatdoPedido(id){
+      return this.http.get<StatePedido>(`${this.API_URI}/pedido/state/${id}`)
+      .pipe(map(d => d.pedido_estado ))
+    
+  }
+
+  warningState(): void {
+    this.modal.warning({
+      nzTitle: 'Esta reserva ya esta en proceso',
+      nzContent: 'Por favor comunicate al restaurante...'
+    });
+  }
+
+  deleteConfirm(index:number,pedido:number): void {
+    this.modal.confirm({
+      nzTitle: 'Deseas Cancelar La Reserva?',
+      nzContent: '',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.storeEffects.deletePedidos(index,pedido),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
+  }
+
   
 }

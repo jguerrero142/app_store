@@ -11,6 +11,7 @@ import { TipoProducto } from 'src/app/shared/models/index.models';
 export class MenuHomeComponent implements OnInit {
 
   public tipos: TipoProducto[] = [];
+  public valid: boolean = false;
 
 
   constructor(public menuService: MenuService) {}
@@ -21,7 +22,10 @@ export class MenuHomeComponent implements OnInit {
 
   getTipoProductos(){
     this.menuService.getTipo.subscribe(
-      data => {this.tipos = data;}
+      data => {
+        this.valid = true;
+        this.tipos = data;
+      }
     )
   }
   

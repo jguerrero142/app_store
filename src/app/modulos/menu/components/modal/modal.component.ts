@@ -24,6 +24,7 @@ export class ModalComponent implements OnInit {
   public pedido: Pedido;
   public total: number;
   public idUser: number;
+  public role: number;
 
   switchValue = false;
   loading = false;
@@ -44,6 +45,7 @@ export class ModalComponent implements OnInit {
     this.storeService.getUser.subscribe((data) => {
       if (data) {
         this.idUser = data.id_user;
+        this.role = data.id_role;
       }
     });
   }
@@ -88,11 +90,22 @@ export class ModalComponent implements OnInit {
   //Agrega el pedido al dar clic en el boton.
 
   sendPedido(){
-    this.pedido = {
-      id_user: this.idUser,
-      valor: this.total,
-      servicio: this.switchValue,
+    if(this.role == 5 || this.role == 6){
+      this.pedido = {
+        id_user: this.idUser,
+        valor: this.total,
+        servicio: this.switchValue,
+        estado_valor: 2,
+        
+      }
+    }else{
+      this.pedido = {
+        id_user: this.idUser,
+        valor: this.total,
+        servicio: this.switchValue,
+      }
     }
+    
     this.storeEffects.sendPedidos(this.pedido,this.tickets);
     this.isVisible = false;
     this.tickets = []

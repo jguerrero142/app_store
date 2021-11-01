@@ -7,10 +7,10 @@ import { MenuModule } from '../modulos/menu/menu.module';
 
 // Componentes Creados
 import { AdminComponent } from './pages/admin/admin.component';
-import { ConfigComponent } from './pages/config/config.component';
+import { InventarioComponent } from './pages/inventario/inventario.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { ReservaComponent } from './pages/reserva/reserva.component';
-import { PerfilComponent } from './pages/perfil/perfil.component';
+import { EmpresaComponent } from './pages/enterprise/enterprise.component';
 
 
 //Angular Material
@@ -26,10 +26,10 @@ import { ReservaModule } from '../modulos/reserva/reserva.module';
 @NgModule({
   declarations: [
     AdminComponent,
-    ConfigComponent,
+    InventarioComponent,
     MenuComponent,
     ReservaComponent,
-    PerfilComponent,
+    EmpresaComponent,
     NavbarComponent
   ],
   imports: [
@@ -42,10 +42,10 @@ import { ReservaModule } from '../modulos/reserva/reserva.module';
   ],
   exports: [
     AdminComponent,
-    ConfigComponent,
+    InventarioComponent,
     MenuComponent,
     ReservaComponent,
-    PerfilComponent,
+    EmpresaComponent,
     NavbarComponent
   ]
 })

@@ -18,9 +18,10 @@ import { Store } from './model/Store.model';
 export class StoreService {
   //Variable Auth0
   public user: User;
-  public use: User[] = [];
   private id: number;
+
   private store: Store[] = [];
+  public use: User[] = [];
   public pedidos: Pedido[] = [];
   public tickets: Ticket[] = [];
   public facturas: Factura[] = [];

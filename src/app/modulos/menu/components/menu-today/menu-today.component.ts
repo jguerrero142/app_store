@@ -10,7 +10,7 @@ import { Producto } from 'src/app/shared/models/Producto.model';
 export class MenuTodayComponent implements OnInit {
 
   public menu: Producto[] = [];
-  public img: boolean = false;
+  public valid: boolean = false;
 
   constructor(public menuServices: MenuService) {}
 
@@ -21,7 +21,7 @@ export class MenuTodayComponent implements OnInit {
   getMenu(){    
     this.menuServices.getMenus.subscribe( data =>{
       this.menu = data;
-      this.img = true;
+      this.valid = true;
     })
   }
 

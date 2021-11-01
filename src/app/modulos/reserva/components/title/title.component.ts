@@ -11,7 +11,7 @@ export class TitleComponent implements OnInit {
   public valid: boolean = false;
 
   //Variables Auth
-  public role: number;
+  public role: string;
   public total: number = 0;
   public user: User;
   public id: any;
@@ -27,7 +27,7 @@ export class TitleComponent implements OnInit {
     this.storeServices.getUser.subscribe((d) => {
       if (d.id_user > 0) {
         this.user = d;
-        this.role = d.role;
+        this.role = d.role_user;
         this.valid = true;
       }
     });

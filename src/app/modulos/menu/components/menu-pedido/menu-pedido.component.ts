@@ -19,7 +19,7 @@ import { map } from 'rxjs/operators';
 export class MenuPedidoComponent implements OnInit, OnDestroy{
   //Variables Auth
   public id: number;
-  public role: number;
+  public role: string;
 
   //Variables obetiene tickets
   public tickets: Producto[] = [];
@@ -74,7 +74,7 @@ export class MenuPedidoComponent implements OnInit, OnDestroy{
     this.storeService.getUser.subscribe((data) => {
       if (data) {
         this.id = data.id_user;
-        this.role = data.role;
+        this.role = data.role_user;
       }
     });
   }

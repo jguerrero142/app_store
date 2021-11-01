@@ -13,9 +13,10 @@ import { AuthService } from '../../../../core/auth/auth.service';
 export class ReservaHomeComponent implements OnInit {
   
   //Variables Auth
-  public role: number;
+  public role: string;
   public user: User;
   public id: any;
+  public valid: boolean = false;
 
   constructor(public auth: AuthService, 
               public reservaServices: ReservaService,
@@ -28,10 +29,11 @@ export class ReservaHomeComponent implements OnInit {
 
   getAuth() {
     this.storeServices.getUser.subscribe((d) => {
-      if (d != null) {          
+      if (d != null) {
+        this.valid = true;     
         this.user = d;
         this.id = d.id_user;
-        this.role = d.role;
+        this.role = d.role_user;
       }
     });
   }

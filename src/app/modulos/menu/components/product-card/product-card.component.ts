@@ -1,9 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MenuService } from '../../services/menu-service.service';
-import { Producto } from 'src/app/shared/models/Producto.model';
-import { TicketsService } from 'src/app/shared/services/ticket.service';
-import { User } from 'src/app/shared/models/index.models';
+
+//Servies
 import { StoreService } from 'src/app/core/store.service';
+import { MenuService } from '../../services/menu-service.service';
+
+//Modales
+import { User,Producto } from 'src/app/shared/models/index.models';
+
 
 @Component({
   selector: 'app-product-card',
@@ -15,24 +18,18 @@ export class ProductCardComponent implements OnInit {
   // Obtiene el tipo de producto 
   @Input() tipoPro: number;
 
-  public productos: Producto[] = [];
-  public menu: Producto[] = [];
-
-
   //Variables Auth
-  public role: number;
   public user: User;
 
   //Variables del componente
-  public noData: boolean;
+  public productos: Producto[] = [];
+  public noData: boolean = false;
   public alert: boolean;
 
             constructor(
               public menuServices: MenuService,
-              public ticketServices: TicketsService,
               public storeService: StoreService
             ) {
-              this.noData = false;
             }
 
   ngOnInit(): void {
@@ -45,7 +42,6 @@ export class ProductCardComponent implements OnInit {
         this.storeService.getUser.subscribe((d) => {
           if (d) {
             this.user = d;
-            this.role = d.role;
             this.alert = false;
           }
         });
@@ -58,9 +54,8 @@ export class ProductCardComponent implements OnInit {
                 const pro = data.filter( d=> d.producto_tipo == this.tipoPro);
                 if(pro.length > 0){
                   this.productos = pro
-                  }else{
                   this.noData = true
-                }
+                  }
               }
             })
       }

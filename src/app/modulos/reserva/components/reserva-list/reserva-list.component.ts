@@ -6,6 +6,7 @@ import { Pedido } from '../../../../shared/models/Pedido.model';
 import { AuthService } from '../../../../core/auth/auth.service';
 import {MatAccordion} from '@angular/material/expansion';
 import { StoreEffects } from '../../../../core/effects/Store.effect';
+import { Factura } from '../../../../shared/models/Factura.model';
 
 
 
@@ -26,7 +27,7 @@ export class ReservaListComponent implements OnInit {
   
   
   //Variables Auth
-  public role: number;
+  public role: string;
   public user: User;
   public id: any;
 
@@ -44,13 +45,16 @@ export class ReservaListComponent implements OnInit {
     this.getAuth();
     this.getStore();
   }
+  keyup(event){
+    console.log(event)
+  }
 
   getAuth() {
     this.storeServices.getUser.subscribe((d) => {
       if (d != null) {
         this.user = d;
         this.id = d.id_user;
-        this.role = d.role;
+        this.role = d.role_user;
       }
     });
   }
@@ -67,7 +71,25 @@ export class ReservaListComponent implements OnInit {
     
   }
 
+  
+
+
   deletPedido(index:number,pedido:number){
-    this.storeEffects.deletePedidos(index,pedido);
+    this.reservaServices.getStatdoPedido(pedido)
+    .subscribe(res => {
+      if(res == 1){
+        this.reservaServices.deleteConfirm(index, pedido);
+      }
+      else{
+          this.reservaServices.warningState();
+      }
+    })
+    // this.storeEffects.deletePedidos(index,pedido);
+  }
+
+  facturarPedido(pedido: Factura){
+    this.storeEffects.setFactura(pedido)
+    console.log(pedido)
+
   }
 }

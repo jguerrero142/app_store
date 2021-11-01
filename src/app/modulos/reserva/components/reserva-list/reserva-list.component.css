@@ -19,3 +19,11 @@
   table {
     width: 100%;
   }
+
+  .body {
+    background-color: #e43c26ec;
+}
+
+.text{
+  color: #ffffffec;
+}

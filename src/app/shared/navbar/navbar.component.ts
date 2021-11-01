@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   //Variable Auth0
   public user: User;
   public role: number;
+  public valid: boolean = false;
   
   //Valida vista de usuario
   public img: boolean = false;
@@ -41,8 +42,10 @@ export class NavbarComponent implements OnInit {
     this.storeService.getUser.subscribe(data =>{
        if(data){
         this.user = data;
-        this.role = data.role;
-        this.img = true;
+        this.role = data.id_role;
+        if(data.id_role > 0 ){
+          this.valid = true
+        }
       }
     });
   }
