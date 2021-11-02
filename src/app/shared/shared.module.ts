@@ -20,6 +20,7 @@ import { nzDesingModule } from '../ant-desing.module';
 import { ReservaModule } from '../modulos/reserva/reserva.module';
 import { CajaModule } from '../modulos/caja/caja.module';
 import { CajaComponent } from './pages/caja/caja.component';
+import { SearchPipe } from './pipe/search.pipe';
 
 
 
@@ -33,7 +34,8 @@ import { CajaComponent } from './pages/caja/caja.component';
     CajaComponent,
     ReservaComponent,
     EmpresaComponent,
-    NavbarComponent
+    NavbarComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,8 @@ import { CajaComponent } from './pages/caja/caja.component';
     CajaComponent,
     ReservaComponent,
     EmpresaComponent,
-    NavbarComponent
+    NavbarComponent,
+    SearchPipe
   ]
 })
 export class SharedModule { }

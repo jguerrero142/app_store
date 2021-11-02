@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+
 //Modales
-import { Ticket, Pedido, Producto } from 'src/app/shared/models/index.models';
+import { Ticket, Pedido, Producto, User } from 'src/app/shared/models/index.models';
 
 // Servicios
 import { MenuService } from '../../services/menu-service.service';
@@ -24,11 +25,16 @@ export class ModalComponent implements OnInit {
   public pedido: Pedido;
   public total: number;
   public idUser: number;
+  public users: User[] = [];
   public role: number;
+  public value: number = 0;
 
   switchValue = false;
   loading = false;
   isVisible = false;
+
+
+  public selectedValue = null ;
 
   constructor(
     private menuServices: MenuService,
@@ -38,6 +44,7 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAuth();
+
   }
 
   //Obtiene el usuario
@@ -46,6 +53,9 @@ export class ModalComponent implements OnInit {
       if (data) {
         this.idUser = data.id_user;
         this.role = data.id_role;
+        if(this.role == 5){
+          this.getAllUser();
+        }
       }
     });
   }
@@ -88,16 +98,24 @@ export class ModalComponent implements OnInit {
   }
 
   //Agrega el pedido al dar clic en el boton.
+  search(id:number){
+    if(id == this.idUser){
+      this.value = 0
+    }else {
+      this.value = id
+      console.log(this.value)
+    }
+    
+}
 
   sendPedido(){
-    if(this.role == 5 || this.role == 6){
-      this.pedido = {
-        id_user: this.idUser,
-        valor: this.total,
-        servicio: this.switchValue,
-        estado_valor: 2,
-        
-      }
+    if(this.role == 5 ){
+          this.pedido = {
+          id_user: this.idUser,
+          valor: this.total,
+          servicio: this.switchValue,
+          estado_valor: 2,
+        }
     }else{
       this.pedido = {
         id_user: this.idUser,
@@ -112,6 +130,19 @@ export class ModalComponent implements OnInit {
     this.menuServices.resetTicket();
   }
 
+  sendPedidoUser(){
+    this.pedido = {
+      id_user: this.value,
+      valor: this.total,
+      servicio: this.switchValue
+    }
+    this.storeEffects.sendPedidos(this.pedido,this.tickets);
+    this.isVisible = false;
+    this.tickets = []
+    this.menuServices.resetTicket();
+  }
+
+
   //Funciones de vista
   handleOk(): void {
     this.isVisible = false;
@@ -119,5 +150,17 @@ export class ModalComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
+    this.value = 0;
   }
+  //Obtiene todos los usuarios
+  getAllUser(){
+    this.storeService.getadStore.subscribe(d =>{
+      this.users = d.users;
+      console.log(this.users)
+    })
+  }
+  
+  
+ 
+  
 }

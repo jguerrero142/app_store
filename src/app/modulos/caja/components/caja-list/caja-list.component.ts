@@ -172,5 +172,9 @@ export class CajaListComponent implements OnInit {
     }
   }
 
+  facturarPedido(id: any){
+    console.log(id)
+  }
+
 
 }

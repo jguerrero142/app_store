@@ -3,14 +3,33 @@
 </button>
 
 <nz-modal
+  *ngIf = "role == 5;else usuario"
   [(nzVisible)]="isVisible"
   [nzFooter]="modalFooter"
   (nzOnCancel)="handleCancel()"
 >
 
+
   <ng-container  *nzModalContent>
-        <nz-card class="fw-bold" nzTitle="Confirma tu Pedido" [nzExtra]="extraTemplate">
+    
+    
+        <nz-card class="fw-bold" nzTitle="Confirma El Pedido" [nzExtra]="extraTemplate">
+
+          <div>
+            <nz-select #iduser nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectedValue">
+              
+                <nz-option *ngFor="let user of users" [value]="user.id_user" [nzLabel]="user.name" [nzValue]= "user.id_user"></nz-option>
+                
+            </nz-select>
+            <button *ngIf="value == 0" nz-button nzType="primary" (click)="search(iduser.value)">
+              <i nz-icon nzType="search" ></i>
+              Select
+            </button>
+            
+          </div>
+
             <div *ngFor="let ticket of tickets">
+              
 
                 <nz-card  nzType="inner" [nzTitle]="ticket.name" [nzExtra]="extraTemplate">
                         <div class="grid grid-cols-4">
@@ -36,11 +55,13 @@
     </ng-container>
 
     <ng-template #modalFooter>
+    
       
         <span class="m-2" nz-typography >Pedido a Domicilio:</span>
         <nz-switch class="m-2" [(ngModel)]="switchValue"  (click)="clickSwitch()" [nzLoading]="loading"></nz-switch>
       
       <button
+        *ngIf="value == 0;else userpedido"
         nz-button
         nzType="primary"
         (click)="sendPedido()"
@@ -48,5 +69,68 @@
       >
         Confirmar
       </button>
+    <ng-template #userpedido>
+      <button 
+        nz-button
+        nzType="primary"
+        (click)="sendPedidoUser()"
+        [nzLoading]="isConfirmLoading"
+      >
+        Confirmar
+      </button>
+
+    </ng-template>
+      
     </ng-template>
 </nz-modal>
+
+<ng-template #usuario>
+          <nz-modal
+          [(nzVisible)]="isVisible"
+          [nzFooter]="modalFooter"
+          (nzOnCancel)="handleCancel()"
+        >
+
+          <ng-container  *nzModalContent>
+                <nz-card class="fw-bold" nzTitle="Confirma tu Pedido" [nzExtra]="extraTemplate">
+                    <div *ngFor="let ticket of tickets">
+
+                        <nz-card  nzType="inner" [nzTitle]="ticket.name" [nzExtra]="extraTemplate">
+                                <div class="grid grid-cols-4">
+
+                                          <div class="m-1 ">
+                                            <nz-avatar  [nzSize]="64" [nzSrc]="ticket.image"></nz-avatar>
+                                          </div>
+
+                                          <div class="m-1 col-span-2 justify-start">
+                                            <h5  nz-typography>{{ticket.descripcion}}</h5>
+                                          </div>               
+                                </div>              
+                        </nz-card>
+                        <ng-template #extraTemplate>
+                          <nz-tag class="fw-bold" nzColor="gold">{{ticket.valor | currency}}</nz-tag>
+                        </ng-template>
+                  </div> 
+                  
+                  <ng-template #extraTemplate>
+                    <nz-tag class="fw-bold" nzColor="success">Total: {{total | currency}}</nz-tag>
+                  </ng-template>
+                </nz-card>    
+            </ng-container>
+
+            <ng-template #modalFooter>
+              
+                <span class="m-2" nz-typography >Pedido a Domicilio:</span>
+                <nz-switch class="m-2" [(ngModel)]="switchValue"  (click)="clickSwitch()" [nzLoading]="loading"></nz-switch>
+              
+              <button
+                nz-button
+                nzType="primary"
+                (click)="sendPedido()"
+                [nzLoading]="isConfirmLoading"
+              >
+                Confirmar
+              </button>
+            </ng-template>
+        </nz-modal>
+</ng-template>

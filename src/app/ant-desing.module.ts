@@ -31,6 +31,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 const icons = [
   MenuFoldOutline,
@@ -65,7 +66,8 @@ const icons = [
     NzButtonModule,
     NzSwitchModule,
     NzTableModule,
-    NzTabsModule
+    NzTabsModule,
+    NzSelectModule
   ],
   exports: [
     NzIconModule,
@@ -92,7 +94,8 @@ const icons = [
     NzButtonModule,
     NzSwitchModule,
     NzTableModule,
-    NzTabsModule
+    NzTabsModule,
+    NzSelectModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })

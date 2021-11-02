@@ -8,47 +8,48 @@
 
 <ng-template #table>
 
-    <nz-table #nzTable [nzData]="reservas"  nzTableLayout="fixed"[nzPageSize]="10">
+    <nz-table #nzTable [nzData]="reservas"  nzTableLayout="fixed"[nzPageSize]="10" [nzBordered]="true">
         <thead>
 
                 <tr>
-                    <th></th>
-                    <th># ID</th>
-                    <th>Usuario</th>
-                    <th>Creado </th>
-                    <th>Servicio</th>
-                    <th>Valor</th>
-                    <th>Facturar</th>
+                    <th class="w-12"></th>
+                    <th class="text-center"># Pedido</th>
+                    <th class="text-center">Usuario</th>
+                    <th class="text-center">Creado </th>
+                    <th class="text-center">Valor</th>
+                    <th class="text-center">Servicio</th>
+                    <th class="text-center">Facturar</th>
                 </tr>
         </thead>
         <tbody>
-                <ng-container *ngFor="let data of nzTable.data">
-                        <tr>
+                <ng-container *ngFor="let data of nzTable.data; index as i">
+                        <tr >
                             <td [nzExpand]="expandSet.has(data.id)"
                             (nzExpandChange)="onExpandChange(data, $event)"
                             ></td>
-                            <td>{{ data.id }}</td>
-                            <td>{{ data.name }}</td>
-                            <td>{{ (data.created_at | date) }}</td>
-                            <td>{{ data.servicio }}</td>
-                            <td>{{ (data.valor | currency) }}</td>
-                            <td></td>
+                            <td class="text-center" ># {{ data.id }}</td>
+                            <td class="text-center">{{ data.name }}</td>
+                            <td class="text-center">{{ (data.created_at | date) }}</td>
+                            <td class="text-center">{{ (data.valor | currency) }}</td>
+                            <td class="text-center justify-center" *ngIf = "data.servicio == 0"><mat-icon>store</mat-icon></td>
+                            <td class="text-center justify-center" *ngIf = "data.servicio == 1"><mat-icon>delivery_dining</mat-icon></td>
+                            <td><button nz-button nzType="sucess" (click)="facturarPedido(i)">Facturar</button></td>
                         </tr>
                         <tr [nzExpand]="expandSet.has(data.id)">
                             
-                                <table class="w-screen">
+                                <table class="w-screen justify-center border">
                                     <tbody> 
                                         <tr>
-                                            <th>#ID</th>
-                                            <th>Producto</th>
-                                            <th>Valor</th>
+                                            <th class="text-center border">#Ticket</th>
+                                            <th class="text-center border">Producto</th>
+                                            <th class="text-center border">Valor</th>
                                         </tr>
                                     
                                      
                                         <tr *ngFor="let data of ticket">
-                                            <td>{{ data.id_ticket }}</td>
-                                            <td>{{ data.name }}</td>
-                                            <td>{{ data.valor }}</td>
+                                            <td class="text-center border"># {{ data.id_ticket }}</td>
+                                            <td class="text-center border">{{ data.name }}</td>
+                                            <td class="text-center border">{{ (data.valor | currency) }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
