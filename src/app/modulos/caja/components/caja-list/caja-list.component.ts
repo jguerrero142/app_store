@@ -7,7 +7,8 @@ import { Pedido } from '../../../../shared/models/Pedido.model';
 import { AuthService } from '../../../../core/auth/auth.service';
 import { MatAccordion } from '@angular/material/expansion';
 import { StoreEffects } from '../../../../core/effects/Store.effect';
-import { Factura } from '../../../../shared/models/Factura.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 interface DataItem {
   name: string;
@@ -92,28 +93,7 @@ export class CajaListComponent implements OnInit {
       filterFn: (address: string, item: DataItem) => item.address.indexOf(address) !== -1
     }
   ];
-  listOfData: DataItem[] = [
-    {
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park'
-    }
-  ];
+  
 
   listOfParentData: ParentItemData[] = [];
   public ticket: Ticket[] = [];
@@ -128,6 +108,7 @@ export class CajaListComponent implements OnInit {
 
    public valid: boolean = false;
    public reservas: Pedido[] = [];
+   public r$: Observable<Pedido[]>;
  
 
   constructor(
@@ -150,14 +131,15 @@ export class CajaListComponent implements OnInit {
       }
     });
   }
-
+  
   getStore() {
     this.storeServices.getadStore.subscribe((d) => {
-      if (d != null) {
+       if (d != null) {
+         console.log(d)
         this.reservas = d.pedidos.filter( p => p.pedido_estado == 1);
         console.log(this.reservas)
         this.valid = true;
-      }
+       }
     });
     
   }

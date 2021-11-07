@@ -21,9 +21,9 @@
                 <nz-option *ngFor="let user of users" [value]="user.id_user" [nzLabel]="user.name" [nzValue]= "user.id_user"></nz-option>
                 
             </nz-select>
-            <button *ngIf="value == 0" nz-button nzType="primary" (click)="search(iduser.value)">
+            <button *ngIf="value == false" nz-button nzType="primary" (click)="search(iduser.value)">
               <i nz-icon nzType="search" ></i>
-              Select
+              Agregar
             </button>
             
           </div>
@@ -61,7 +61,7 @@
         <nz-switch class="m-2" [(ngModel)]="switchValue"  (click)="clickSwitch()" [nzLoading]="loading"></nz-switch>
       
       <button
-        *ngIf="value == 0;else userpedido"
+        *ngIf="value == false;else userpedido"
         nz-button
         nzType="primary"
         (click)="sendPedido()"

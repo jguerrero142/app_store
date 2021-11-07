@@ -27,7 +27,7 @@ export class ModalComponent implements OnInit {
   public idUser: number;
   public users: User[] = [];
   public role: number;
-  public value: number = 0;
+  public value: boolean = false;
 
   switchValue = false;
   loading = false;
@@ -99,12 +99,13 @@ export class ModalComponent implements OnInit {
 
   //Agrega el pedido al dar clic en el boton.
   search(id:number){
-    if(id == this.idUser){
-      this.value = 0
-    }else {
-      this.value = id
-      console.log(this.value)
-    }
+    console.log(id)
+    // if(id == this.idUser){
+    //   this.value = 0
+    // }else {
+    //   this.value = id
+    //   console.log(this.value)
+    // }
     
 }
 
@@ -130,17 +131,17 @@ export class ModalComponent implements OnInit {
     this.menuServices.resetTicket();
   }
 
-  sendPedidoUser(){
-    this.pedido = {
-      id_user: this.value,
-      valor: this.total,
-      servicio: this.switchValue
-    }
-    this.storeEffects.sendPedidos(this.pedido,this.tickets);
-    this.isVisible = false;
-    this.tickets = []
-    this.menuServices.resetTicket();
-  }
+  // sendPedidoUser(){
+  //   this.pedido = {
+  //     id_user: this.value,
+  //     valor: this.total,
+  //     servicio: this.switchValue
+  //   }
+  //   this.storeEffects.sendPedidos(this.pedido,this.tickets);
+  //   this.isVisible = false;
+  //   this.tickets = []
+  //   this.menuServices.resetTicket();
+  // }
 
 
   //Funciones de vista
@@ -150,7 +151,7 @@ export class ModalComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
-    this.value = 0;
+    this.value = false;
   }
   //Obtiene todos los usuarios
   getAllUser(){

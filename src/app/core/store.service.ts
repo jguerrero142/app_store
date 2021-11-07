@@ -54,7 +54,9 @@ export class StoreService {
 
   set sendPedido( pedido: Pedido){
     this.store.pedido.push(pedido);
+    this.adStore.pedidos.push(pedido);
     this.setStore = this.store
+    this.setadStore = this.adStore
   }
 
   set deletPedido(index: number){
@@ -71,7 +73,7 @@ export class StoreService {
 
       set setadStore(store: adStore) {
         this.adStoreObservable.next(store);
-        console.log(store);
+        console.log(this.adStore)
       }
 
 

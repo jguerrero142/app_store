@@ -37,6 +37,7 @@ export class StoreEffects {
 
       sendPedidos(pedido: Pedido, payload: Producto[]){
        this.pedidoServices.savePedido(pedido).subscribe(res =>{
+         console.log(res)
           this.pedidoDate = res
           this.pedidoDate.ticket = []
           this.sendTicket(payload)
