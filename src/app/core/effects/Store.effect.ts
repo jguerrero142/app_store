@@ -66,7 +66,6 @@ export class StoreEffects {
             });
             
         });
-        console.log(this.pedidoDate)
         this.storeServices.sendPedido = this.pedidoDate
         
       }

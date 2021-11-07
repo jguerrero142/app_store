@@ -133,7 +133,6 @@ export class CajaListComponent implements OnInit {
   getStore() {
     this.storeServices.getStore.subscribe((d) => {
        if (d != null) {
-         console.log(d)
         this.reservas = d.pedidos.filter( p => p.pedido_estado == 1);
         console.log(this.reservas)
         this.valid = true;
@@ -145,8 +144,7 @@ export class CajaListComponent implements OnInit {
   onExpandChange(data: Pedido , checked: boolean):void{
     if(checked){
       this.expandSet.add(data.id)
-      this.ticket = data.ticket.filter(d=> d.id_pedido == data.id)
-      console.log(this.ticket)
+      this.ticket = data.ticket.filter(d=> d.id_pedido == data.id);
     }else{
       this.expandSet.delete(data.id)
     }

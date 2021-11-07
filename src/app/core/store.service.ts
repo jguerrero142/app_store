@@ -40,6 +40,7 @@ export class StoreService {
 
   set sendPedido( pedido: Pedido){
     this.store.user.pedido.push(pedido);
+    this.store.pedidos.push(pedido);
     this.setStore = this.store
   }
 

@@ -90,7 +90,6 @@ export class ModalComponent implements OnInit {
       this.loading = true;
       setTimeout(() => {        
         this.switchValue = !this.switchValue;
-        console.log(this.switchValue)
         this.loading = false;
       }, 1000);
     }
@@ -138,7 +137,6 @@ export class ModalComponent implements OnInit {
   getAllUser(){
     this.storeService.getStore.subscribe(d =>{
       this.users = d.users;
-      console.log(this.users)
     })
   }
   
