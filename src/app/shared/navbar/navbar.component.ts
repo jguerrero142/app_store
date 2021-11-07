@@ -24,8 +24,7 @@ export class NavbarComponent implements OnInit {
   public valid: boolean = false;
   
   //Valida vista de usuario
-  public img: boolean = false;
-  
+  public img: boolean = false;  
 
           constructor(
             public auth: AuthService,
@@ -39,11 +38,11 @@ export class NavbarComponent implements OnInit {
   
 
   getAuth() {
-    this.storeService.getUser.subscribe(data =>{
-       if(data){
-        this.user = data;
-        this.role = data.id_role;
-        if(data.id_role > 0 ){
+    this.storeService.getStore.subscribe(data =>{
+       if(data.user){
+        this.user = data.user;
+        this.role = data.user.id_role;
+        if(data.user.id_role > 0 ){
           this.valid = true
         }
       }

@@ -14,11 +14,11 @@ import { Factura } from '../../shared/models/Factura.model';
 export class StoreEffects {
 
    private pedidoId: number;
-   private  pedidoDate: Pedido;
+   private  pedidoDate: Pedido = new Pedido;
    private factura: Factura;
    
    
-   private ticket: Producto[];
+   private ticket: Ticket;
    private user: number;
 
   constructor( private storeServices: StoreService,
@@ -26,32 +26,39 @@ export class StoreEffects {
                private ticketServices: TicketsService,
                private facturarServices: FacturarService) {
                
-                  this.storeServices.getUser.subscribe((data) => {
+                  this.storeServices.getStore.subscribe((data) => {
                     if (data) {
-                      this.user = data.id_user;
+                      this.user = data.user.id_user;
                     }
                   });
                   
                 
                }
-
-      sendPedidos(pedido: Pedido, payload: Producto[]){
-       this.pedidoServices.savePedido(pedido).subscribe(res =>{
-         console.log(res)
-          this.pedidoDate = res
-          this.pedidoDate.ticket = []
-          this.sendTicket(payload)
-       });
+      sendPedidos(pedido: Pedido, payload: Producto[], user?: number){
+      this.pedidoServices.savePedido(pedido).subscribe(res =>{
+        this.pedidoDate = res;
+        this.pedidoDate.ticket = [];
+        this.sendTicket(payload, user);
+      });
       }
 
-      sendTicket(ticket:Producto[]){
-          ticket.map(t => {            
-          const ticke = {
-            user_ticket: this.user,
-            Producto: t.id,
-            id_pedido: this.pedidoDate.id,
+
+      sendTicket(ticket:Producto[], user?: number){
+          ticket.map(t => {
+            if(user > 0){
+              this.ticket = {
+                user_ticket: user,
+                Producto: t.id,
+                id_pedido: this.pedidoDate.id,
+                }
+            }else{
+              this.ticket = {
+                user_ticket: this.user,
+                Producto: t.id,
+                id_pedido: this.pedidoDate.id,
+                }
             }
-            this.ticketServices.saveTicket(ticke)
+            this.ticketServices.saveTicket(this.ticket)
             .subscribe(d=>{
                     d.map(date => {
                       this.pedidoDate.ticket.push(date)
@@ -59,6 +66,7 @@ export class StoreEffects {
             });
             
         });
+        console.log(this.pedidoDate)
         this.storeServices.sendPedido = this.pedidoDate
         
       }

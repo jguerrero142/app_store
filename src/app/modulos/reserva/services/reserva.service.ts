@@ -1,17 +1,16 @@
-import { Injectable,EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 //Modales
-import { Pedido, Ticket } from '../../../shared/models/index.models';
+import { Pedido, Ticket } from 'src/app/shared/models/index.models';
 import { environment } from 'src/environments/environment';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
 //Servicios
 import { StoreService } from 'src/app/core/store.service';
 import { StatePedido } from '../models/pedido.state';
-import { StoreEffects } from '../../../core/effects/Store.effect';
+import { StoreEffects } from 'src/app/core/effects/Store.effect';
 
 
 @Injectable({
@@ -23,28 +22,11 @@ export class ReservaService {
   public pedidos: Pedido[] = []
   public tickets: Ticket[] = []
   public user: number;
-  alert: any;
 
   public valid: boolean = false;
   public reservas: Pedido[] = [];
 
-  
-
-  private reservaObservable: BehaviorSubject <Pedido[]> = new BehaviorSubject<Pedido[]>(
-   null
-  );
-
-  getReserva = this.reservaObservable.asObservable();
-
-  // Enviamos los RESERVAS al arreglo 
-  set setReservas(reserva: Pedido[]){
-    // this.pedidos = pedido;
-    this.reservaObservable.next(reserva);
-    
-  }
-
-  API_URI = environment.wsUrl;
-  
+  API_URI = environment.wsUrl;  
 
   constructor(private http: HttpClient,
               private storeServices: StoreService,
@@ -55,11 +37,10 @@ export class ReservaService {
                 this.getAuth();
               }
 
-
    getAuth() {
-    this.storeServices.getUser.subscribe((d) => {
-      if (d.id_user > 0 ) {          
-        this.user = d.id_user;
+    this.storeServices.getStore.subscribe((d) => {
+      if (d.user.id_user > 0 ) {          
+        this.user = d.user.id_user;
       }
     });
   }

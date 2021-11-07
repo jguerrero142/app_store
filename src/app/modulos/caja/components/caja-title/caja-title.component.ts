@@ -9,18 +9,20 @@ import { User, Ticket } from 'src/app/shared/models/index.models';
 })
 export class CajaTitleComponent implements OnInit {
 
-  public valid: boolean = false;
-
+  
   //Variables Auth
   public role: string;
+  public user: User;
+  public valid: boolean = false;
+
+  //Variables Componente
   public total: number = 0;
   public ticket: Ticket [] = [];
   public almuerzo: number;
-  public user: User;
-  public id: any;
+  
 
   constructor( private storeServices: StoreService) {
-    this.getadStore();
+    this.getStore();
    }
 
   ngOnInit(): void {
@@ -29,17 +31,17 @@ export class CajaTitleComponent implements OnInit {
   }
 
   getAuth() {
-    this.storeServices.getUser.subscribe((d) => {
-      if (d.id_user > 0) {
-        this.user = d;
-        this.role = d.role_user;
+    this.storeServices.getStore.subscribe((d) => {
+      if (d.user.id_user > 0) {
+        this.user = d.user;
+        this.role = d.user.role_user;
         this.valid = true;
       }
     });
   }
 
-  getadStore(){
-    this.storeServices.getadStore.subscribe( s=>{
+  getStore(){
+    this.storeServices.getStore.subscribe( s=>{
       if(s != null){
 
         //Obtiene los pedidos en CREADA

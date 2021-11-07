@@ -50,11 +50,11 @@ export class ReservaListComponent implements OnInit {
   }
   
   getAuth() {
-    this.storeServices.getUser.subscribe((d) => {
+    this.storeServices.getStore.subscribe((d) => {
       if (d != null) {
-        this.user = d;
-        this.id = d.id_user;
-        this.role = d.role_user;
+        this.user = d.user;
+        this.id = d.user.id_user;
+        this.role = d.user.role_user;
       }
     });
   }
@@ -62,7 +62,7 @@ export class ReservaListComponent implements OnInit {
   getStore() {
     this.storeServices.getStore.subscribe((d) => {
       if (d != null) {
-        this.reservas = d.pedido.filter( p => p.pedido_estado == 1);
+        this.reservas = d.user.pedido.filter( p => p.pedido_estado == 1);
         this.valid = true;
       }
     });

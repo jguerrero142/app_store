@@ -1,22 +1,22 @@
-import { Component, OnInit, EventEmitter, OnDestroy} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // Interfaces
-import { Ticket, Pedido, Producto} from 'src/app/shared/models/index.models';
+import { Producto} from 'src/app/shared/models/index.models';
 
 // Servicios
 import { PedidoService } from 'src/app/shared/services/pedido.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { MenuService } from '../../services/menu-service.service';
 import { TicketsService } from 'src/app/shared/services/ticket.service';
-import { StoreService } from '../../../../core/store.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { StoreService } from 'src/app/core/store.service';
+
+
 @Component({
   selector: 'app-menu-pedido',
   templateUrl: './menu-pedido.component.html',
   styleUrls: ['./menu-pedido.component.css'],
 })
-export class MenuPedidoComponent implements OnInit, OnDestroy{
+export class MenuPedidoComponent implements OnInit{
   //Variables Auth
   public id: number;
   public role: string;
@@ -71,10 +71,10 @@ export class MenuPedidoComponent implements OnInit, OnDestroy{
 
   //Obtenemos datos del USUARIO
   getAuth() {
-    this.storeService.getUser.subscribe((data) => {
+    this.storeService.getStore.subscribe((data) => {
       if (data) {
-        this.id = data.id_user;
-        this.role = data.role_user;
+        this.id = data.user.id_user;
+        this.role = data.user.role_user;
       }
     });
   }
@@ -86,7 +86,6 @@ export class MenuPedidoComponent implements OnInit, OnDestroy{
 
   afterClose(): void {
     this.alert = false;
-}
-ngOnDestroy(){}
+  }
 
 }

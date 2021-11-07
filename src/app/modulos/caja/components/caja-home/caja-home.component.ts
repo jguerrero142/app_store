@@ -10,7 +10,6 @@ export class CajaHomeComponent implements OnInit {
 
   constructor( private cajaService: CajaService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

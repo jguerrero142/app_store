@@ -1,22 +1,15 @@
-import { Pedido, Factura } from '../../shared/models/index.models'
+import { Pedido, Factura, User,Producto,TipoProducto } from '../../shared/models/index.models';
 
 export class Store{
 
-    id_user?: number;
-    sub?: string;
-    name?: string;
-    picture?: string;
-    email?: string;
-    created_at?: Date;
-    given_name?: string;
-    family_name?: string;
-    nickname?: string;
-    locale?: string;
-    updated_at?: string;
-    email_verified?: string;
-    role?: number;
-    id_empresa?: number;
-    pedido?: Pedido[];
-    factura?: Factura[];
+    constructor(
+        public user?: User,
+        public users?: User[],
+        public pedidos?: Pedido[],
+        public facturas?: Factura[],
+        public productos?: Producto[],
+        public menus?: Producto[],
+        public tipo_producto?: TipoProducto[],
+    ){}
 
 }

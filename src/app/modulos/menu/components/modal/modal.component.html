@@ -15,16 +15,20 @@
     
         <nz-card class="fw-bold" nzTitle="Confirma El Pedido" [nzExtra]="extraTemplate">
 
-          <div>
-            <nz-select #iduser nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectedValue">
+          <div class="m-2">
+            <nz-select #iduser nzShowSearch nzAllowClear nzPlaceHolder="Selecciona Usuario" [(ngModel)]="selectedValue">
               
-                <nz-option *ngFor="let user of users" [value]="user.id_user" [nzLabel]="user.name" [nzValue]= "user.id_user"></nz-option>
+                <nz-option *ngFor="let user of users"  [value]="user.id_user" [nzLabel]="user.name" [nzValue] = "user.id_user"></nz-option>
                 
             </nz-select>
-            <button *ngIf="value == false" nz-button nzType="primary" (click)="search(iduser.value)">
-              <i nz-icon nzType="search" ></i>
-              Agregar
-            </button>
+            
+                <button nz-button *ngIf="iduser.value > 0" class="m-1" nzType="primary" (click)="loadTwo(iduser.value)" [nzLoading]="isLoadingTwo">
+                  Agregar
+                </button>
+              
+
+              
+            
             
           </div>
 
@@ -61,7 +65,7 @@
         <nz-switch class="m-2" [(ngModel)]="switchValue"  (click)="clickSwitch()" [nzLoading]="loading"></nz-switch>
       
       <button
-        *ngIf="value == false;else userpedido"
+        
         nz-button
         nzType="primary"
         (click)="sendPedido()"
@@ -69,17 +73,6 @@
       >
         Confirmar
       </button>
-    <ng-template #userpedido>
-      <button 
-        nz-button
-        nzType="primary"
-        (click)="sendPedidoUser()"
-        [nzLoading]="isConfirmLoading"
-      >
-        Confirmar
-      </button>
-
-    </ng-template>
       
     </ng-template>
 </nz-modal>

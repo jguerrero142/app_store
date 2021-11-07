@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/index.models';
+
+
+//Servicios
 import { ReservaService } from '../../services/reserva.service';
 import { StoreService } from '../../../../core/store.service';
-import { Pedido } from '../../../../shared/models/Pedido.model';
 import { AuthService } from '../../../../core/auth/auth.service';
 
 @Component({
@@ -28,12 +30,12 @@ export class ReservaHomeComponent implements OnInit {
   }
 
   getAuth() {
-    this.storeServices.getUser.subscribe((d) => {
+    this.storeServices.getStore.subscribe((d) => {
       if (d != null) {
         this.valid = true;     
-        this.user = d;
-        this.id = d.id_user;
-        this.role = d.role_user;
+        this.user = d.user;
+        this.id = d.user.id_user;
+        this.role = d.user.role_user;
       }
     });
   }

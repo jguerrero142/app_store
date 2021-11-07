@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+//Modales
+import { User,Producto } from 'src/app/shared/models/index.models';
+
+
 //Servies
 import { StoreService } from 'src/app/core/store.service';
 import { MenuService } from '../../services/menu-service.service';
-
-//Modales
-import { User,Producto } from 'src/app/shared/models/index.models';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { User,Producto } from 'src/app/shared/models/index.models';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css'],
 })
+
 export class ProductCardComponent implements OnInit {
 
   // Obtiene el tipo de producto 
@@ -39,9 +41,9 @@ export class ProductCardComponent implements OnInit {
  
       //Obtenemos las variables del usuario
       getAuth() {
-        this.storeService.getUser.subscribe((d) => {
+        this.storeService.getStore.subscribe((d) => {
           if (d) {
-            this.user = d;
+            this.user = d.user;
             this.alert = false;
           }
         });

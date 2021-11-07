@@ -46,13 +46,11 @@ interface ChildrenItemData {
 }
 
 
-
 @Component({
   selector: 'app-caja-list',
   templateUrl: './caja-list.component.html',
   styleUrls: ['./caja-list.component.css']
 })
-
 
 
 export class CajaListComponent implements OnInit {
@@ -123,17 +121,17 @@ export class CajaListComponent implements OnInit {
   }
 
   getAuth() {
-    this.storeServices.getUser.subscribe((d) => {
+    this.storeServices.getStore.subscribe((d) => {
       if (d != null) {
-        this.user = d;
-        this.id = d.id_user;
-        this.role = d.role_user;
+        this.user = d.user;
+        this.id = d.user.id_user;
+        this.role = d.user.role_user;
       }
     });
   }
   
   getStore() {
-    this.storeServices.getadStore.subscribe((d) => {
+    this.storeServices.getStore.subscribe((d) => {
        if (d != null) {
          console.log(d)
         this.reservas = d.pedidos.filter( p => p.pedido_estado == 1);

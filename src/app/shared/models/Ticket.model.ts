@@ -1,13 +1,15 @@
-export interface Ticket {
-  id_ticket?: number;
-  user_ticket?: number;
-  Producto?: number;
-  created_at?: Date;
-  id_pedido?: number;
-  estado?: true;
-  name?: string;
-  valor?: number;
-  descripcion?: string;
-  image?: string;
-  producto_tipo?: number;
+export class Ticket {
+  constructor(
+    public id_ticket?: number,
+    public user_ticket?: number,
+    public Producto?: number,
+    public created_at?: Date,
+    public id_pedido?: number,
+    public estado?: true,
+    public name?: string,
+    public valor?: number,
+    public descripcion?: string,
+    public image?: string,
+    public producto_tipo?: number,
+  ){}
 }

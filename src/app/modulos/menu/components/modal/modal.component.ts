@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 
 //Modales
@@ -6,7 +6,7 @@ import { Ticket, Pedido, Producto, User } from 'src/app/shared/models/index.mode
 
 // Servicios
 import { MenuService } from '../../services/menu-service.service';
-import { StoreService } from '../../../../core/store.service';
+import { StoreService } from 'src/app/core/store.service';
 import { StoreEffects } from 'src/app/core/effects/Store.effect';
 
 @Component({
@@ -17,6 +17,10 @@ import { StoreEffects } from 'src/app/core/effects/Store.effect';
 export class ModalComponent implements OnInit {
 
   // Obtiene id USER
+  public client: number = 0;
+  public idUser: number;
+  public users: User[] = [];
+  public role: number;
   
 
   //Variables obetiene tickets
@@ -24,17 +28,12 @@ export class ModalComponent implements OnInit {
   public ticket: Ticket;
   public pedido: Pedido;
   public total: number;
-  public idUser: number;
-  public users: User[] = [];
-  public role: number;
-  public value: boolean = false;
+  
 
   switchValue = false;
   loading = false;
   isVisible = false;
-
-
-  public selectedValue = null ;
+  isLoadingTwo = false;
 
   constructor(
     private menuServices: MenuService,
@@ -49,13 +48,10 @@ export class ModalComponent implements OnInit {
 
   //Obtiene el usuario
   getAuth() {
-    this.storeService.getUser.subscribe((data) => {
+    this.storeService.getStore.subscribe((data) => {
       if (data) {
-        this.idUser = data.id_user;
-        this.role = data.id_role;
-        if(this.role == 5){
-          this.getAllUser();
-        }
+        this.idUser = data.user.id_user;
+        this.role = data.user.id_role;
       }
     });
   }
@@ -64,6 +60,9 @@ export class ModalComponent implements OnInit {
   showModal(): void {
     this.isVisible = true;
     this.getTicket();
+      if(this.role == 5){
+      this.getAllUser();
+       }
   }
 
   //Obtiene los tickets en el array
@@ -98,51 +97,33 @@ export class ModalComponent implements OnInit {
   }
 
   //Agrega el pedido al dar clic en el boton.
-  search(id:number){
-    console.log(id)
-    // if(id == this.idUser){
-    //   this.value = 0
-    // }else {
-    //   this.value = id
-    //   console.log(this.value)
-    // }
-    
-}
+ 
+  loadTwo(id: number): void {
+    this.client = id;
+    this.isLoadingTwo = true;
+  }
 
   sendPedido(){
-    if(this.role == 5 ){
+    if(this.client > 0 ){
           this.pedido = {
-          id_user: this.idUser,
+          id_user: this.client,
           valor: this.total,
-          servicio: this.switchValue,
-          estado_valor: 2,
+          servicio: this.switchValue
         }
     }else{
       this.pedido = {
         id_user: this.idUser,
         valor: this.total,
         servicio: this.switchValue,
-      }
+        estado_valor: 2,
     }
+  }
     
-    this.storeEffects.sendPedidos(this.pedido,this.tickets);
+    this.storeEffects.sendPedidos(this.pedido,this.tickets,this.client);
     this.isVisible = false;
     this.tickets = []
     this.menuServices.resetTicket();
   }
-
-  // sendPedidoUser(){
-  //   this.pedido = {
-  //     id_user: this.value,
-  //     valor: this.total,
-  //     servicio: this.switchValue
-  //   }
-  //   this.storeEffects.sendPedidos(this.pedido,this.tickets);
-  //   this.isVisible = false;
-  //   this.tickets = []
-  //   this.menuServices.resetTicket();
-  // }
-
 
   //Funciones de vista
   handleOk(): void {
@@ -151,11 +132,11 @@ export class ModalComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
-    this.value = false;
+    this.isLoadingTwo = false;
   }
   //Obtiene todos los usuarios
   getAllUser(){
-    this.storeService.getadStore.subscribe(d =>{
+    this.storeService.getStore.subscribe(d =>{
       this.users = d.users;
       console.log(this.users)
     })
