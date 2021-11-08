@@ -107,6 +107,7 @@ export class CajaListComponent implements OnInit {
    public valid: boolean = false;
    public reservas: Pedido[] = [];
    public r$: Observable<Pedido[]>;
+   isLoadingOne = false;
  
 
   constructor(
@@ -129,16 +130,24 @@ export class CajaListComponent implements OnInit {
       }
     });
   }
+
+  loadStore(): void {
+    this.storeServices.getLoadingStore(); 
+    this.isLoadingOne = true;
+    setTimeout(() => {
+      this.getStore();
+      this.isLoadingOne = false;
+    }, 1000);
+  }
   
   getStore() {
-    this.storeServices.getStore.subscribe((d) => {
-       if (d != null) {
-        this.reservas = d.pedidos.filter( p => p.pedido_estado == 1);
-        console.log(this.reservas)
-        this.valid = true;
-       }
-    });
-    
+      this.storeServices.getStore.subscribe((d) => {
+        if (d.pedidos.length > 0) {
+         this.reservas = d.pedidos.filter( p => p.pedido_estado == 1);
+         console.log(this.reservas)
+         this.valid = true;
+        }
+     }); 
   }
 
   onExpandChange(data: Pedido , checked: boolean):void{

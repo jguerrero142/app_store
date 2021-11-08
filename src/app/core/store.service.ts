@@ -92,6 +92,14 @@ export class StoreService {
       this.setStore = this.store;
     }
 
+    getLoadingStore(){
+      this.getAsFacturas();
+      this.getAsPedido();
+      this.getAsTicket();
+      
+      this.setStore = this.store;
+    }
+
     //Obtenemos los pedidos del USUARIO
     getUserPedidos() {
     return this.http

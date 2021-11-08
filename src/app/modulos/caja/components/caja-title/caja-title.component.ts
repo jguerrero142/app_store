@@ -2,11 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/core/store.service';
 import { User, Ticket } from 'src/app/shared/models/index.models';
 
+interface Person {
+  key: string;
+  name: string;
+  age: number;
+  address: string;
+}
+
 @Component({
   selector: 'app-caja-title',
   templateUrl: './caja-title.component.html',
   styleUrls: ['./caja-title.component.css']
 })
+
+
 export class CajaTitleComponent implements OnInit {
 
   
@@ -16,14 +25,23 @@ export class CajaTitleComponent implements OnInit {
   public valid: boolean = false;
 
   //Variables Componente
-  public total: number = 0;
+  public total: number = 0 ;
+  public fiado: number = 0 ;
+  public efectivo: number = 0 ;
   public ticket: Ticket [] = [];
   public almuerzo: number;
+  isLoadingOne = false;
   
-
   constructor( private storeServices: StoreService) {
     this.getStore();
    }
+
+   loadOne(): void {
+    this.isLoadingOne = true;
+    setTimeout(() => {
+      this.isLoadingOne = false;
+    }, 5000);
+  }
 
   ngOnInit(): void {
     this.getAuth();
@@ -42,11 +60,19 @@ export class CajaTitleComponent implements OnInit {
 
   getStore(){
     this.storeServices.getStore.subscribe( s=>{
-      if(s != null){
+      if(s.pedidos.length > 0){
 
-        //Obtiene los pedidos en CREADA
+        //Obtiene el TOTAL de VENTA
         const p = s.pedidos.filter(d=> d.pedido_estado == 1);
         this.total = p.reduce((suma, d) => suma + d.valor,0);
+
+        //Obtiene TOTAL de FIADO
+        const f = s.pedidos.filter(d=> d.estado_valor == 1);
+        this.fiado = f.reduce((suma, d) => suma + d.valor,0);
+
+        //Obtiene TOTAL de EFECTIVO
+        const e = s.pedidos.filter(d=> d.estado_valor == 2);
+        this.efectivo = e.reduce((suma, d) => suma + d.valor,0);
 
         // Obtiene Total de almuerzos
         p.map(d=> {
