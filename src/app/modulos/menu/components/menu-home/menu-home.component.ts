@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu-service.service';
 import { TipoProducto } from 'src/app/shared/models/index.models';
 
@@ -21,10 +21,10 @@ export class MenuHomeComponent implements OnInit {
   }
 
   getTipoProductos(){
-    this.menuService.getTipo.subscribe(
+    this.menuService.getStore.subscribe(
       data => {
         this.valid = true;
-        this.tipos = data;
+        this.tipos = data.tipoProducto;
       }
     )
   }

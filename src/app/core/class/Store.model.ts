@@ -7,9 +7,7 @@ export class Store{
         public users?: User[],
         public pedidos?: Pedido[],
         public facturas?: Factura[],
-        public productos?: Producto[],
-        public menus?: Producto[],
-        public tipo_producto?: TipoProducto[],
+        
     ){}
 
 }

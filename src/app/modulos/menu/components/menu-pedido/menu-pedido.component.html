@@ -1,17 +1,6 @@
 <main>
   <div class="container">
-    <ng-template>
-      <div>           
-        <nz-alert
-          class="m-2"
-          nzType="warning"
-          nzCloseable
-          nzMessage="Agrega almenos un producto"
-          (nzOnClose)="afterClose()"          
-        ></nz-alert>
-      </div>
-    </ng-template>
-    
+        
     <div class="card-group animated fadeIn fast">
       <mat-card>
         <mat-card-header>
@@ -69,7 +58,7 @@
             </li>
           
           </ul>
-          <div class="botn m-2" *ngIf="texto == false" (click)="alert = true">
+          <div class="botn m-2" *ngIf="texto == false">
             <button nz-button nzType="primary">Agrega productos</button>
           </div>
           

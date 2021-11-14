@@ -48,28 +48,25 @@ export class ProductCardComponent implements OnInit {
           }
         });
       }
-
       //Obtenemos todos los productos
       getProductos() {
-            this.menuServices.getProducto.subscribe( data =>{
-              if(data.length > 0 ){
-                const pro = data.filter( d=> d.producto_tipo == this.tipoPro);
+        this.menuServices.getStore.subscribe( data =>{
+          if(data.productos.length > 0 ){
+          const pro = data.productos.filter( d=> d.producto_tipo == this.tipoPro);
                 if(pro.length > 0){
                   this.productos = pro
                   this.noData = true
-                  }
-              }
-            })
+                }
+        }})
       }
 
       //Guardamos el ticket
-      saveTicket(data: Producto){
+      saveTicket(data: Producto){        
           if(this.user){
-          this.menuServices.setTickets = data;
+            this.menuServices.setStoreTickets = data;
           }else{
           this.alert = true;
-          }
-          
+          }  
       }
 
       // Funcion controla alerta

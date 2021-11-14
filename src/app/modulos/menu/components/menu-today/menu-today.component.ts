@@ -18,11 +18,12 @@ export class MenuTodayComponent implements OnInit {
     this.getMenu();
   }
 
-  getMenu(){    
-    this.menuServices.getMenus.subscribe( data =>{
+  getMenu(){
+      this.menuServices.getMenus.subscribe( data =>{
       this.menu = data;
       this.valid = true;
     })
   }
+
 
 }

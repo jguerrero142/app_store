@@ -4,10 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { Producto} from 'src/app/shared/models/index.models';
 
 // Servicios
-import { PedidoService } from 'src/app/shared/services/pedido.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { MenuService } from '../../services/menu-service.service';
-import { TicketsService } from 'src/app/shared/services/ticket.service';
 import { StoreService } from 'src/app/core/store.service';
 
 
@@ -35,38 +33,15 @@ export class MenuPedidoComponent implements OnInit{
   constructor(
     public auth: AuthService,
     private menuServices: MenuService,
-    public pedidoServices: PedidoService,
-    public ticketsService: TicketsService,
     public storeService: StoreService
   ) {
   }
 
   ngOnInit(): void {
+    this.getAuth();
     this.getTicket();
     this.getTotal();
-    this.getAuth();
-  }
-
-  //Obtenemos los TICKETS
-  getTicket(){
-    this.menuServices.getTickets.subscribe(data =>{
-      this.tickets = data;
-      if(this.tickets){
-        this.alert = false;
-      }
-      
-    })
-  }
-   // Obtenemos el TOTAL
-  getTotal(){
-     this.menuServices.getTotal.subscribe(total => {
-       if(total > 0){
-        this.total = total;
-        this.texto = true;
-       }else{
-        this.texto = false;
-       }
-     })
+    
   }
 
   //Obtenemos datos del USUARIO
@@ -78,10 +53,32 @@ export class MenuPedidoComponent implements OnInit{
       }
     });
   }
+
+  //Obtenemos los TICKETS
+  getTicket(){
+    this.menuServices.getStore.subscribe(data =>{
+      if(data.tickets.length > 0){
+      this.tickets = data.tickets;
+      this.getTotal();
+      }
+    });
+  }
+   // Obtenemos el TOTAL
+  getTotal(){
+    this.total = this.menuServices.store.getTotal();
+    if(this.total > 0){
+      this.texto = true;
+    }
+    else{
+       this.texto = false;
+    }
+  }
+
+  
   //Eliminamos el TICKET del arreglo
   deleteTicket(id: number){
-    this.tickets.splice(id, 1);
-    this.menuServices.setTotal(this.tickets);
+    this.menuServices.setDeletTickets = id;
+    this.getTotal();
   }
 
   afterClose(): void {

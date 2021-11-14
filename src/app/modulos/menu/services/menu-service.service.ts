@@ -1,10 +1,11 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 //Modelos
 import { Producto, TipoProducto } from 'src/app/shared/models/index.models';
 import { environment } from 'src/environments/environment';
+import { StoreProducts } from '../Class/storeProducts';
 
 
 @Injectable({
@@ -12,64 +13,48 @@ import { environment } from 'src/environments/environment';
 })
 export class MenuService {
 
-  public tickets: Producto [] = []
-  public productos: Producto [] = []
-  public tipoProducto: TipoProducto [] = []
+  public store: StoreProducts = new StoreProducts;
 
-  //PRODUCTOS observable
-  private tiposObservable: BehaviorSubject <TipoProducto[]> = new BehaviorSubject<TipoProducto[]>(
-    null
-  );
+  //Store observable
+  private StoreObservable: BehaviorSubject <StoreProducts> = new BehaviorSubject<StoreProducts>(this.store);
 
-  //TIPOS observable
-  private productoObservable: BehaviorSubject <Producto[]> = new BehaviorSubject<Producto[]>(
-    null
-  );
+  get getStore(){
+    return this.StoreObservable.asObservable();
+  }
 
-  //TICKETS bservable
-  public ticketObservable: BehaviorSubject <Producto[]> = new BehaviorSubject<Producto[]>(
-    null
-  );
+  set setStoreProductos( productos: Producto[]){
+    this.store.productos = productos
+    this.StoreObservable.next(this.store)
+    console.log(this.store);
+  }
 
-  //TOTAL bservable
-  private totalObservable: BehaviorSubject <number> = new BehaviorSubject<number>(
-    null
-  );
+  set setStoreTipos(tipos: TipoProducto[]){
+    this.store.tipoProducto = tipos;
+    this.StoreObservable.next(this.store)
+  }
 
+  set setStoreTickets(ticket: Producto){
+    this.store.tickets.push(ticket)
+    this.StoreObservable.next(this.store)
+  }
+
+  set setDeletTickets(id: number){
+    this.store.tickets.splice(id, 1);
+    this.StoreObservable.next(this.store);
+  }
+
+  
   //MENU observable
   private menuObservable: BehaviorSubject <Producto[]> = new BehaviorSubject<Producto[]>(
     null
   );
 
-  // Obtenemos el observable
-  getTipo = this.tiposObservable.asObservable();
-  getProducto = this.productoObservable.asObservable();
-  getTickets = this.ticketObservable.asObservable();
-  getTotal = this.totalObservable.asObservable();
   getMenus = this.menuObservable.asObservable();
-  
-  // Enviamos el TIPO al arreglo 
-  set setTipo(tipo: TipoProducto[]){
-    this.tiposObservable.next(tipo)
-  }
 
-  // Enviamos el PRODUCTO al arreglo 
-  set setProducto(producto: Producto[]){
-    this.productoObservable.next(producto);
-  }
-
-  // Enviamos los TICKET al arreglo 
-  set setTickets(data: Producto){
-    this.tickets.push(data);
-    this.ticketObservable.next(this.tickets);
-    this.setTotal(this.tickets)
-  }
-
-  // Enviamos el MENU al arreglo 
   set setMenu(menu: Producto[]){
     this.menuObservable.next(menu);
   }
-
+  
 
   // Url api
   API_URI = environment.wsUrl;
@@ -79,42 +64,30 @@ export class MenuService {
     this.getTipos();
     
   }
-  resetTicket(){
-    this.tickets = []
-    this.ticketObservable.next(this.tickets)
-    this.setTotal(this.tickets)
-  }
-
-  setTotal(data: Producto[]){
-    const total = data.reduce((suma, d) => suma + d.valor, 0);
-    this.totalObservable.next(total);
-  }
-
-  //Obtenemos los tipos de los productos
-  getTipos() {
-    return this.http.get<TipoProducto[]>(`${this.API_URI}/producto/tipo/producto/`)
-    .subscribe(tipos => {
-      if(tipos.length > 0){
-        this.setTipo = tipos
-      }});
-  }
-
-  //Obetenemos los productos
-  getProductos() {
-    return this.http.get<Producto[]>(`${this.API_URI}/producto`)
-    .subscribe( data =>{
-      if(data.length > 0){
-        this.setProducto = data;
-        this.getMenu(data);
+      //Obetenemos los productos
+      getProductos() {
+        return this.http.get<Producto[]>(`${this.API_URI}/producto`)
+        .subscribe( data =>{
+          if(data.length > 0){
+            this.setStoreProductos = data;
+            const menu = this.store.getMenu();
+            this.setMenu = menu;
+          }
+        })
       }
-    })
-  }
 
-  //Obtenemos el menu activo
-  
-  getMenu(data: Producto[]) {    
-    const menu = data.filter( d => d.menu == true);
-    this.setMenu = menu;    
-  }
+      getTipos() {
+        return this.http.get<TipoProducto[]>(`${this.API_URI}/producto/tipo/producto/`)
+        .subscribe(tipos => {
+          if(tipos.length > 0){
+            this.setStoreTipos = tipos;
+          }});
+      }
+
+      resetTicket(){
+        
+        // this.ticketObservable.next(this.tickets)
+        // this.setTotal(this.tickets)
+      }
 
 }

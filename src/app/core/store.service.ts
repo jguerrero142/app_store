@@ -82,7 +82,7 @@ export class StoreService {
       this.getUserFacturas();
       this.getUserTickets();
       if(this.role == 5){
-      this.getAsProductos();
+      // this.getAsProductos();
       this.getAsUser();
       this.getAsFacturas();
       this.getAsPedido();
@@ -133,17 +133,17 @@ export class StoreService {
 
     //Obtiene los productos del Observable Productos
 
-    getAsProductos(){
-          this.menuService.getProducto.subscribe(d=>{
-            this.store.productos = d;
-          });
-          this.menuService.getMenus.subscribe(d=>{
-            this.store.menus = d;
-          })
-          this.menuService.getTipo.subscribe(d=>{
-            this.store.tipo_producto = d;
-          })
-      }
+    // getAsProductos(){
+    //       this.menuService.getProducto.subscribe(d=>{
+    //         this.store.productos = d;
+    //       });
+    //       this.menuService.getMenus.subscribe(d=>{
+    //         this.store.menus = d;
+    //       })
+    //       this.menuService.getTipo.subscribe(d=>{
+    //         this.store.tipo_producto = d;
+    //       })
+    //   }
 
     //Obtiene todos los pedidos
     getAsPedido(){

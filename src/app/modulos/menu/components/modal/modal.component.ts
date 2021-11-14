@@ -56,89 +56,89 @@ export class ModalComponent implements OnInit {
     });
   }
 
-  //Activa la vision de la mdoal
+  // //Activa la vision de la mdoal
   showModal(): void {
-    this.isVisible = true;
-    this.getTicket();
-      if(this.role == 5){
-      this.getAllUser();
-       }
+    // this.isVisible = true;
+    // this.getTicket();
+    //   if(this.role == 5){
+    //   this.getAllUser();
+    //    }
   }
 
-  //Obtiene los tickets en el array
-  getTicket(){
-    this.menuServices.getTickets.subscribe(data =>{
-      if(data.length > 0){
-        this.tickets = data;
-        this.getTotal();
-      }
+  // //Obtiene los tickets en el array
+  // getTicket(){
+  //   this.menuServices.getTickets.subscribe(data =>{
+  //     if(data.length > 0){
+  //       this.tickets = data;
+  //       this.getTotal();
+  //     }
             
-    })
-  }
-  //Obtiene el total de arrayl
-  getTotal(){
-    this.menuServices.getTotal.subscribe( total =>{
-      if(total > 0){
-        this.total = total;
-      }      
-    })
-  }
+  //   })
+  // }
+  // //Obtiene el total de arrayl
+  // getTotal(){
+  //   this.menuServices.getTotal.subscribe( total =>{
+  //     if(total > 0){
+  //       this.total = total;
+  //     }      
+  //   })
+  // }
 
-  //Captura el valor del servicio 
-  clickSwitch(): void {    
-    if (!this.loading) {
-      this.loading = true;
-      setTimeout(() => {        
-        this.switchValue = !this.switchValue;
-        this.loading = false;
-      }, 1000);
-    }
-  }
+  // //Captura el valor del servicio 
+  // clickSwitch(): void {    
+  //   if (!this.loading) {
+  //     this.loading = true;
+  //     setTimeout(() => {        
+  //       this.switchValue = !this.switchValue;
+  //       this.loading = false;
+  //     }, 1000);
+  //   }
+  // }
 
-  //Agrega el pedido al dar clic en el boton.
+  // //Agrega el pedido al dar clic en el boton.
  
-  loadTwo(id: number): void {
-    this.client = id;
-    this.isLoadingTwo = true;
-  }
+  // loadTwo(id: number): void {
+  //   this.client = id;
+  //   this.isLoadingTwo = true;
+  // }
 
-  sendPedido(){
-    if(this.client > 0 ){
-          this.pedido = {
-          id_user: this.client,
-          valor: this.total,
-          servicio: this.switchValue
-        }
-    }else{
-      this.pedido = {
-        id_user: this.idUser,
-        valor: this.total,
-        servicio: this.switchValue,
-        estado_valor: 2,
-    }
-  }
+  // sendPedido(){
+  //   if(this.client > 0 ){
+  //         this.pedido = {
+  //         id_user: this.client,
+  //         valor: this.total,
+  //         servicio: this.switchValue
+  //       }
+  //   }else{
+  //     this.pedido = {
+  //       id_user: this.idUser,
+  //       valor: this.total,
+  //       servicio: this.switchValue,
+  //       estado_valor: 2,
+  //   }
+  // }
     
-    this.storeEffects.sendPedidos(this.pedido,this.tickets,this.client);
-    this.isVisible = false;
-    this.tickets = []
-    this.menuServices.resetTicket();
-  }
+  //   this.storeEffects.sendPedidos(this.pedido,this.tickets,this.client);
+  //   this.isVisible = false;
+  //   this.tickets = []
+  //   this.menuServices.resetTicket();
+  // }
 
-  //Funciones de vista
-  handleOk(): void {
-    this.isVisible = false;
-  }
+  // //Funciones de vista
+  // handleOk(): void {
+  //   this.isVisible = false;
+  // }
 
-  handleCancel(): void {
-    this.isVisible = false;
-    this.isLoadingTwo = false;
-  }
-  //Obtiene todos los usuarios
-  getAllUser(){
-    this.storeService.getStore.subscribe(d =>{
-      this.users = d.users;
-    })
-  }
+  // handleCancel(): void {
+  //   this.isVisible = false;
+  //   this.isLoadingTwo = false;
+  // }
+  // //Obtiene todos los usuarios
+  // getAllUser(){
+  //   this.storeService.getStore.subscribe(d =>{
+  //     this.users = d.users;
+  //   })
+  // }
   
   
  
