@@ -6,14 +6,16 @@ export class StoreProducts {
     constructor(  public productos?: Producto [],
                   public tipoProducto?: TipoProducto [],
                   public tickets: Producto[] = []
-                 
+
       ){}
 
-      getMenu() {    
+      // Obtenemos los PRODCUTOS con Menu true
+      getMenu() {
         const menu = this.productos.filter( d => d.menu == true);
-        return menu; 
+        return menu;
       }
 
+      // Obtenemos el TOTAL de los Tickets
       getTotal(){
           const total = this.tickets.reduce((suma, d) => suma + d.valor, 0);
           return total;

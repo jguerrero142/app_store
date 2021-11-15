@@ -39,6 +39,7 @@ export class StoreService {
   //////////////////////Efectos Store /////////////////////////////////////////////
 
   set sendPedido( pedido: Pedido){
+    console.log(pedido);
     this.store.user.pedido.push(pedido);
     this.store.pedidos.push(pedido);
     this.setStore = this.store
@@ -53,8 +54,7 @@ export class StoreService {
   API_URI = environment.wsUrl;
 
   constructor(private auth: AuthService, 
-              private http: HttpClient,
-              private menuService: MenuService
+              private http: HttpClient
               ) {}
 
     getAuth() {
@@ -82,7 +82,6 @@ export class StoreService {
       this.getUserFacturas();
       this.getUserTickets();
       if(this.role == 5){
-      // this.getAsProductos();
       this.getAsUser();
       this.getAsFacturas();
       this.getAsPedido();
@@ -100,7 +99,7 @@ export class StoreService {
       this.setStore = this.store;
     }
 
-    //Obtenemos los pedidos del USUARIO
+    //Obtenemos los pedidos del USUARIOy
     getUserPedidos() {
     return this.http
       .get<Pedido[]>(`${this.API_URI}/pedido/get/${this.id}`)
@@ -130,20 +129,6 @@ export class StoreService {
               })
           });
     }
-
-    //Obtiene los productos del Observable Productos
-
-    // getAsProductos(){
-    //       this.menuService.getProducto.subscribe(d=>{
-    //         this.store.productos = d;
-    //       });
-    //       this.menuService.getMenus.subscribe(d=>{
-    //         this.store.menus = d;
-    //       })
-    //       this.menuService.getTipo.subscribe(d=>{
-    //         this.store.tipo_producto = d;
-    //       })
-    //   }
 
     //Obtiene todos los pedidos
     getAsPedido(){

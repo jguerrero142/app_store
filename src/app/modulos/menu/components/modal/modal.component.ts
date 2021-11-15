@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 
-//Modales
+// Modales
 import { Ticket, Pedido, Producto, User } from 'src/app/shared/models/index.models';
 
 // Servicios
@@ -17,18 +17,16 @@ import { StoreEffects } from 'src/app/core/effects/Store.effect';
 export class ModalComponent implements OnInit {
 
   // Obtiene id USER
-  public client: number = 0;
   public idUser: number;
-  public users: User[] = [];
   public role: number;
+  public users: User[] = [];
+  public client = 0;
   
 
-  //Variables obetiene tickets
+  // Variables obetiene tickets
   public tickets: Producto[] = [];
-  public ticket: Ticket;
   public pedido: Pedido;
   public total: number;
-  
 
   switchValue = false;
   loading = false;
@@ -37,7 +35,7 @@ export class ModalComponent implements OnInit {
 
   constructor(
     private menuServices: MenuService,
-    private storeEffects: StoreEffects,   
+    private storeEffects: StoreEffects,
     private storeService: StoreService
   ) {}
 
@@ -46,7 +44,7 @@ export class ModalComponent implements OnInit {
 
   }
 
-  //Obtiene el usuario
+  // Obtiene el usuario
   getAuth() {
     this.storeService.getStore.subscribe((data) => {
       if (data) {
@@ -58,49 +56,59 @@ export class ModalComponent implements OnInit {
 
   // //Activa la vision de la mdoal
   showModal(): void {
-    // this.isVisible = true;
-    // this.getTicket();
-    //   if(this.role == 5){
-    //   this.getAllUser();
-    //    }
+    this.isVisible = true;
+    this.getTickets();
+    if (this.role == 5){
+      this.getAllUser();
+    }
   }
 
-  // //Obtiene los tickets en el array
-  // getTicket(){
-  //   this.menuServices.getTickets.subscribe(data =>{
-  //     if(data.length > 0){
-  //       this.tickets = data;
-  //       this.getTotal();
-  //     }
-            
-  //   })
-  // }
-  // //Obtiene el total de arrayl
-  // getTotal(){
-  //   this.menuServices.getTotal.subscribe( total =>{
-  //     if(total > 0){
-  //       this.total = total;
-  //     }      
-  //   })
-  // }
+  // //Obtiene los TICKETS
+  getTickets(){
+    this.menuServices.getStore.subscribe(data =>{
+        this.tickets = data.tickets;
+        this.total = data.getTotal();
+    })
+  }
 
-  // //Captura el valor del servicio 
-  // clickSwitch(): void {    
-  //   if (!this.loading) {
-  //     this.loading = true;
-  //     setTimeout(() => {        
-  //       this.switchValue = !this.switchValue;
-  //       this.loading = false;
-  //     }, 1000);
-  //   }
-  // }
+  // //Obtiene todos los usuarios
+  getAllUser(){
+    this.storeService.getStore.subscribe(d =>{
+      this.users = d.users;
+    })
+  }
 
-  // //Agrega el pedido al dar clic en el boton.
+  // Agrega el Id de USUARIO cliente
+  selectUser(id: number): void {
+    this.client = id;
+    console.log(this.client)
+    this.isLoadingTwo = true;
+  }
  
-  // loadTwo(id: number): void {
-  //   this.client = id;
-  //   this.isLoadingTwo = true;
-  // }
+  //Captura el valor del servicio
+  clickSwitch(): void {
+    if (!this.loading) {
+      this.loading = true;
+      setTimeout(() => {
+        this.switchValue = !this.switchValue;
+        this.loading = false;
+      }, 1000);
+    }
+  }
+
+  setPedidoUser(){
+    this.pedido = {
+      id_user: this.idUser,
+      valor: this.total,
+      servicio: this.switchValue
+    }
+    console.log(this.tickets)
+    this.storeEffects.setPedidoUser(this.pedido,this.tickets);
+    this.isVisible = false;
+    this.tickets = [];
+    this.menuServices.DeletTickets = this.tickets;
+  }
+
 
   // sendPedido(){
   //   if(this.client > 0 ){
@@ -117,30 +125,20 @@ export class ModalComponent implements OnInit {
   //       estado_valor: 2,
   //   }
   // }
-    
   //   this.storeEffects.sendPedidos(this.pedido,this.tickets,this.client);
   //   this.isVisible = false;
   //   this.tickets = []
   //   this.menuServices.resetTicket();
   // }
 
-  // //Funciones de vista
-  // handleOk(): void {
-  //   this.isVisible = false;
-  // }
+  // Al Clic en confirmar Oculta la modal
+  handleOk(): void {
+    this.isVisible = false;
+  }
 
-  // handleCancel(): void {
-  //   this.isVisible = false;
-  //   this.isLoadingTwo = false;
-  // }
-  // //Obtiene todos los usuarios
-  // getAllUser(){
-  //   this.storeService.getStore.subscribe(d =>{
-  //     this.users = d.users;
-  //   })
-  // }
-  
-  
- 
+  handleCancel(): void {
+    this.isVisible = false;
+    this.isLoadingTwo = false;
+  }
   
 }

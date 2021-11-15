@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Ticket } from '../models/index.models';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Producto } from 'src/app/shared/models/index.models';
 
 @Injectable({
   providedIn: 'root',
@@ -27,8 +28,8 @@ export class TicketsService {
   deletTicket(id: string | number) {
     return this.http.delete(`${this.API_URI}/ticket/${id}`);
   }
-  saveTicket(ticket: Ticket) {
-    return this.http.post<Ticket[]>(`${this.API_URI}/ticket`, ticket);
+  saveTicket(ticket: Ticket, id: number) {
+    return this.http.post(`${this.API_URI}/ticket/${id}`, ticket);
   }
 
   updateTicket(id: string | number, updateTicket: Ticket): Observable<Ticket> {

@@ -56,11 +56,9 @@ export class MenuPedidoComponent implements OnInit{
 
   //Obtenemos los TICKETS
   getTicket(){
-    this.menuServices.getStore.subscribe(data =>{
-      if(data.tickets.length > 0){
+    this.menuServices.getStore.subscribe(data =>{      
       this.tickets = data.tickets;
       this.getTotal();
-      }
     });
   }
    // Obtenemos el TOTAL
@@ -73,7 +71,6 @@ export class MenuPedidoComponent implements OnInit{
        this.texto = false;
     }
   }
-
   
   //Eliminamos el TICKET del arreglo
   deleteTicket(id: number){

@@ -10,27 +10,23 @@
 >
 
 
-  <ng-container  *nzModalContent>
-    
+  <ng-container  *nzModalContent>    
     
         <nz-card class="fw-bold" nzTitle="Confirma El Pedido" [nzExtra]="extraTemplate">
 
-          <div class="m-2">
-            <nz-select #iduser nzShowSearch nzAllowClear nzPlaceHolder="Selecciona Usuario" [(ngModel)]="selectedValue">
-              
-                <nz-option *ngFor="let user of users"  [value]="user.id_user" [nzLabel]="user.name" [nzValue] = "user.id_user"></nz-option>
-                
-            </nz-select>
-            
-                <button nz-button *ngIf="iduser.value > 0" class="m-1" nzType="primary" (click)="loadTwo(iduser.value)" [nzLoading]="isLoadingTwo">
-                  Agregar
-                </button>
-              
+            <div class="m-2">
 
-              
-            
-            
-          </div>
+                  <nz-select #iduser nzShowSearch nzAllowClear nzPlaceHolder="Selecciona Usuario" [(ngModel)]="selectedValue">
+                    
+                      <nz-option *ngFor="let user of users"  [value]="user.id_user" [nzLabel]="user.name" [nzValue] = "user.id_user"></nz-option>
+                      
+                  </nz-select>
+                  
+                  <button nz-button *ngIf="iduser.value > 0" class="m-1" nzType="primary" (click)="selectUser(iduser.value)" [nzLoading]="isLoadingTwo">
+                    Agregar
+                  </button>
+                              
+            </div>
 
             <div *ngFor="let ticket of tickets">
               
@@ -47,36 +43,43 @@
                                   </div>               
                         </div>              
                 </nz-card>
+
                 <ng-template #extraTemplate>
                   <nz-tag class="fw-bold" nzColor="gold">{{ticket.valor | currency}}</nz-tag>
                 </ng-template>
-          </div> 
+
+            </div> 
           
-          <ng-template #extraTemplate>
-            <nz-tag class="fw-bold" nzColor="success">Total: {{total | currency}}</nz-tag>
-          </ng-template>
-        </nz-card>    
+              <ng-template #extraTemplate>
+                <nz-tag class="fw-bold" nzColor="success">Total: {{total | currency}}</nz-tag>
+              </ng-template>
+
+        </nz-card>
+
     </ng-container>
 
     <ng-template #modalFooter>
     
       
-        <span class="m-2" nz-typography >Pedido a Domicilio:</span>
-        <nz-switch class="m-2" [(ngModel)]="switchValue"  (click)="clickSwitch()" [nzLoading]="loading"></nz-switch>
+          <span class="m-2" nz-typography >Pedido a Domicilio:</span>
+          <nz-switch class="m-2" [(ngModel)]="switchValue"  (click)="clickSwitch()" [nzLoading]="loading"></nz-switch>
       
-      <button
-        
-        nz-button
-        nzType="primary"
-        (click)="sendPedido()"
-        [nzLoading]="isConfirmLoading"
-      >
-        Confirmar
-      </button>
+          <button
+            
+            nz-button
+            nzType="primary"
+            (click)="sendPedido()"
+            [nzLoading]="isConfirmLoading"
+          >
+            Confirmar
+          </button>
       
     </ng-template>
+
 </nz-modal>
 
+
+ <!-- MODAL visible para el USUARIO -->
 <ng-template #usuario>
           <nz-modal
           [(nzVisible)]="isVisible"
@@ -119,7 +122,7 @@
               <button
                 nz-button
                 nzType="primary"
-                (click)="sendPedido()"
+                (click)="setPedidoUser()"
                 [nzLoading]="isConfirmLoading"
               >
                 Confirmar
