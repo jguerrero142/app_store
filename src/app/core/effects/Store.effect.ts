@@ -56,7 +56,6 @@ export class StoreEffects {
         }
         });
       }
-
       setTicketUser(){
         // console.log(this.tickets);
         this.tickets.map( item =>{
