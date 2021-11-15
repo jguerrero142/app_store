@@ -151,10 +151,10 @@ export class CajaListComponent implements OnInit {
 
   onExpandChange(data: Pedido , checked: boolean):void{
     if(checked){
-      this.expandSet.add(data.id)
-      this.ticket = data.ticket.filter(d=> d.id_pedido == data.id);
+      this.expandSet.add(data.id_pedido)
+      this.ticket = data.ticket.filter(d=> d.id_pedido == data.id_pedido);
     }else{
-      this.expandSet.delete(data.id)
+      this.expandSet.delete(data.id_pedido)
     }
   }
 

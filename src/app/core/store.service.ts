@@ -124,7 +124,7 @@ export class StoreService {
           .get<Ticket[]>(`${this.API_URI}/ticket/user/${this.id}`)
           .subscribe((data) => {
                 this.store.user.pedido.forEach((item, index)=>{
-                const t = data.filter(d => d.id_pedido == item.id)
+                const t = data.filter(d => d.id_pedido == item.id_pedido)
                 this.store.user.pedido[index].ticket = t
               })
           });
@@ -164,7 +164,7 @@ export class StoreService {
       .get<Ticket[]>(`${this.API_URI}/ticket/`)
       .subscribe((data) => {
             this.store.pedidos.forEach((item, index)=>{
-            const ad = data.filter( a => a.id_pedido == item.id);
+            const ad = data.filter( a => a.id_pedido == item.id_pedido);
             this.store.pedidos[index].ticket = ad;
           })
       });

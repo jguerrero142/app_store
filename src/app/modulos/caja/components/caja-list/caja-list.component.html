@@ -29,7 +29,7 @@
                             <td [nzExpand]="expandSet.has(data.id)"
                             (nzExpandChange)="onExpandChange(data, $event)"
                             ></td>
-                            <td class="text-center" ># {{ data.id }}</td>
+                            <td class="text-center" ># {{ data.id_pedido }}</td>
                             <td class="text-center">{{ data.name }}</td>
                             <td class="text-center">{{ (data.created_at | date) }}</td>
                             <td class="text-center">{{ (data.valor | currency) }}</td>

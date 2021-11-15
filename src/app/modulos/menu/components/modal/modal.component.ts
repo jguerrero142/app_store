@@ -97,39 +97,11 @@ export class ModalComponent implements OnInit {
   }
 
   setPedidoUser(){
-    this.pedido = {
-      id_user: this.idUser,
-      valor: this.total,
-      servicio: this.switchValue
-    }
-    console.log(this.tickets)
-    this.storeEffects.setPedidoUser(this.pedido,this.tickets);
+    this.storeEffects.setPedidoUser(this.total,this.tickets,this.switchValue);
     this.isVisible = false;
     this.tickets = [];
     this.menuServices.DeletTickets = this.tickets;
   }
-
-
-  // sendPedido(){
-  //   if(this.client > 0 ){
-  //         this.pedido = {
-  //         id_user: this.client,
-  //         valor: this.total,
-  //         servicio: this.switchValue
-  //       }
-  //   }else{
-  //     this.pedido = {
-  //       id_user: this.idUser,
-  //       valor: this.total,
-  //       servicio: this.switchValue,
-  //       estado_valor: 2,
-  //   }
-  // }
-  //   this.storeEffects.sendPedidos(this.pedido,this.tickets,this.client);
-  //   this.isVisible = false;
-  //   this.tickets = []
-  //   this.menuServices.resetTicket();
-  // }
 
   // Al Clic en confirmar Oculta la modal
   handleOk(): void {

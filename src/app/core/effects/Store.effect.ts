@@ -21,49 +21,68 @@ export class StoreEffects {
 
   // Obtiene los datos del pedido RESPONSE
   private  pedidoDate: Pedido;
-  private tickets: Producto[] = [];
+  private tickets: Producto[];
    
    API_URI = environment.wsUrl;
 
   constructor( private storeServices: StoreService,
                private pedidoServices: PedidoService,
-               private ticketServices: TicketsService,
                private facturarServices: FacturarService,
                private http: HttpClient) {
                
                   this.storeServices.getStore.subscribe((data) => {
-                    this.user = data.user.id_user;
-                  });
-                  this.pedidoDate.ticket = [];
-                  
-                
+                    if(data.user.id_user != null){
+                      this.user = data.user.id_user;
+                    }
+                    
+                  });  
                }
-      setPedidoUser(pedido: Pedido, payload: Producto[]){
+      setPedidoUser(total: number, payload: Producto[], service: boolean){
+        this.tickets = payload;
+        // console.log(total,payload, service)
+        const pedido = {
+          id_user: this.user,
+          valor: total,
+          servicio: service
+        }
         this.http.post<Pedido>(`${this.API_URI}/pedido/${this.user}`, pedido)
-        .subscribe( res => { 
-           this.pedidoDate = res;
+        .subscribe( res => {
+          this.pedidoDate = res;
+          if (this.pedidoDate.id_pedido != null){
+          this.setTicketUser();
+          this.pedidoDate.ticket = [];
+          this.pedidoDate.ticket = this.tickets;        
+          this.storeServices.sendPedido = this.pedidoDate;
+        }
         });
-          
-          this.pedidoDate.ticket = payload;
-          console.log(this.pedidoDate);
-          this.storeServices.sendPedido = this.pedidoDate
       }
 
-      
-
       setTicketUser(){
-        this.tickets.forEach((item, index)=>{
+        // console.log(this.tickets);
+        this.tickets.map( item =>{
           const ticket = {
             user_ticket: this.user,
-            Producto: item.id
+            Producto: item.id,
+            id_pedido: this.pedidoDate.id_pedido,
           }
-          this.http.post<Ticket[]>(`${this.API_URI}/ticket/${this.user}`, ticket)
-          .subscribe(d => {
-            if(d.length> 0){
-              console.log(d)}
-            })         
-            
+          this.http.post<Ticket[]>(`${this.API_URI}/ticket/`, ticket)
+          .subscribe(d =>{})
         })
+        
+        
+      }
+        // this.tickets.forEach((item, index)=>{
+        //   const ticket = {
+        //     user_ticket: this.user,
+        //     Producto: item.id
+        //   }
+        //   this.http.post<Ticket[]>(`${this.API_URI}/ticket/${this.user}`, ticket)
+        //   .subscribe(d => {
+        //     if(d.length> 0){
+        //       console.log(d)}
+        //     })         
+            
+        // })
         
         // this.http.post(`${this.API_URI}/ticket/${this.user}`, ticket)
         // .subscribe(d => {console.log(d)})
@@ -104,7 +123,7 @@ export class StoreEffects {
         // });
         // this.storeServices.sendPedido = this.pedidoDate
         
-      }
+     
 
       deletePedidos(index: number, pedido: number){
         this.storeServices.deletPedido = index
