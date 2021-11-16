@@ -23,7 +23,9 @@ export class StoreEffects {
 
   // Obtiene los datos del pedido RESPONSE
   private  pedidoDate: Pedido;
+  private  pedido: Pedido;
   private tickets: Producto[];
+  private ticket$: Producto[];
    
    API_URI = environment.wsUrl;
 
@@ -59,12 +61,44 @@ export class StoreEffects {
       }
 
       setTicketUser(){
-        // console.log(this.tickets);
+        console.log(this.tickets);
         this.tickets.map( item =>{
           const ticket = {
             user_ticket: this.user,
             Producto: item.id,
             id_pedido: this.pedidoDate.id_pedido,
+          }
+          this.http.post<Ticket[]>(`${this.API_URI}/ticket/`, ticket)
+          .subscribe(d =>{})
+        })
+      }
+
+      setPedido(total: number, payload: Producto[], service: boolean, client: number){
+        this.ticket$ = payload;
+        const pedido = {
+          id_user: client,
+          valor: total,
+          servicio: service
+        }
+        this.http.post<Pedido>(`${this.API_URI}/pedido/${client}`, pedido)
+        .subscribe( res => {
+          this.pedido = res;
+          if (this.pedido.id_pedido != null){
+          this.setTicket(client);
+          this.pedido.ticket = [];
+          this.pedido.ticket = this.ticket$;        
+          this.storeServices.setPedido = this.pedido;
+        }
+        });
+      }
+
+      setTicket(client: number){
+        // console.log(this.tickets);
+        this.ticket$.map( item =>{
+          const ticket = {
+            user_ticket: client,
+            Producto: item.id,
+            id_pedido: this.pedido.id_pedido,
           }
           this.http.post<Ticket[]>(`${this.API_URI}/ticket/`, ticket)
           .subscribe(d =>{})

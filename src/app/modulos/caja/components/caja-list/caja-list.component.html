@@ -37,22 +37,22 @@
                             <td class="text-center justify-center" *ngIf = "data.servicio == 1"><mat-icon>delivery_dining</mat-icon></td>
                             <td><button nz-button nzType="sucess" (click)="facturarPedido(i)">Facturar</button></td>
                         </tr>
-                        <tr [nzExpand]="expandSet.has(data.id)">
+                        <tr [nzExpand]="expandSet.has(data.id_pedido)">
                           
                           <div class="flex">
                             <nz-table class="w-screen" #basicTable [nzBordered]="true" [nzFrontPagination]="false" [nzData]="ticket">
                               <thead>
                                 <tr>
-                                  <th class="text-center">#Ticket</th>
                                   <th class="text-center">Producto</th>
                                   <th class="text-center">Valor</th>
+                                  <th class="text-center">Descripcion</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr *ngFor="let data of basicTable.data">
-                                  <td class="text-center"># {{ data.id_ticket }}</td>
                                   <td class="text-center">{{ data.name }}</td>
-                                  <td class="text-center">{{ (data.valor | currency) }}</td>
+                                  <td class="text-center">{{ data.valor | currency }}</td>
+                                  <td class="text-center">{{ (data.descripcion) }}</td>
                                 </tr>
                               </tbody>
                             </nz-table>

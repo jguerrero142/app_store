@@ -43,6 +43,11 @@ export class StoreService {
     this.setStore = this.store
   }
 
+  set setPedido(pedido: Pedido){
+    this.store.pedidos.push(pedido);
+    this.setStore = this.store
+  }
+
   set deletPedido(index: number){
     this.store.user.pedido.splice(index,1);
     this.setStore = this.store
@@ -164,6 +169,7 @@ export class StoreService {
       .subscribe((data) => {
             this.store.pedidos.forEach((item, index)=>{
             const ad = data.filter( a => a.id_pedido == item.id_pedido);
+            this.store.pedidos[index].ticket = [];
             this.store.pedidos[index].ticket = ad;
           })
       });

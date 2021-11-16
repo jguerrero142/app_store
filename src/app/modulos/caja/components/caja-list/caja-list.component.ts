@@ -143,7 +143,7 @@ export class CajaListComponent implements OnInit {
   getStore() {
       this.storeServices.getStore.subscribe((d) => {
         if (d.pedidos.length > 0) {
-         this.reservas = d.pedidos.filter( p => p.pedido_estado == 1);
+         this.reservas = d.pedidos.filter( p => p.pedido_estado == 1 || p.pedido_estado == 2);
          this.valid = true;
         }
      }); 

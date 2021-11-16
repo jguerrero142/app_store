@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 // Modales
-import { Ticket, Pedido, Producto, User } from 'src/app/shared/models/index.models';
+import { Pedido, Producto, User } from 'src/app/shared/models/index.models';
 
 // Servicios
 import { MenuService } from '../../services/menu-service.service';
@@ -98,6 +98,18 @@ export class ModalComponent implements OnInit {
 
   setPedidoUser(){
     this.storeEffects.setPedidoUser(this.total,this.tickets,this.switchValue);
+    this.isVisible = false;
+    this.tickets = [];
+    this.menuServices.DeletTickets = this.tickets;
+  }
+
+  setPedido(){
+    if (this.client > 0){
+      this.storeEffects.setPedido(this.total,this.tickets,this.switchValue,this.client);
+    }else{
+      console.log("holi")
+      this.storeEffects.setPedidoUser(this.total,this.tickets,this.switchValue);
+    }
     this.isVisible = false;
     this.tickets = [];
     this.menuServices.DeletTickets = this.tickets;
