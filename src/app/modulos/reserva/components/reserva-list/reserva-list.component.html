@@ -15,7 +15,7 @@
             
               <mat-expansion-panel-header class="flex  flex-wrap p-1 h-16 md:h-14">
                  <mat-panel-description  class="flex flex-wrap m-2">
-                  <div class="m-2"><nz-tag [nzColor]="'gold'" > # ID {{ panel.id }}</nz-tag>
+                  <div class="m-2"><nz-tag [nzColor]="'gold'" > # ID {{ panel.id_pedido }}</nz-tag>
                   </div>
                   <div>
                     <nz-tag [nzColor]="'green'">{{" "}}.{{ panel.valor | currency }}</nz-tag>
@@ -57,7 +57,7 @@
     
                       </div>
                       <div class="flex justify-between mt-2">
-                        <button nz-button nzType="primary" (click)="deletPedido(i,panel.id)">Cancelar</button>
+                        <button nz-button nzType="primary" (click)="deletPedido(i,panel.id_pedido)">Cancelar</button>
                       </div>
                       
         

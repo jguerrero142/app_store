@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
 //Servicios
 import { AuthService } from './auth/auth.service';
 import { Store } from './class/Store.model';
-import { MenuService } from '../modulos/menu/services/menu-service.service';
 
 
 @Injectable({
@@ -39,7 +38,6 @@ export class StoreService {
   //////////////////////Efectos Store /////////////////////////////////////////////
 
   set sendPedido( pedido: Pedido){
-    console.log(pedido);
     this.store.user.pedido.push(pedido);
     this.store.pedidos.push(pedido);
     this.setStore = this.store
@@ -99,7 +97,7 @@ export class StoreService {
       this.setStore = this.store;
     }
 
-    //Obtenemos los pedidos del USUARIOy
+    //Obtenemos los pedidos del USUARIO
     getUserPedidos() {
     return this.http
       .get<Pedido[]>(`${this.API_URI}/pedido/get/${this.id}`)
@@ -119,7 +117,8 @@ export class StoreService {
     }
 
     //Obtiene los TICKETS del USUARIO
-    getUserTickets() { 
+    getUserTickets() {
+      
         return this.http
           .get<Ticket[]>(`${this.API_URI}/ticket/user/${this.id}`)
           .subscribe((data) => {

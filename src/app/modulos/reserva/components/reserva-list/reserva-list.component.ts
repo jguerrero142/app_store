@@ -62,14 +62,14 @@ export class ReservaListComponent implements OnInit {
   getStore() {
     this.storeServices.getStore.subscribe((d) => {
       if (d != null) {
-        this.reservas = d.user.pedido.filter( p => p.pedido_estado == 1);
+        this.reservas = d.user.pedido.filter( p => p.pedido_estado == 1 || p.pedido_estado == 2);
         this.valid = true;
       }
     });
     
   }
   deletPedido(index:number,pedido:number){
-    this.reservaServices.getStatdoPedido(pedido)
+    this.reservaServices.getStatePedido(pedido)
     .subscribe(res => {
       if(res == 1){
         this.reservaServices.deleteConfirm(index, pedido);

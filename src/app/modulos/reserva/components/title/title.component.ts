@@ -35,7 +35,7 @@ export class TitleComponent implements OnInit {
 
   getTotalReservas(){
     this.storeServices.getStore.subscribe(s=>{
-      const p = s.user.pedido.filter(d=> d.pedido_estado == 1 )
+      const p = s.user.pedido.filter(d=> d.pedido_estado == 1 || d.pedido_estado == 2 )
       this.total = p.reduce((suma,d)=> suma + d.valor, 0);
     })
   }

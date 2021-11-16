@@ -45,7 +45,7 @@ export class ReservaService {
     });
   }
 
-  getStatdoPedido(id){
+  getStatePedido(id: number){
       return this.http.get<StatePedido>(`${this.API_URI}/pedido/state/${id}`)
       .pipe(map(d => d.pedido_estado ))
     
