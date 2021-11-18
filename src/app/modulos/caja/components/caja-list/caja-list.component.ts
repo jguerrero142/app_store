@@ -139,6 +139,13 @@ export class CajaListComponent implements OnInit {
       this.isLoadingOne = false;
     }, 1000);
   }
+  ids(id:any){
+    console.log(id)
+  }
+  onKeyUp(event){
+    const s = event.target.value
+    console.log(s)
+  }
   
   getStore() {
       this.storeServices.getStore.subscribe((d) => {
@@ -151,8 +158,8 @@ export class CajaListComponent implements OnInit {
 
   onExpandChange(data: Pedido , checked: boolean):void{
     if(checked){
-      this.expandSet.add(data.id_pedido)
-      this.ticket = data.ticket.filter(d=> d.id_pedido == data.id_pedido);
+      this.expandSet.add(data.id_pedido);      
+      this.ticket = data.ticket.filter((d)=> d.id_pedido = data.id_pedido); 
     }else{
       this.expandSet.delete(data.id_pedido)
     }

@@ -8,7 +8,7 @@
 
 <ng-template #table>
   
-    <nz-table #nzTable [nzData]="reservas"  nzTableLayout="fixed"[nzPageSize]="10" [nzBordered]="true">
+    <nz-table #nzTable [nzData]="reservas"  nzTableLayout="fixed"[nzPageSize]="10" [nzBordered]="true" (keyup.enter)="onKeyUp($event)">
         <thead>
 
                 <tr>
@@ -23,10 +23,10 @@
                     <th class="text-center">Facturar</th>
                 </tr>
         </thead>
-        <tbody>
-                <ng-container *ngFor="let data of nzTable.data; index as i">
-                        <tr >
-                            <td [nzExpand]="expandSet.has(data.id)"
+        <tbody >
+                <ng-container *ngFor="let data of nzTable.data; index as i" >
+                      <tr (click)="ids(data.id_pedido)" >
+                            <td [nzExpand]="expandSet.has(data.id_pedido)"
                             (nzExpandChange)="onExpandChange(data, $event)"
                             ></td>
                             <td class="text-center" ># {{ data.id_pedido }}</td>
