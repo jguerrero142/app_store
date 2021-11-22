@@ -17,6 +17,8 @@ import { MenuService } from '../../services/menu-service.service';
 
 export class ProductCardComponent implements OnInit {
 
+  tooltips = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
+  value = 3;
   // Obtiene el tipo de producto 
   @Input() tipoPro: number;
 

@@ -1,1 +1,43 @@
-<p>caja-factura works!</p>
+<ng-container *ngIf="!valid; else table">
+    <div class="flex justify-center content-center m-12">
+      <nz-spin class="mr-6" nzSimple [nzSize]="'large'"></nz-spin>
+      <div nz-typography><h5>Esperando Pedidos...</h5></div>
+      
+    </div>
+  </ng-container>
+
+<ng-template #table>
+  
+    <nz-table #nzTable [nzData]="reservas"  nzTableLayout="fixed"[nzPageSize]="30" [nzBordered]="true">
+        <thead>
+
+                <tr>
+                    <th class="w-12 p-2 justify-center content-center"><button nz-button nzShape="circle" nzType="secondary" (click)="loadStore()" [nzLoading]="isLoadingOne">
+                      <i class="flex justify-center items-center" nz-icon [nzType]="'sync'"></i>
+                    </button></th>
+                    <th class="text-center"># Factura</th>
+                    <th class="text-center">Usuario</th>
+                    <th class="text-center">Creado </th>
+                    <th class="text-center">Valor</th>
+                    <th class="text-center">Observacion</th>
+                </tr>
+        </thead>
+        <tbody >
+                <ng-container *ngFor="let data of nzTable.data" >
+                      <tr>
+                            <td></td>
+                            <td class="text-center" ># {{ data.id_factura }}</td>
+                            <td class="text-center">{{ data.name }}</td>
+                            <td class="text-center">{{ (data.create_at | date) }}</td>
+                            <td class="text-center">{{ (data.valor | currency) }}</td>
+                            <td class="text-center justify-center">{{ (data.observacion) }}</td>
+                        </tr>
+
+                </ng-container>
+            
+        </tbody>
+
+    </nz-table>
+
+      
+</ng-template>

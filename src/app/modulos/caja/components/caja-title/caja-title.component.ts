@@ -60,28 +60,29 @@ export class CajaTitleComponent implements OnInit {
 
   getStore(){
     this.storeServices.getStore.subscribe( s=>{
-      if(s.pedidos.length > 0){
+      if(s.facturas.length > 0){
 
         //Obtiene el TOTAL de VENTA
-        const p = s.pedidos.filter(d=> d.pedido_estado == 1);
+        const p = s.facturas.filter(d=> d.estado_factura == 3);
         this.total = p.reduce((suma, d) => suma + d.valor,0);
 
         //Obtiene TOTAL de FIADO
-        const f = s.pedidos.filter(d=> d.estado_valor == 1);
+        const f = s.facturas.filter(d=> d.estado_valor == 1);
         this.fiado = f.reduce((suma, d) => suma + d.valor,0);
 
         //Obtiene TOTAL de EFECTIVO
-        const e = s.pedidos.filter(d=> d.estado_valor == 2);
+        const e = s.facturas.filter(d=> d.estado_valor == 2);
         this.efectivo = e.reduce((suma, d) => suma + d.valor,0);
 
         // Obtiene Total de almuerzos
-        p.map(d=> {
-          const a = d.ticket.filter(d=> {
-            if(d.producto_tipo == 1){
-              this.ticket.push(d)
-            }
-          })
-          
+        s.pedidos.map(d=> {
+          if(d.pedido_estado == 1){
+            const a = d.ticket.filter(d=> {
+              if(d.producto_tipo == 1){
+                this.ticket.push(d)
+              }
+            })
+          }
         })
         this.almuerzo = this.ticket.length
       }

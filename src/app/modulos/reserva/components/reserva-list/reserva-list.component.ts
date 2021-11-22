@@ -36,6 +36,7 @@ export class ReservaListComponent implements OnInit {
 
   public valid: boolean = false;
   public reservas: Pedido[] = [];
+  public facturas: Factura[] = [];
 
   constructor(
     public auth: AuthService,
@@ -47,6 +48,7 @@ export class ReservaListComponent implements OnInit {
   ngOnInit(): void {
     this.getAuth();
     this.getStore();
+    this.getFacturasUser();
   }
   
   getAuth() {
@@ -68,6 +70,13 @@ export class ReservaListComponent implements OnInit {
     });
     
   }
+
+  getFacturasUser(){
+    this.storeServices.getStore.subscribe( d=>{
+      this.facturas = d.user.factura;
+    })
+  }
+
   deletPedido(index:number,pedido:number){
     this.reservaServices.getStatePedido(pedido)
     .subscribe(res => {
@@ -78,11 +87,5 @@ export class ReservaListComponent implements OnInit {
           this.reservaServices.warningState();
       }
     })
-  }
-
-  facturarPedido(pedido: Factura){
-    // this.storeEffects.setFactura(pedido)
-    // console.log(pedido)
-
   }
 }

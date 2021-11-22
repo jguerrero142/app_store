@@ -1,24 +1,44 @@
 <div class="container">
-  <div *ngIf="valid == false ; else contenido">
-    <nz-skeleton [nzActive]="true"></nz-skeleton>
-  </div>
+        <!-- <div *ngIf="valid == false ; else contenido">
+          <nz-skeleton [nzActive]="true"></nz-skeleton>
+        </div> -->
 
-  <ng-template #contenido>
-    <div class="row justify-items-center">
-      <app-title></app-title>
-    </div>
-    <div class="row justify-items-center">
-      <div class="col-md-7 justify-center">
-        <app-reserva-list></app-reserva-list>
-      </div>
-  
-      <div class="col-md-5 text-center justify-center">
-        <app-reserva-factura></app-reserva-factura>
-      </div>
-    </div>
-  </ng-template>
+        <!-- <ng-template #contenido> -->
+          <div class="row justify-items-center">
+            <app-title></app-title>
+          </div>
 
-  
+          
+            <div class="justify-center">
 
+                  <nz-tabset nzCentered>                      
+                    <nz-tab nzTitle="RESERVAS"><app-reserva-list></app-reserva-list></nz-tab>
+                    <nz-tab nzTitle="FACTURAS"></nz-tab>
+                </nz-tabset>
+            </div>
+
+          
+
+        
 
 </div>
+
+
+<!-- <div class="container">
+    
+      <div class="row justify-items-center">
+        <app-caja-title></app-caja-title>
+      </div>
+      
+      <div class="row justify-items-center">
+        <div class="col-md-12 justify-center">
+          <nz-tabset nzCentered>
+            <nz-tab nzTitle="RESERVAS"><app-caja-list></app-caja-list></nz-tab>
+            <nz-tab nzTitle="FACTURAS"><app-caja-factura></app-caja-factura></nz-tab>
+            <nz-tab nzTitle="Tab 3">Content of Tab Pane 3</nz-tab>
+          </nz-tabset>
+          
+        </div>
+        
+      </div>
+</div> -->
