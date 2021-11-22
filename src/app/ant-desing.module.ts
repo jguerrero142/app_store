@@ -34,6 +34,8 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzListModule } from 'ng-zorro-antd/list';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 const icons = [
   MenuFoldOutline,
@@ -71,7 +73,9 @@ const icons = [
     NzTabsModule,
     NzSelectModule,
     NzDescriptionsModule,
-    NzListModule
+    NzListModule,
+    NzInputModule,
+    NzFormModule
   ],
   exports: [
     NzIconModule,
@@ -101,7 +105,9 @@ const icons = [
     NzTabsModule,
     NzSelectModule,
     NzDescriptionsModule,
-    NzListModule
+    NzListModule,
+    NzInputModule,
+    NzFormModule
   ],
   providers: [{ provide: NZ_ICONS, useValue: icons }],
 })

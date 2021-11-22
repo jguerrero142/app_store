@@ -1,4 +1,4 @@
-import { Pedido, Factura, User,Producto,TipoProducto } from '../../shared/models/index.models';
+import { Pedido, Factura, User, MetodoPago } from '../../shared/models/index.models';
 
 export class Store{
 
@@ -7,6 +7,7 @@ export class Store{
         public users?: User[],
         public pedidos?: Pedido[],
         public facturas?: Factura[],
+        public metodos?: MetodoPago[],
         
     ){}
 

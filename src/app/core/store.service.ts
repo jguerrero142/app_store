@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 //Modals
-import { User, Pedido, Ticket,Factura } from '../shared/models/index.models';
+import { User, Pedido, Ticket,Factura, MetodoPago } from '../shared/models/index.models';
 import { environment } from 'src/environments/environment';
 
 //Servicios
@@ -19,6 +19,7 @@ export class StoreService {
   public user: User;
   private id: number;
   private role: number;
+  public data: Pedido;
 
   // Variables Store
   public store: Store = new Store;
@@ -45,6 +46,19 @@ export class StoreService {
 
   set setPedido(pedido: Pedido){
     this.store.pedidos.push(pedido);
+    this.setStore = this.store
+  }
+
+  set updatePedido(pedido: Pedido){
+    this.data = pedido;
+    const p = this.store.pedidos.findIndex(d => d.id_pedido == this.data.id_pedido );
+    this.store.pedidos.splice(p,1);
+    this.store.pedidos.push(this.data);
+    this.setStore = this.store;
+  }
+
+  set setFactura(factura: Factura){
+    this.store.facturas.push(factura);
     this.setStore = this.store
   }
 
@@ -89,6 +103,7 @@ export class StoreService {
       this.getAsFacturas();
       this.getAsPedido();
       this.getAsTicket();
+      this.getAsMetodosPago();
       }
 
       this.setStore = this.store;
@@ -173,6 +188,15 @@ export class StoreService {
             this.store.pedidos[index].ticket = ad;
           })
       });
+    }
+
+    //Obtiene todos los metodos de Pago
+    getAsMetodosPago(){
+      return this.http
+        .get<MetodoPago[]>(`${this.API_URI}/factura/metodo-pago/get`)
+        .subscribe((data) => {
+            this.store.metodos = data;
+        })
     }
   
 

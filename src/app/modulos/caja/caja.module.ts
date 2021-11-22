@@ -17,7 +17,7 @@ import { CajaService } from './services/caja.service';
     CajaHomeComponent,
     CajaTitleComponent,
     CajaListComponent,
-    CajaFacturaComponent
+    CajaFacturaComponent,
   ],
   imports: [CommonModule, MaterialModule, nzDesingModule],
   providers: [CajaService],

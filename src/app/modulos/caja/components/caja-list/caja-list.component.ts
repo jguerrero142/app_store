@@ -9,6 +9,7 @@ import { MatAccordion } from '@angular/material/expansion';
 import { StoreEffects } from '../../../../core/effects/Store.effect';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { MetodoPago } from '../../../../shared/models/Metodo-pago';
 
 interface DataItem {
   name: string;
@@ -105,10 +106,19 @@ export class CajaListComponent implements OnInit {
    public id: any;
 
    public valid: boolean = false;
+   public alert: boolean = false;
    public reservas: Pedido[] = [];
+   public factura: Pedido;
+   public metodos: MetodoPago[] = [];
+   public idMetodo: number = 0;
+
+
    public r$: Observable<Pedido[]>;
-   isLoadingOne = false;
- 
+   public isLoadingOne = false;
+   public isVisible = false;
+   public isDisabled = false;
+   public switchValue = false;
+   public loading = false;
 
   constructor(
     public auth: AuthService,
@@ -139,14 +149,7 @@ export class CajaListComponent implements OnInit {
       this.isLoadingOne = false;
     }, 1000);
   }
-  ids(id:any){
-    console.log(id)
-  }
-  onKeyUp(event){
-    const s = event.target.value
-    console.log(s)
-  }
-  
+    
   getStore() {
       this.storeServices.getStore.subscribe((d) => {
         if (d.pedidos.length > 0) {
@@ -165,9 +168,44 @@ export class CajaListComponent implements OnInit {
     }
   }
 
-  facturarPedido(id: any){
-    console.log(id)
+  showModal(pedido: Pedido){
+    this.factura = pedido;
+    this.idMetodo = 0;
+    this.isVisible = true;
+    this.storeServices.getStore.subscribe(m=>{
+      this.metodos = m.metodos;
+    });
+  }  
+
+  setFactura(): void {
+    const fact = this.storeEffects.setFacturaUser(this.factura.id_pedido,this.factura.valor,this.idMetodo,this.factura.servicio);
+   if(fact == true){
+     this.alert = true;
+   }else{
+    this.isVisible = false;
+    this.isDisabled = false;
+    this.alert = false;
+   }    
   }
 
+  handleCancel(): void {
+    this.isVisible = false;
+    this.isDisabled = false;
+    this.alert = false;
+    this.switchValue = !this.switchValue;
+    this.idMetodo = 0
+  }
 
+  clickSwitch(id?: number): void {
+    if (!this.loading && this.isDisabled == false) {
+      this.loading = true;
+      setTimeout(() => {
+        this.switchValue = !this.switchValue;
+        this.idMetodo = id;
+        console.log(this.idMetodo);
+        this.isDisabled = true
+        this.loading = false;
+      }, 1000);
+    }
+  }
 }

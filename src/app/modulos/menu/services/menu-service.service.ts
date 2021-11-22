@@ -12,7 +12,6 @@ import { StoreProducts } from '../Class/storeProducts';
   providedIn: 'root',
 })
 export class MenuService {
-
   public store: StoreProducts = new StoreProducts();
 
   // Store observable

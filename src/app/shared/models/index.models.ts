@@ -5,3 +5,4 @@ export { Producto } from './Producto.model';
 export { Factura } from './Factura.model';
 export { Ticket } from './Ticket.model';
 export { TipoProducto } from './Tipo-producto.model';
+export { MetodoPago } from './Metodo-pago';

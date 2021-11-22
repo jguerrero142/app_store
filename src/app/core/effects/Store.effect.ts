@@ -26,6 +26,13 @@ export class StoreEffects {
   private  pedido: Pedido;
   private tickets: Producto[];
   private ticket$: Producto[];
+  public factura: Factura;
+  public facturaRes: Factura;
+  public facturaUser: Factura;
+  public pedidoData: Pedido;
+
+  public total: number;
+  public metodo: number;
    
    API_URI = environment.wsUrl;
 
@@ -41,12 +48,15 @@ export class StoreEffects {
                     
                   });  
                }
+
+      // Ingresa los pedidos De Usuario
       setPedidoUser(total: number, payload: Producto[], service: boolean){
         this.tickets = payload;
         const pedido = {
           id_user: this.user,
           valor: total,
-          servicio: service
+          servicio: service,
+          user_update: this.user,
         }
         this.http.post<Pedido>(`${this.API_URI}/pedido/${this.user}`, pedido)
         .subscribe( res => {
@@ -73,12 +83,14 @@ export class StoreEffects {
         })
       }
 
+      // Ingresa los pedidos de CAJA con ID cliente
       setPedido(total: number, payload: Producto[], service: boolean, client: number){
         this.ticket$ = payload;
         const pedido = {
           id_user: client,
           valor: total,
-          servicio: service
+          servicio: service,
+          user_update: this.user,
         }
         this.http.post<Pedido>(`${this.API_URI}/pedido/${client}`, pedido)
         .subscribe( res => {
@@ -105,21 +117,117 @@ export class StoreEffects {
         })
       }
 
+      // Ingresa los Pedidos de CAJA 
+      setFacturar(total: number,payload: Producto[], service: boolean, metodo: number ){
+        this.total = total,
+        this.metodo = metodo,
+          this.tickets = payload;
+          const pedido = {
+          id_user: this.user,
+          valor: total,
+          servicio: service,
+          metodo_pago: metodo,
+          estado_valor: 2,
+          pedido_estado: 3,
+          user_update: this.user,
+        }
+        this.http.post<Pedido>(`${this.API_URI}/pedido/${this.user}`, pedido)
+        .subscribe( res => {
+          this.pedidoDate = res;
+          if (this.pedidoDate.id_pedido != null){
+          this.setTicketUser();
+          this.setFactura(this.pedidoDate.id_pedido,this.total,this.metodo);
+          this.pedidoDate.ticket = [];
+          this.pedidoDate.ticket = this.tickets;        
+          this.storeServices.sendPedido = this.pedidoDate;
+        }
+        });
+      }
+
+
+
       deletePedidos(index: number, pedido: number){
         this.storeServices.deletPedido = index
         this.pedidoServices.deletPedido(pedido).subscribe(d=>{});
       }
 
-      setFactura(factura: Factura){
-        console.log(factura)
-          // this.factura = {
-          //   id_user: factura.id_user,
-          //   id_pedido: factura.id_pedido,
-          //   valor: factura.valor,
-          //   observacion: factura.observacion,
-          // // }
-          // console.log(this.factura)
-          this.facturarServices.saveFactura(factura).subscribe(d =>{console.log(d)});
+      setFactura(id: number, total: number, metodo: number){
+        const factura = {
+          id_user: this.user,
+          id_pedido: id,
+          valor: total,
+          id_metodo: metodo,
+          estado_valor: 2,
+          estado_factura: 3,
+          user_update: this.user,
+        }
+        return this.http.post<Factura>(`${this.API_URI}/factura/${this.user}`, factura).subscribe(d =>{
+          this.facturaRes = d;
+          this.storeServices.setFactura = this.facturaRes
+        });
       }
 
+      setFacturaUser(id: number, total: number, metodo: number, servicio: boolean){
+        if(servicio == true && metodo == 0){
+          const alert = true;
+          return alert;
+        }else if(servicio == true){
+          this.updatePedido(id, 3, metodo, 2);
+          this.facturaUser = {
+            id_user: this.user,
+            id_pedido: id,
+            valor: total,
+            id_metodo: metodo,
+            estado_valor: 2,
+            estado_factura: 3,
+            user_update: this.user,
+          }
+        }
+        else if(metodo > 0){
+          this.updatePedido(id, 3, metodo, 2);
+          this.facturaUser = {
+            id_user: this.user,
+            id_pedido: id,
+            valor: total,
+            id_metodo: metodo,
+            estado_valor: 1,
+            estado_factura: 3,
+            user_update: this.user,
+          }
+          }else{
+            this.updatePedido(id, 3, metodo);
+            this.facturaUser = {
+              id_user: this.user,
+              id_pedido: id,
+              valor: total,
+              estado_valor: 1,
+              estado_factura: 3,
+              user_update: this.user,
+            }
+          }
+        return this.http.post<Factura>(`${this.API_URI}/factura/${this.user}`, this.facturaUser).subscribe(d =>{
+          this.facturaRes = d;
+          this.storeServices.setFactura = this.facturaRes
+        });
+      }
+
+      updatePedido(id: number, est_factura: number, metodo: number, estado?: number){
+        if(metodo == 0){
+          this.pedidoData = {
+            pedido_estado: est_factura,
+            user_update: this.user,
+          }
+        }else{
+          this.pedidoData = {
+            metodo_pago: metodo,
+            estado_valor: estado,
+            pedido_estado: est_factura,
+            user_update: this.user,
+          }
+        }
+          
+        return this.http.put<Pedido>(`${this.API_URI}/pedido/${id}`,this.pedidoData).subscribe(d=> {
+        this.storeServices.updatePedido = d;
+        });
+      } 
 }

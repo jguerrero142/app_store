@@ -81,8 +81,8 @@ export class ReservaListComponent implements OnInit {
   }
 
   facturarPedido(pedido: Factura){
-    this.storeEffects.setFactura(pedido)
-    console.log(pedido)
+    // this.storeEffects.setFactura(pedido)
+    // console.log(pedido)
 
   }
 }

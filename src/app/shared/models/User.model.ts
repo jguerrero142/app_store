@@ -17,6 +17,7 @@ export class User {
         public locale?: string,
         public updated_at?: string,
         public email_verified?: string,
+        public contacto?:string,
         public role?: number,
         public id_empresa?: number,
         public name_enterprise?: string,

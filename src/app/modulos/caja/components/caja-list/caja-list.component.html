@@ -25,7 +25,7 @@
         </thead>
         <tbody >
                 <ng-container *ngFor="let data of nzTable.data; index as i" >
-                      <tr (click)="ids(data.id_pedido)" >
+                      <tr>
                             <td [nzExpand]="expandSet.has(data.id_pedido)"
                             (nzExpandChange)="onExpandChange(data, $event)"
                             ></td>
@@ -35,7 +35,7 @@
                             <td class="text-center">{{ (data.valor | currency) }}</td>
                             <td class="text-center justify-center" *ngIf = "data.servicio == 0"><mat-icon>store</mat-icon></td>
                             <td class="text-center justify-center" *ngIf = "data.servicio == 1"><mat-icon>delivery_dining</mat-icon></td>
-                            <td><button nz-button nzType="sucess" (click)="facturarPedido(i)">Facturar</button></td>
+                            <td><button nz-button nzType="sucess" (click)="showModal(data)">Facturar</button></td>
                         </tr>
                         <tr [nzExpand]="expandSet.has(data.id_pedido)">
                           
@@ -68,4 +68,32 @@
 
       
 </ng-template>
+
+<nz-modal
+        [(nzVisible)]="isVisible"
+        nzOkText="Facturar"
+        nzCancelText="Cancelar"
+        (nzOnOk)="setFactura()"
+        (nzOnCancel)="handleCancel()"
+      >
+        <ng-container *nzModalContent>
+          <h5 class="text-center p-2" nz-typography> Confirma el metodo de pago</h5>
+          <nz-alert nzType="warning" *ngIf="alert == true" nzMessage="Elige un metodo de pago" nzShowIcon></nz-alert>
+          <div class="flex justify-between px-5">            
+            <div  class="" *ngFor="let metodo of metodos">
+
+              
+
+              <nz-card  nzType="inner" [nzTitle]="ticket.name" [nzExtra]="extraTemplate">
+                            
+                <h5 nz-typography>{{ metodo.metodo_name}}</h5>
+                <nz-avatar class="p-2" [nzShape]="'square'" [nzSize]="64" [nzSrc]="metodo.image"></nz-avatar>
+                <nz-switch [(ngModel)]="switchValue" [nzDisabled]="isDisabled" (click)="clickSwitch(metodo.id_metodo)" [nzLoading]="loading"></nz-switch>
+
+              </nz-card>              
+            </div>
+          </div>
+          
+        </ng-container>
+      </nz-modal>
   

@@ -130,3 +130,82 @@
             </ng-template>
         </nz-modal>
 </ng-template>
+
+
+<nz-modal
+        [(nzVisible)]="isVisible2"
+        nzOkText="Facturar"
+        nzCancelText="Cancelar"
+        (nzOnOk)="setFactura()"
+        (nzOnCancel)="handleCancel2()"
+      >
+        <ng-container *nzModalContent>
+          <h5 class="text-center p-2" nz-typography> Confirma el metodo de pago</h5>
+          <div class="flex justify-between px-5">            
+            <div  class="" *ngFor="let metodo of metodos">
+
+              <nz-card  nzType="inner">
+                            
+                <h5 nz-typography>{{ metodo.metodo_name}}</h5>
+                <nz-avatar class="p-2"  [nzShape]="'square'" [nzSize]="64" [nzSrc]="metodo.image"></nz-avatar>
+                <nz-switch [(ngModel)]="switchValue2" [nzDisabled]="isDisabled" (click)="clickSwitch2(metodo.id_metodo )" [nzLoading]="loading"></nz-switch>
+
+              </nz-card>              
+            </div>
+          </div>
+          
+        </ng-container>
+      </nz-modal>
+
+
+      <nz-modal
+        [(nzVisible)]="isVisible3"
+        nzOkText="Enviar"
+        (nzOnOk)="setFactura()"
+        nzCancelText="Cancelar"
+        (nzOnCancel)="handleCancel3()"
+      >
+        <ng-container *nzModalContent>
+          <div class="flex justify-between px-5">            
+            <div  class="" >
+
+              <nz-card  nzType="inner">
+                            
+                <h5 nz-typography>Numero de contacto</h5>
+
+                <nz-input-group [nzSuffix]="inputClearTpl">
+                  <input type="text" nz-input [(ngModel)]="inputValue" placeholder="input with clear icon" />
+                </nz-input-group>
+                <ng-template #inputClearTpl>
+                  <i
+                    nz-icon
+                    class="ant-input-clear-icon"
+                    nzTheme="fill"
+                    nzType="close-circle"
+                    *ngIf="inputValue"
+                    (click)="inputValue = null"
+                  ></i>
+                </ng-template>
+                <br />
+                <br />
+                <nz-input-group [nzSuffix]="textAreaClearTpl" class="ant-input-affix-wrapper-textarea-with-clear-btn">
+                  <textarea nz-input [(ngModel)]="textValue" placeholder="textarea with clear icon"></textarea>
+                </nz-input-group>
+                <ng-template #textAreaClearTpl>
+                  <i
+                    nz-icon
+                    class="ant-input-textarea-clear-icon"
+                    nzTheme="fill"
+                    nzType="close-circle"
+                    *ngIf="textValue"
+                    (click)="textValue = null"
+                  ></i>
+                </ng-template>
+                              
+
+              </nz-card>              
+            </div>
+          </div>
+          
+        </ng-container>
+      </nz-modal>
