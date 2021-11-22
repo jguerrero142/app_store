@@ -12,31 +12,27 @@ interface Person {
 @Component({
   selector: 'app-caja-title',
   templateUrl: './caja-title.component.html',
-  styleUrls: ['./caja-title.component.css']
+  styleUrls: ['./caja-title.component.css'],
 })
-
-
 export class CajaTitleComponent implements OnInit {
-
-  
   //Variables Auth
   public role: string;
   public user: User;
   public valid: boolean = false;
 
   //Variables Componente
-  public total: number = 0 ;
-  public fiado: number = 0 ;
-  public efectivo: number = 0 ;
-  public ticket: Ticket [] = [];
-  public almuerzo: number;
+  public total: number = 0;
+  public fiado: number = 0;
+  public efectivo: number = 0;
+  public ticket: Ticket[] = [];
+  public almuerzo: number = 0;
   isLoadingOne = false;
-  
-  constructor( private storeServices: StoreService) {
-    this.getStore();
-   }
 
-   loadOne(): void {
+  constructor(private storeServices: StoreService) {
+    this.getStore();
+  }
+
+  loadOne(): void {
     this.isLoadingOne = true;
     setTimeout(() => {
       this.isLoadingOne = false;
@@ -45,7 +41,6 @@ export class CajaTitleComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAuth();
-    
   }
 
   getAuth() {
@@ -58,36 +53,33 @@ export class CajaTitleComponent implements OnInit {
     });
   }
 
-  getStore(){
-    this.storeServices.getStore.subscribe( s=>{
-      if(s.facturas.length > 0){
-
+  getStore() {
+    this.storeServices.getStore.subscribe((s) => {
+      if (s.facturas.length > 0) {
         //Obtiene el TOTAL de VENTA
-        const p = s.facturas.filter(d=> d.estado_factura == 3);
-        this.total = p.reduce((suma, d) => suma + d.valor,0);
+        const p = s.facturas.filter((d) => d.estado_factura == 3);
+        this.total = p.reduce((suma, d) => suma + d.valor, 0);
 
         //Obtiene TOTAL de FIADO
-        const f = s.facturas.filter(d=> d.estado_valor == 1);
-        this.fiado = f.reduce((suma, d) => suma + d.valor,0);
+        const f = s.facturas.filter((d) => d.estado_valor == 1);
+        this.fiado = f.reduce((suma, d) => suma + d.valor, 0);
 
         //Obtiene TOTAL de EFECTIVO
-        const e = s.facturas.filter(d=> d.estado_valor == 2);
-        this.efectivo = e.reduce((suma, d) => suma + d.valor,0);
+        const e = s.facturas.filter((d) => d.estado_valor == 2);
+        this.efectivo = e.reduce((suma, d) => suma + d.valor, 0);
 
         // Obtiene Total de almuerzos
-        s.pedidos.map(d=> {
-          if(d.pedido_estado == 1){
-            const a = d.ticket.filter(d=> {
-              if(d.producto_tipo == 1){
-                this.ticket.push(d)
+        s.pedidos.map((d) => {
+          if (d.pedido_estado == 1) {
+            const a = d.ticket.filter((d) => {
+              if (d.producto_tipo == 1) {
+                this.ticket.push(d);
               }
-            })
+            });
           }
-        })
-        this.almuerzo = this.ticket.length
+        });
+        this.almuerzo = this.ticket.length;
       }
-      
-    })
+    });
   }
-
 }
