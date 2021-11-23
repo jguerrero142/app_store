@@ -17,6 +17,7 @@ import { SharedModule } from './shared/shared.module';
 import { MenuModule } from './modulos/menu/menu.module';
 import { ReservaModule } from './modulos/reserva/reserva.module';
 import { CajaModule } from './modulos/caja/caja.module';
+import { InventarioModule } from './modulos/inventario/inventario.module';
 
 
 // Modulos librearias
@@ -24,6 +25,7 @@ import { nzDesingModule } from './ant-desing.module';
 import { MaterialModule } from './material.module';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -51,7 +53,9 @@ registerLocaleData(es);
     MaterialModule,
     FormsModule,
     BrowserAnimationsModule,
-    nzDesingModule
+    nzDesingModule,
+    InventarioModule,
+    NgxChartsModule
   ],
   providers: [ { provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

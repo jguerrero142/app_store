@@ -21,6 +21,8 @@ import { ReservaModule } from '../modulos/reserva/reserva.module';
 import { CajaModule } from '../modulos/caja/caja.module';
 import { CajaComponent } from './pages/caja/caja.component';
 import { SearchPipe } from './pipe/search.pipe';
+import { InventarioModule } from '../modulos/inventario/inventario.module';
+import { CoreModule } from '../core/core.module';
 
 
 
@@ -39,10 +41,12 @@ import { SearchPipe } from './pipe/search.pipe';
   ],
   imports: [
     CommonModule,
+    CoreModule,
     SharedRoutingModule,
     MenuModule,
     ReservaModule,
     CajaModule,
+    InventarioModule,
     MaterialModule,
     nzDesingModule
   ],

@@ -1,0 +1,74 @@
+<div class="container">
+    <nz-tabset nzCentered>
+        <nz-tab nzTitle="INFORME">
+
+        <div >
+            <div class="m-3">
+                <nz-page-header class="w-full" nzBackIcon>
+                    <nz-page-header-title>Title</nz-page-header-title>
+                    <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle>
+                    <nz-page-header-tags>
+                      <nz-tag nzColor="blue">Runing</nz-tag>
+                    </nz-page-header-tags>
+                    
+                    <nz-page-header-content>
+                      <nz-row nzType="flex p-0">
+                          <div class="grid grid-cols-12 w-full p-0">
+                            <nz-statistic class="col-span-4" nzTitle="Status" nzValue="Pending"></nz-statistic>
+                            <nz-statistic class="col-span-4" nzTitle="Price" [nzValue]="568.08" nzPrefix="$" style="margin: 0 32px"></nz-statistic>
+                            <nz-statistic class="col-span-4" nzTitle="Balance" [nzValue]="3345.08" nzPrefix="$"></nz-statistic>
+                          </div>
+                        
+                      </nz-row>
+                    </nz-page-header-content>
+                  </nz-page-header>
+            </div>
+                
+            
+            <div class="ml-5">
+                <ngx-charts-advanced-pie-chart
+                class="w-screen"
+                [view]="view"
+                scheme="cool"
+                [results]="single"
+                [gradient]="gradient"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)"
+                >
+                </ngx-charts-advanced-pie-chart>
+            </div>
+
+        </div>
+
+            
+            <!-- <nz-progress [nzPercent]="30"></nz-progress>
+            <nz-progress [nzPercent]="50" nzStatus="active"></nz-progress>
+            <nz-progress [nzPercent]="70" nzStatus="exception"></nz-progress>
+            <nz-progress [nzPercent]="100"></nz-progress>
+            <nz-progress [nzPercent]="50" [nzShowInfo]="false"></nz-progress> -->
+        </nz-tab>
+        <nz-tab nzTitle="FACTURAS"></nz-tab>
+       <nz-tab nzTitle="ALMACEN">Content of Tab Pane 3</nz-tab> 
+      </nz-tabset>
+    
+     <!-- <div class="row justify-items-center">
+      <app-caja-title></app-caja-title>
+    </div>
+    
+    <div class="row justify-items-center">
+      <div class="col-md-12 justify-center">
+        <nz-tabset nzCentered>
+          <nz-tab nzTitle="RESERVAS"><app-caja-list></app-caja-list></nz-tab>
+          <nz-tab nzTitle="FACTURAS"><app-caja-factura></app-caja-factura></nz-tab>
+         <nz-tab nzTitle="Tab 3">Content of Tab Pane 3</nz-tab> 
+        </nz-tabset>
+        
+      </div>
+    
+    </div>  -->
+
+  
+
+
+</div>
