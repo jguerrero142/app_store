@@ -73,7 +73,7 @@ export class ReservaListComponent implements OnInit {
 
   getFacturasUser(){
     this.storeServices.getStore.subscribe( d=>{
-      this.facturas = d.user.factura;
+      this.facturas = d.user.factura.filter(d => d.estado_factura == 3 || d.estado_factura == 4) ;
     })
   }
 

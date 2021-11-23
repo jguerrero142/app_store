@@ -104,20 +104,25 @@
         <p
           style="
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.85);
+            color: #e43c26ec;
             margin-bottom: 16px;
             font-weight: 500;
           "
         >
-          MIS FACTURAS
+          ULTIMAS FACTURAS
         </p>
+        
+              <nz-card class="w-full m-1 p-0" *ngFor="let factura of facturas" nzType="inner">
+                <div class="grid grid-cols-8 p-0">
+                  <span class="col-span-4 m-1" >{{ factura.name }}</span>
+                  <span class="col-span-2 m-1" >{{ factura.create_at | date }}</span>                  
+                  <span class="col-span-2 m-1" >{{ factura.valor | currency }}</span>            
+                  
+                </div>
+              </nz-card>
+        
 
-        <nz-card class="m-1" *ngFor="let factura of facturas" nzType="inner">
-          <div>
-            <a>{{ factura.name }}</a>
-            <a>{{ factura.valor }}</a>
-          </div>
-        </nz-card>
+                
       </nz-card>
       <ng-template #extraTemplate>
         <a>More</a>

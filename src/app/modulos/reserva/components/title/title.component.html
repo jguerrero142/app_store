@@ -12,14 +12,26 @@
             <nz-tag  nzColor="lime">ID # {{ user.id_user }}</nz-tag>
         </nz-page-header-tags>
         
-        <nz-page-header-content>
-          <nz-row nzType="flex">
-            <nz-statistic nzTitle="Estado" nzValue="Pendiente"></nz-statistic>
-            <nz-statistic
-              nzTitle="Precio"
-              [nzValue]="(total | currency)"
-              style="margin: 0 32px"
-            ></nz-statistic>
+        <nz-page-header-content class="p-0">
+          <nz-row nzType="flex p-0">
+            <div class="grid grid-cols-12 w-full p-0">
+                  <nz-statistic class="col-span-2" nzTitle="Estado" nzValue="Pendiente"></nz-statistic>
+                  <nz-statistic
+                    class="col-span-5"
+                    nzTitle="Precio"
+                    [nzValue]="(total | currency)"
+                    style="margin: 0 32px"
+                  ></nz-statistic>
+                  <nz-statistic class="col-span-2" nzTitle="Estado" nzValue="Facturado"></nz-statistic>
+                  <nz-statistic
+                    class="col-span-3"
+                    nzTitle="Total"
+                    [nzValue]="(factura | currency)"
+                    style="margin: 0 32px"
+                  ></nz-statistic>
+
+            </div>
+
           </nz-row>
         </nz-page-header-content>
       </nz-page-header>

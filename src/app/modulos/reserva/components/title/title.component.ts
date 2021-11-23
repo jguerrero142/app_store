@@ -13,6 +13,7 @@ export class TitleComponent implements OnInit {
   //Variables Auth
   public role: string;
   public total: number = 0;
+  public factura: number = 0;
   public user: User;
   public id: any;
 
@@ -37,6 +38,9 @@ export class TitleComponent implements OnInit {
     this.storeServices.getStore.subscribe(s=>{
       const p = s.user.pedido.filter(d=> d.pedido_estado == 1 || d.pedido_estado == 2 )
       this.total = p.reduce((suma,d)=> suma + d.valor, 0);
+
+      const f = s.user.factura.filter(d=> d.estado_factura == 3 || d.estado_factura == 4 || d.estado_factura == 5 )
+      this.factura = f.reduce((suma,d)=> suma + d.valor, 0);
     })
   }
 
