@@ -62,11 +62,21 @@ export class StoreService {
     this.setStore = this.store
   }
 
+  set updateFactura(num: number){
+    this.store.facturas.map(d=>{
+      if(d.estado_factura == 1 || d.estado_factura == 2 || d.estado_factura == 3){
+        d.estado_factura = num
+      }
+    });
+    this.setStore = this.store
+  }
+
   set deletPedido(index: number){
     this.store.user.pedido.splice(index,1);
     this.setStore = this.store
   }
 
+  
   // Url api
   API_URI = environment.wsUrl;
 

@@ -79,6 +79,7 @@ export class StoreEffects {
         user_ticket: this.user,
         Producto: item.id,
         id_pedido: this.pedidoDate.id_pedido,
+        producto_tipo: item.producto_tipo
       };
       this.http
         .post<Ticket[]>(`${this.API_URI}/ticket/`, ticket)
@@ -120,6 +121,7 @@ export class StoreEffects {
         user_ticket: client,
         Producto: item.id,
         id_pedido: this.pedido.id_pedido,
+        producto_tipo: item.producto_tipo
       };
       this.http
         .post<Ticket[]>(`${this.API_URI}/ticket/`, ticket)
@@ -257,5 +259,14 @@ export class StoreEffects {
       .subscribe((d) => {
         this.storeServices.updatePedido = d;
       });
+  }
+
+  closeBox(){
+    return this.http.get(`${this.API_URI}/factura/closed/up`)
+    .subscribe(d=> {
+      const num = 4;
+    this.storeServices.updateFactura = num;
+    });
+    
   }
 }
