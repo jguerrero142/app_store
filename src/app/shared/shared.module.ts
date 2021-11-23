@@ -12,7 +12,6 @@ import { MenuComponent } from './pages/menu/menu.component';
 import { ReservaComponent } from './pages/reserva/reserva.component';
 import { EmpresaComponent } from './pages/enterprise/enterprise.component';
 
-
 //Angular Material
 import { MaterialModule } from '../material.module';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -20,13 +19,9 @@ import { nzDesingModule } from '../ant-desing.module';
 import { ReservaModule } from '../modulos/reserva/reserva.module';
 import { CajaModule } from '../modulos/caja/caja.module';
 import { CajaComponent } from './pages/caja/caja.component';
-import { SearchPipe } from './pipe/search.pipe';
 import { InventarioModule } from '../modulos/inventario/inventario.module';
 import { CoreModule } from '../core/core.module';
-
-
-
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -37,7 +32,6 @@ import { CoreModule } from '../core/core.module';
     ReservaComponent,
     EmpresaComponent,
     NavbarComponent,
-    SearchPipe
   ],
   imports: [
     CommonModule,
@@ -48,7 +42,8 @@ import { CoreModule } from '../core/core.module';
     CajaModule,
     InventarioModule,
     MaterialModule,
-    nzDesingModule
+    nzDesingModule,
+    NgxChartsModule,
   ],
   exports: [
     AdminComponent,
@@ -58,7 +53,6 @@ import { CoreModule } from '../core/core.module';
     ReservaComponent,
     EmpresaComponent,
     NavbarComponent,
-    SearchPipe
-  ]
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -1,58 +1,132 @@
 <div class="container">
-    <nz-tabset nzCentered>
-        <nz-tab nzTitle="INFORME">
+  <nz-tabset nzCentered>
+    <nz-tab nzTitle="INFORME">
+      <div>
+        <div class="m-3">
+          <nz-page-header class="w-full" nzBackIcon>
+            <nz-page-header-title>Ventas</nz-page-header-title>
+            <nz-page-header-subtitle>Ultimo Cierre</nz-page-header-subtitle>
+            <nz-page-header-tags>
+              <nz-tag nzColor="blue">Caja</nz-tag>
+            </nz-page-header-tags>
 
-        <div >
-            <div class="m-3">
-                <nz-page-header class="w-full" nzBackIcon>
-                    <nz-page-header-title>Title</nz-page-header-title>
-                    <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle>
-                    <nz-page-header-tags>
-                      <nz-tag nzColor="blue">Runing</nz-tag>
-                    </nz-page-header-tags>
-                    
-                    <nz-page-header-content>
-                      <nz-row nzType="flex p-0">
-                          <div class="grid grid-cols-12 w-full p-0">
-                            <nz-statistic class="col-span-4" nzTitle="Status" nzValue="Pending"></nz-statistic>
-                            <nz-statistic class="col-span-4" nzTitle="Price" [nzValue]="568.08" nzPrefix="$" style="margin: 0 32px"></nz-statistic>
-                            <nz-statistic class="col-span-4" nzTitle="Balance" [nzValue]="3345.08" nzPrefix="$"></nz-statistic>
-                          </div>
-                        
-                      </nz-row>
-                    </nz-page-header-content>
-                  </nz-page-header>
-            </div>
-                
-            
-            <div class="ml-5">
-                <ngx-charts-advanced-pie-chart
-                class="w-screen"
-                [view]="view"
-                scheme="cool"
-                [results]="single"
-                [gradient]="gradient"
-                (select)="onSelect($event)"
-                (activate)="onActivate($event)"
-                (deactivate)="onDeactivate($event)"
-                >
-                </ngx-charts-advanced-pie-chart>
-            </div>
-
+            <nz-page-header-content>
+              <nz-row nzType="flex p-0">
+                <div class="grid grid-cols-12 w-full p-0">
+                  <nz-statistic
+                    class="col-span-3"
+                    nzTitle="Total Venta"
+                    [nzValue]="totalVenta | currency"
+                    style="margin: 0 32px"
+                  ></nz-statistic>
+                  <nz-statistic
+                    class="col-span-2"
+                    nzTitle="Fiado"
+                    [nzValue]="totalFiado | currency"
+                  ></nz-statistic>
+                  <nz-statistic
+                    class="col-span-2"
+                    nzTitle="Efectivo"
+                    [nzValue]="totalEfectivo | currency"
+                  ></nz-statistic>
+                  <nz-statistic
+                    class="col-span-2"
+                    nzTitle="Pago Datafono"
+                    [nzValue]="metodoPago1 | currency"
+                  ></nz-statistic>
+                  <nz-statistic
+                    class="col-span-2"
+                    nzTitle="Pago Qr"
+                    [nzValue]="metodoPago2 | currency"
+                  ></nz-statistic>
+                </div>
+              </nz-row>
+            </nz-page-header-content>
+          </nz-page-header>
         </div>
 
-            
-            <!-- <nz-progress [nzPercent]="30"></nz-progress>
+        <div class="flex ml-5 mt-2 p-0">
+          <ngx-charts-advanced-pie-chart
+            class="w-screen"
+            [view]="view"
+            scheme="cool"
+            [results]="single"
+            [gradient]="gradient"
+            (select)="onSelect($event)"
+            (activate)="onActivate($event)"
+            (deactivate)="onDeactivate($event)"
+          >
+          </ngx-charts-advanced-pie-chart>
+        </div>
+      </div>
+
+      <!-- <nz-progress [nzPercent]="30"></nz-progress>
             <nz-progress [nzPercent]="50" nzStatus="active"></nz-progress>
             <nz-progress [nzPercent]="70" nzStatus="exception"></nz-progress>
             <nz-progress [nzPercent]="100"></nz-progress>
             <nz-progress [nzPercent]="50" [nzShowInfo]="false"></nz-progress> -->
-        </nz-tab>
-        <nz-tab nzTitle="FACTURAS"></nz-tab>
-       <nz-tab nzTitle="ALMACEN">Content of Tab Pane 3</nz-tab> 
-      </nz-tabset>
-    
-     <!-- <div class="row justify-items-center">
+    </nz-tab>
+    <nz-tab nzTitle="FACTURAS">
+      <ng-container *ngIf="!valid; else table">
+        <div class="flex justify-center content-center m-12">
+          <nz-spin class="mr-6" nzSimple [nzSize]="'large'"></nz-spin>
+          <div nz-typography><h5>Esperando Pedidos...</h5></div>
+        </div>
+      </ng-container>
+
+      <ng-template #table>
+        <nz-table
+          #nzTable
+          [nzData]="reservas"
+          nzTableLayout="fixed"
+          [nzPageSize]="30"
+          [nzBordered]="true"
+        >
+          <thead>
+            <tr>
+              <th class="w-12 p-2 justify-center content-center">
+                <button
+                  nz-button
+                  nzShape="circle"
+                  nzType="secondary"
+                  (click)="loadStore()"
+                  [nzLoading]="isLoadingOne"
+                >
+                  <i
+                    class="flex justify-center items-center"
+                    nz-icon
+                    [nzType]="'sync'"
+                  ></i>
+                </button>
+              </th>
+              <th class="text-center"># Factura</th>
+              <th class="text-center">Usuario</th>
+              <th class="text-center">Creado</th>
+              <th class="text-center">Valor</th>
+              <th class="text-center">Observacion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let data of nzTable.data">
+              <tr>
+                <td></td>
+                <td class="text-center"># {{ data.id_factura }}</td>
+                <td class="text-center">{{ data.name }}</td>
+                <td class="text-center">{{ data.create_at | date }}</td>
+                <td class="text-center">{{ data.valor | currency }}</td>
+                <td class="text-center justify-center">
+                  {{ data.observacion }}
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </nz-table>
+      </ng-template>
+    </nz-tab>
+    <nz-tab nzTitle="ALMACEN">Content of Tab Pane 3</nz-tab>
+  </nz-tabset>
+
+  <!-- <div class="row justify-items-center">
       <app-caja-title></app-caja-title>
     </div>
     
@@ -67,8 +141,4 @@
       </div>
     
     </div>  -->
-
-  
-
-
 </div>

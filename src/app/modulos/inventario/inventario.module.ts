@@ -2,30 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../material.module';
 import { nzDesingModule } from '../../ant-desing.module';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { InventarioHomeComponent } from './components/inventario-home/inventario-home.component';
 import { InventarioListComponent } from './components/inventario-list/inventario-list.component';
 import { InventarioAlmacenComponent } from './components/inventario-almacen/inventario-almacen.component';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-
-
 
 @NgModule({
   declarations: [
     InventarioHomeComponent,
     InventarioListComponent,
-    InventarioAlmacenComponent
+    InventarioAlmacenComponent,
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    nzDesingModule,
-    NgxChartsModule
-  ],
+  imports: [CommonModule, MaterialModule, nzDesingModule, NgxChartsModule],
   exports: [
     InventarioHomeComponent,
     InventarioListComponent,
-    InventarioAlmacenComponent
+    InventarioAlmacenComponent,
   ],
 })
-export class InventarioModule { }
+export class InventarioModule {}
