@@ -28,7 +28,7 @@ const routes: Routes = [
       { path: 'Inventario', component: InventarioComponent },
       { path: 'Admin', component: AdminComponent },
       { path: 'callback', component: CallbackComponent },
-      { path: '**', redirectTo: 'Menu', pathMatch: 'full' },
+      { path: '**', redirectTo: 'Menu' },
     ],
   },
 ];

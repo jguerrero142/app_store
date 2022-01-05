@@ -1,1 +1,25 @@
-<app-navbar></app-navbar>
+<nz-layout class="layout">
+
+    
+        <button mat-icon-button class="btn-wsp cursor-pointer">
+         <mat-icon class="flex items-center" aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>
+        </button>
+        
+   
+    <nz-layout>
+      
+            <nz-content class="rounded-lg">
+                <div class="inner-content">
+                        <router-outlet></router-outlet>
+                </div>
+            </nz-content>
+            
+      </nz-layout>
+  </nz-layout>
+
+  
+  <div class="relative">
+    <div class="fixed bottom-0 left-0 right-0"><app-nav></app-nav></div>
+  </div>
+  
+

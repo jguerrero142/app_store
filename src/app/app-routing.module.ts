@@ -7,7 +7,6 @@ const routes: Routes = [
 { 
   path: 'auth', 
   loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule)
-
 }
 ];
 

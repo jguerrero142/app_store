@@ -1,0 +1,67 @@
+.layout {
+    min-height: 100vh;
+    background-color: #e43c26ec;
+  }
+
+  .btn-wsp{
+      position: fixed;
+      width: 55px;
+      height: 55px;
+      line-height: 50px;
+      bottom: 80px;
+      right: 20px;
+      background: #e43c26ec;
+      color: white;
+      border-radius: 58px;
+      text-align: center;
+      z-index: 999;
+  }
+
+  nz-sider{ 
+    background-color: #e43c26ec;
+    
+  }
+
+  .menu{
+    padding: 0px;  
+    background-color: #e43c26ec;
+    position: fixed;
+  }
+  .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .trigger:hover {
+    color: #e43c26ec;
+  }
+
+  .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+  }
+
+  nz-header {
+    background: #fff;
+    padding: 0;
+  }
+
+  nz-content {
+    margin: 15px 16px 0;
+    margin-bottom: 70px;
+    z-index: 0;
+  }
+
+  .inner-content {
+    padding: 24px;
+    background: #fff;
+    min-height: 360px;
+  }
+
+  nz-footer {
+    text-align: center;
+  }

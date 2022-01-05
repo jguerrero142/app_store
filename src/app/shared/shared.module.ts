@@ -22,6 +22,7 @@ import { CajaComponent } from './pages/caja/caja.component';
 import { InventarioModule } from '../modulos/inventario/inventario.module';
 import { CoreModule } from '../core/core.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ReservaComponent,
     EmpresaComponent,
     NavbarComponent,
+    NavComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +42,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MenuModule,
     ReservaModule,
     CajaModule,
-    InventarioModule,
     MaterialModule,
     nzDesingModule,
     NgxChartsModule,
@@ -53,6 +54,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ReservaComponent,
     EmpresaComponent,
     NavbarComponent,
+    NavComponent
   ],
 })
 export class SharedModule {}
