@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -6,18 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
 
-//Modulos de la aplicacion
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 
 
 // Modulos Creados
-import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { MenuModule } from './modulos/menu/menu.module';
-import { ReservaModule } from './modulos/reserva/reserva.module';
-import { CajaModule } from './modulos/caja/caja.module';
-import { InventarioModule } from './modulos/inventario/inventario.module';
 
 
 // Modulos librearias
@@ -26,15 +20,9 @@ import { MaterialModule } from './material.module';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
-
-
-
+import { ReservaModule } from './modulos/reserva/reserva.module';
 
 registerLocaleData(es);
-
-
-
 
 
 @NgModule({
@@ -45,16 +33,12 @@ registerLocaleData(es);
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    CoreModule,
     SharedModule,
-    MenuModule,
     ReservaModule,
-    CajaModule,
     MaterialModule,
     FormsModule,
     BrowserAnimationsModule,
     nzDesingModule,
-    InventarioModule,
     NgxChartsModule
   ],
   providers: [ { provide: NZ_I18N, useValue: en_US }],

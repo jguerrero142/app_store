@@ -1,0 +1,56 @@
+<main>
+<div class="container p-0">
+
+<div class="row">
+
+                <div *ngIf="valid == false ;else tipo">
+                    <nz-skeleton [nzActive]="true"></nz-skeleton>
+                </div>
+                <!-- md:h-96 w-auto ml-2 sm:ml-6 md:ml-12 
+                md:h-96 w-full ml-2 sm:ml-6 md:ml-12 justify-center-->
+                <ng-template #tipo>
+                    <div class="grid content-center h-96 ">
+                        <nz-carousel nzAutoPlay>
+                            <div nz-carousel-content *ngFor="let index of menu">
+
+                                <div class="flex justify-center">
+                                    <nz-page-header
+                                    class="site-page-header"
+                                    [nzTitle]="index.name"
+                                    [nzSubtitle]="index.descripcion"
+                                ></nz-page-header>
+                                </div>
+                                
+                                <div class="flex justify-center mb-2 h-32">
+                                    <img class=" rounded-2xl h-80 m-2" [src]="index.image" />
+                                </div>
+                            </div>
+                        </nz-carousel>
+                    </div>
+                        
+                    
+                    
+                        <mat-tab-group dynamicHeight>   
+                            <div class="flex justify-center m-4">
+                                <mat-tab  *ngFor = "let tipo of tipos" [label]="tipo.name_tipo">                    
+                                
+                                    <app-card [tipoPro]="tipo.id_tipo"></app-card>                    
+                                </mat-tab>
+                            </div>                 
+                            
+                        </mat-tab-group>
+                   
+                        
+                    
+
+                </ng-template>
+                
+                <div class="col-md-4 text-center justify-center" >
+                    <!-- <app-menu-pedido></app-menu-pedido> -->
+                </div>
+                                                   
+</div>
+
+</div>
+
+</main>

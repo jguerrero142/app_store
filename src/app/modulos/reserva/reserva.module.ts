@@ -8,6 +8,7 @@ import { TitleComponent } from './components/title/title.component';
 import { ReservaHomeComponent } from './components/reserva-home/reserva-home.component';
 import { ReservaFacturaComponent } from './components/reserva-factura/reserva-factura.component';
 import { ReservaListComponent } from './components/reserva-list/reserva-list.component';
+import { ReservaRoutingModule } from './reserva.routing.module';
 
 
 
@@ -24,7 +25,8 @@ import { ReservaListComponent } from './components/reserva-list/reserva-list.com
   imports: [
     CommonModule,
     MaterialModule,
-    nzDesingModule
+    nzDesingModule,
+    ReservaRoutingModule
   ],
   exports:[
     TitleComponent,

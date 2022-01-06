@@ -82,7 +82,7 @@ export class StoreService {
 
   constructor(private auth: AuthService, 
               private http: HttpClient
-              ) {}
+              ) {console.log("carshop")}
 
     getAuth() {
     this.auth.userProfile$.subscribe((perfil: User) => {

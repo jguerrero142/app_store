@@ -8,13 +8,8 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 })
 export class NavComponent implements OnInit {
 
-  constructor(public auth: AuthService,) { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit(): void {
   }
-
-  login(){
-    console.log("holi")
-  }
-
 }

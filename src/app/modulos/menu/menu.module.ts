@@ -9,6 +9,7 @@ import { MenuPedidoComponent } from './components/menu-pedido/menu-pedido.compon
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { MenuHomeComponent } from './components/menu-home/menu-home.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { MenuRoutingModule } from './menu.routing.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { ModalComponent } from './components/modal/modal.component';
     ProductCardComponent,
     ModalComponent,
   ],
-  imports: [CommonModule, MaterialModule, nzDesingModule],
+  imports: [CommonModule, MaterialModule, nzDesingModule, MenuRoutingModule],
   exports: [
     MenuHomeComponent,
     MenuTodayComponent,

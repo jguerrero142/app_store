@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 //Modelos
-import { User } from '../models/index.models';
+import { User } from '../../../shared/models/index.models';
 
 //Servicios
 import { AuthService } from 'src/app/core/auth/auth.service';

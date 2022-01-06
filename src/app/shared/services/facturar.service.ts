@@ -12,7 +12,7 @@ import { Factura } from '../models/Factura.model';
 export class FacturarService {
   API_URI = environment.wsUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {console.log("carshop")}
 
   getPedidos() {
     return this.http.get(`${this.API_URI}/pedido`);

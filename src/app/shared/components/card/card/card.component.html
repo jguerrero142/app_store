@@ -1,0 +1,44 @@
+<div class="container flex flex-wrap justify-around ml-1 md:ml-2">
+    <mat-card
+      class="
+        flex
+        w-full
+        sm:w-60
+        md:w-52
+        p-0
+        m-2
+        md:m-3
+        animated
+        fadeIn
+        fast
+        cursor-pointer
+        mat-elevation-z2
+      "
+      (click)="saveTicket(producto)"
+      *ngFor="let producto of productos"
+    >
+      <mat-card-content>
+        <div class="rounded-sm p-1">
+          <img class="m-0 p-0 rounded-sm" [src]="producto.image" />
+          <div class="m-2">
+            <mat-card-title
+              ><span class="justify-center" nz-typography
+                ><strong> {{ producto.name }}</strong></span
+              ></mat-card-title
+            >
+            <mat-card-subtitle class="fw-bold"
+              ><nz-tag [nzColor]="'green'">{{
+                producto.valor | currency
+              }}</nz-tag></mat-card-subtitle
+            >
+          </div>
+          <div class="m-2">
+            <h5 class="m-2">
+              {{ producto.descripcion }}
+            </h5>
+          </div>
+        </div>
+      </mat-card-content>
+     
+    </mat-card>
+  </div>

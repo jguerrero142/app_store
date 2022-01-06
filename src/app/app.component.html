@@ -1,21 +1,17 @@
 <nz-layout class="layout">
 
-    
-        <button mat-icon-button class="btn-wsp cursor-pointer">
-         <mat-icon class="flex items-center" aria-hidden="false" aria-label="Example home icon">shopping_cart</mat-icon>
-        </button>
-        
-   
-    <nz-layout>
+    <app-cartshop *ngIf="auth.loggedIn"></app-cartshop>
+      <nz-layout>
       
-            <nz-content class="rounded-lg">
-                <div class="inner-content">
+            <nz-content>
+                <div class="inner-content rounded-lg mat-elevation-z4">
                         <router-outlet></router-outlet>
                 </div>
             </nz-content>
             
       </nz-layout>
-  </nz-layout>
+
+</nz-layout>
 
   
   <div class="relative">
