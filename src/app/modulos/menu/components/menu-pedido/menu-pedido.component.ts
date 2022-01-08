@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // Interfaces
-import { Producto} from 'src/app/shared/models/index.models';
+import { Producto} from 'src/app/modulos/shared/models/index.models';
 
 // Servicios
 import { AuthService } from 'src/app/core/auth/auth.service';

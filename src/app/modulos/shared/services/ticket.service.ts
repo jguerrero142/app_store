@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Ticket } from '../models/index.models';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Producto } from 'src/app/shared/models/index.models';
+import { Producto } from 'src/app/modulos/shared/models/index.models';
 
 @Injectable({
   providedIn: 'root',

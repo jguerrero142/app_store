@@ -9,18 +9,13 @@ import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
 
 
-
-// Modulos Creados
-import { SharedModule } from './shared/shared.module';
-
-
 // Modulos librearias
-import { nzDesingModule } from './ant-desing.module';
-import { MaterialModule } from './material.module';
+// import { nzDesingModule } from './ant-desing.module';
+// import { MaterialModule } from './material.module';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { ReservaModule } from './modulos/reserva/reserva.module';
+// import { NgxChartsModule } from '@swimlane/ngx-charts';
+// import { ReservaModule } from './modulos/reserva/reserva.module';
 
 registerLocaleData(es);
 
@@ -33,13 +28,8 @@ registerLocaleData(es);
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    SharedModule,
-    ReservaModule,
-    MaterialModule,
     FormsModule,
-    BrowserAnimationsModule,
-    nzDesingModule,
-    NgxChartsModule
+    BrowserAnimationsModule
   ],
   providers: [ { provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

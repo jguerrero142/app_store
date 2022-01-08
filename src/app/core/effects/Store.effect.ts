@@ -7,12 +7,12 @@ import {
   Producto,
   Factura,
   Ticket,
-} from '../../shared/models/index.models';
+} from '../../modulos/shared/models/index.models';
 import { environment } from 'src/environments/environment';
 
 // Servicios
-import { PedidoService } from 'src/app/shared/services/pedido.service';
-import { FacturarService } from 'src/app/shared/services/facturar.service';
+import { PedidoService } from 'src/app/modulos/shared/services/pedido.service';
+import { FacturarService } from 'src/app/modulos/shared/services/facturar.service';
 import { StoreService } from '../store.service';
 
 @Injectable({

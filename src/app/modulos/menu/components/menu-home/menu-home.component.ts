@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu-service.service';
-import { TipoProducto } from 'src/app/shared/interface/index';
+import { ApiTipoPro } from 'src/app/modulos/shared/interface/index';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { TipoProducto } from 'src/app/shared/interface/index';
 })
 export class MenuHomeComponent implements OnInit {
 
-  public tipos: TipoProducto [] = [];
+  public tipos: ApiTipoPro [] = [];
   public valid: boolean = false;
 
 

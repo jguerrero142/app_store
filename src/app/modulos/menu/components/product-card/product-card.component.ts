@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 //Modales
-import { User,Producto } from 'src/app/shared/models/index.models';
+import { User,Producto } from 'src/app/modulos/shared/models/index.models';
 
 
 //Servies

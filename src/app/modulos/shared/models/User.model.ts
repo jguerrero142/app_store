@@ -1,4 +1,4 @@
-import { Pedido, Factura } from '../../shared/models/index.models'
+import { Pedido, Factura } from './index.models'
 
 export class User {
 

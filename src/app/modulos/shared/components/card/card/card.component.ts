@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
-import { ApiProducto } from 'src/app/shared/interface/index';
+import { ApiProducto } from 'src/app/modulos/shared/interface/index';
 
 @Component({
   selector: 'app-card',

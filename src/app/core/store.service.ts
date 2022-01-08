@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 //Modals
-import { User, Pedido, Ticket,Factura, MetodoPago } from '../shared/models/index.models';
+import { User, Pedido, Ticket,Factura, MetodoPago } from '../modulos/shared/models/index.models';
 import { environment } from 'src/environments/environment';
 
 //Servicios

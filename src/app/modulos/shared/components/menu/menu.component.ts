@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ApiTipoPro, ApiProducto, Menu } from 'src/app/shared/interface/index';
+import { ApiTipoPro, ApiProducto, Menu } from 'src/app/modulos/shared/interface/index';
 import { ApiService } from '../../services/api.service';
 
 @Component({

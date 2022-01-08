@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 
 // Modales
-import { Pedido, Producto, User } from 'src/app/shared/models/index.models';
+import { Pedido, Producto, User } from 'src/app/modulos/shared/models/index.models';
 
 // Servicios
 import { MenuService } from '../../services/menu-service.service';
 import { StoreService } from 'src/app/core/store.service';
 import { StoreEffects } from 'src/app/core/effects/Store.effect';
-import { MetodoPago } from '../../../../shared/models/Metodo-pago';
+import { MetodoPago } from '../../../shared/models/Metodo-pago';
 
 @Component({
   selector: 'app-modal',

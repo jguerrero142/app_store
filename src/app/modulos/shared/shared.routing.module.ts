@@ -2,14 +2,21 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Auth0
-import { CallbackComponent } from './components/callback/callback.component';
-import { AuthGuard } from '../core/auth/auth.guard';
+// import { CallbackComponent } from './components/callback/callback.component';
+// import { AuthGuard } from '../core/auth/auth.guard';
 import { MenuComponent } from './components/menu/menu.component';
 
 const routes: Routes = [
-  {
-    path: '', component: MenuComponent
-  }
+
+  // { path: '',
+  //   children: [
+  //     { path: 'index', component: MenuComponent },
+  //     { path: '**', redirectTo: 'index' }
+  //   ]    
+  // }
+  // {
+  //   path: '', component: MenuComponent
+  // }
   // {
   //   path: '',
   //   children: [

@@ -1,4 +1,4 @@
-import { Pedido, Factura, User, MetodoPago } from '../../shared/models/index.models';
+import { Pedido, Factura, User, MetodoPago } from '../../modulos/shared/models/index.models';
 
 export class Store{
 

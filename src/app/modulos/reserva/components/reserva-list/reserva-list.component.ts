@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 
 
-import { User, Pedido, Factura } from 'src/app/shared/models/index.models';
+import { User, Pedido, Factura } from 'src/app/modulos/shared/models/index.models';
 import {MatAccordion} from '@angular/material/expansion';
 
 

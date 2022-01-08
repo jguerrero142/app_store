@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder } from 'ng-zorro-antd/table';
 
-import { User, Ticket, Factura } from 'src/app/shared/models/index.models';
+import { User, Ticket, Factura } from 'src/app/modulos/shared/models/index.models';
 import { StoreService } from '../../../../core/store.service';
-import { Pedido } from '../../../../shared/models/Pedido.model';
+import { Pedido } from '../../../shared/models/Pedido.model';
 import { AuthService } from '../../../../core/auth/auth.service';
 import { MatAccordion } from '@angular/material/expansion';
 import { StoreEffects } from '../../../../core/effects/Store.effect';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MetodoPago } from '../../../../shared/models/Metodo-pago';
+import { MetodoPago } from '../../../shared/models/Metodo-pago';
 
 @Component({
   selector: 'app-caja-factura',

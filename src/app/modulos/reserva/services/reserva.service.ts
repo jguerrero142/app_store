@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 //Modales
-import { Pedido, Ticket } from 'src/app/shared/models/index.models';
+import { Pedido, Ticket } from 'src/app/modulos/shared/models/index.models';
 import { environment } from 'src/environments/environment';
 import { NzModalService } from 'ng-zorro-antd/modal';
 

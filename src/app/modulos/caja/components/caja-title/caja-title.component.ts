@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/core/store.service';
-import { User, Ticket } from 'src/app/shared/models/index.models';
+import { User, Ticket } from 'src/app/modulos/shared/models/index.models';
 import { StoreEffects } from '../../../../core/effects/Store.effect';
 import { CajaService } from '../../services/caja.service';
 

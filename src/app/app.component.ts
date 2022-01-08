@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 //Servicios
-import { AuthService } from 'src/app/core/auth/auth.service';
-
+// import { AuthService } from 'src/app/core/auth/auth.service';
+// public auth: AuthService
 
 
 @Component({
@@ -12,9 +12,9 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 })
 export class AppComponent implements OnInit {
 
-   constructor( public auth: AuthService) { }
+   constructor( ) { }
     ngOnInit(){
-      this.auth.localAuthSetup();
+      // this.auth.localAuthSetup();
     }
 
 

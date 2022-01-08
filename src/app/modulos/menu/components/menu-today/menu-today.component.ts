@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu-service.service';
-import { Producto } from 'src/app/shared/models/Producto.model';
+import { Producto } from 'src/app/modulos/shared/models/Producto.model';
 
 @Component({
   selector: 'app-menu-today',
