@@ -1,6 +1,7 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-// import { CallbackComponent } from './modulos/shared/components/callback/callback.component';
+import { CallbackComponent } from './shared/components/callback/callback.component';
+
 // import { MenuComponent } from './modulos/shared/components/menu/menu.component';
 // import { ReservaHomeComponent } from './modulos/reserva/components/reserva-home/reserva-home.component';
 
@@ -8,7 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: 'index', loadChildren: () => import('./index/index.module').then(m => m.IndexModule) },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-  
+  { path: 'callback', component: CallbackComponent },  
   { path: '**', redirectTo: 'index' },
   
   

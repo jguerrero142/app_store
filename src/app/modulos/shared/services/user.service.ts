@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 //Interfaces
 import { User } from '../models/index.models';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/app/shared/http/environments/environment';
 
 
 

@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 //Modals
 import { User, Pedido, Ticket,Factura, MetodoPago } from '../modulos/shared/models/index.models';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/app/shared/http/environments/environment';
 
 //Servicios
 import { AuthService } from './auth/auth.service';

@@ -1,0 +1,27 @@
+.layout {
+    min-height: 100vh;
+    margin: 15px 16px 0;
+    margin-bottom: 70px;
+    z-index: 0;
+  }
+
+  .spin{
+    position: fixed;
+    bottom: 50%;
+    right: 50%;
+  }
+
+  .text{
+    position: fixed;
+    bottom: 42%;
+    right: 43%;
+  }
+
+
+/* mat-card-content{
+    margin: auto;
+    width: 50%;
+    float: right;
+    display: block;
+    margin-top: 2rem;
+} */

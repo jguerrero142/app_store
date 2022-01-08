@@ -1,17 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './components/navbar/navbar.component';
 
+
+//Modulos UI
+import { nzDesingModule } from '../ant-desing.module';
+import { MaterialModule } from '../material.module';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+//Componentes
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { CallbackComponent } from './components/callback/callback.component';
 
 @NgModule({
   declarations: [
-    NavbarComponent
+    NavbarComponent,
+    CallbackComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    nzDesingModule,
+    MaterialModule,
   ],
   exports:[
-    NavbarComponent
+    NavbarComponent,
+    CallbackComponent
   ]
 })
 export class SharedModule { }

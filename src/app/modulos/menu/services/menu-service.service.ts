@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 
 // Modelos
 import { Producto, TipoProducto } from 'src/app/modulos/shared/models/index.models';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/app/shared/http/environments/environment';
 import { StoreProducts } from '../Class/storeProducts';
 
 

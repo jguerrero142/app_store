@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { IndexRoutingModule } from './index-routing.module';
-import { IndexComponent } from './components/index/index.component';
-import { MenuComponent } from './components/menu/menu.component';
 import { SharedModule } from '../shared/shared.module';
+
+//Modulos UI
 import { nzDesingModule } from '../ant-desing.module';
 import { MaterialModule } from '../material.module';
+
+
+//Componentes
+import { IndexComponent } from './components/index/index.component';
+import { MenuComponent } from './components/menu/menu.component';
+
+
 
 
 
@@ -17,10 +23,11 @@ import { MaterialModule } from '../material.module';
   ],
   imports: [
     CommonModule,
+    nzDesingModule,
+    MaterialModule,
     IndexRoutingModule,
     SharedModule,
-    nzDesingModule,
-    MaterialModule
+    
   ]
 })
 export class IndexModule { }

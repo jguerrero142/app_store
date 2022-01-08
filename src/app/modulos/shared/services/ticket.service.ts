@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Ticket } from '../models/index.models';
 import { Observable, Subject } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/app/shared/http/environments/environment';
 import { Producto } from 'src/app/modulos/shared/models/index.models';
 
 @Injectable({
