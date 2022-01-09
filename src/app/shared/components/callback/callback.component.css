@@ -1,14 +1,10 @@
-  .spin{
+  /* .spin{
     position: fixed;
     bottom: 50%;
     right: 50%;
-  }
+  } */
 
-  .text{
-    position: fixed;
-    bottom: 42%;
-    right: 43%;
-  }
+  
 
 
 /* mat-card-content{

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiTipoPro } from 'src/app/modulos/shared/interface';
+import { IndexService } from '../../services/index.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsComponent implements OnInit {
 
-  constructor() { }
+  public tipos: ApiTipoPro[] = [];
+  public valid: boolean = false;
+  constructor(private service: IndexService) {
+    this.getTipos();
+   }
 
   ngOnInit(): void {
   }
 
+  getTipos(){
+    this.service.getTipoProducts()
+    .subscribe( resp => {
+      this.tipos = resp;
+      this.valid = true;
+    })
+  }
 }

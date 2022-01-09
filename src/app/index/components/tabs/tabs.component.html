@@ -1,1 +1,10 @@
-<p>tabs works!</p>
+<mat-tab-group dynamicHeight>   
+    <div class="flex justify-center m-4 p-0">
+        <mat-tab  *ngFor = "let tipo of tipos" [label]="tipo.name_tipo">                    
+        
+            <!-- <app-card [tipoPro]="tipo.id_tipo"></app-card>                     -->
+            <app-card></app-card>
+        </mat-tab>
+    </div>                 
+    
+</mat-tab-group>

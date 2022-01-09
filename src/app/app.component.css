@@ -1,8 +1,12 @@
- .content{
+.layout {
+  min-height: 100vh;
+}
+
+.content{
+  min-height: 80vh;
     margin: 15px 16px;
     margin-bottom: 75px;
     background: #fff;
-    min-height: 550px;
   }
 
   /*
