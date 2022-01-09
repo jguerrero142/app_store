@@ -9,8 +9,11 @@ import { MaterialModule } from '../material.module';
 
 
 //Componentes
-import { IndexComponent } from './components/index/index.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { CartshopComponent } from './components/cartshop/cartshop.component';
+import { CarrouselComponent } from './components/carrousel/carrousel.component';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { CardComponent } from './components/card/card.component';
 
 
 
@@ -18,8 +21,11 @@ import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
-    IndexComponent,
-    MenuComponent
+    MenuComponent,
+    CartshopComponent,
+    CarrouselComponent,
+    TabsComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,40 @@
+<div *ngIf="valid == false; else carrousel">
+    <nz-skeleton [nzActive]="true"></nz-skeleton>
+</div>
+
+<ng-template #carrousel>
+
+        <nz-carousel nzAutoPlay>
+
+                <div nz-carousel-content *ngFor="let index of menu">
+
+                    <nz-page-header
+                        class="header flex p-0 bg-white justify-center"
+                        [nzTitle]="index.name"
+                        [nzSubtitle]="index.descripcion">
+                    </nz-page-header>
+                    <div class="flex justify-center rounded-lg">
+                        <img class=" rounded-md" [src]="index.image" />
+                    </div>
+
+                </div>
+
+          </nz-carousel>
+
+
+</ng-template>
+
+<!-- <ng-template #carrousel>
+    <nz-carousel nzAutoPlay>
+      <div nz-carousel-content *ngFor="let index of menu">
+        <nz-page-header
+          class="site-page-header"
+          [nzTitle]="index.name"
+          [nzSubtitle]="index.descripcion"
+        ></nz-page-header>
+        <div class="h-80">
+          <img class="rounded-2xl h-40 w-auto md:h-72" [src]="index.image" />
+        </div>
+      </div>
+    </nz-carousel>
+  </ng-template> -->
