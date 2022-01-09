@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './components/index/index.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 const routes: Routes = [
   { path: '',
     children: [
-      { path: 'menu', component: IndexComponent },
+      { path: 'menu', component: MenuComponent },
       { path: '**', redirectTo: 'menu' }
     ]    
   }

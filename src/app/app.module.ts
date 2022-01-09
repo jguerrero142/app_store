@@ -10,10 +10,11 @@ import es from '@angular/common/locales/es';
 
 
 // Modulos librearias
-// import { nzDesingModule } from './ant-desing.module';
+import { nzDesingModule } from './ant-desing.module';
 // import { MaterialModule } from './material.module';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
+import { SharedModule } from './shared/shared.module';
 // import { NgxChartsModule } from '@swimlane/ngx-charts';
 // import { ReservaModule } from './modulos/reserva/reserva.module';
 
@@ -29,7 +30,9 @@ registerLocaleData(es);
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    nzDesingModule,
+    SharedModule
   ],
   providers: [ { provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

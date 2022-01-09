@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public auth: AuthService) {console.log("holi") }
+  constructor(public auth: AuthService) {}
 
   ngOnInit(): void {
     this.auth.localAuthSetup();

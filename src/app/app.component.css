@@ -1,9 +1,12 @@
-/* .layout {
-    min-height: 100vh;
-    background-color: #e43c26ec;
+ .content{
+    margin: 15px 16px;
+    margin-bottom: 75px;
+    padding: 24px;
+    background: #fff;
+    min-height: 550px;
   }
 
-  
+  /*
 
   nz-sider{ 
     background-color: #e43c26ec;

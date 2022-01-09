@@ -3,7 +3,7 @@
 
         <div *ngIf="!auth.loggedIn; else navbar">
 
-            <mat-toolbar (click)="auth.login()" class="flex justify-between cursor-pointer bg-red-600">                
+            <mat-toolbar (click)="auth.login()" class="flex justify-between cursor-pointer bg-red-600 h-16">                
               <div><span class="text-white">Ingresar</span></div>
                 
                     <div >
@@ -26,7 +26,7 @@
     
         <ng-template #navbar>
             <div>
-                <mat-toolbar class="flex justify-between bg-red-600">
+                <mat-toolbar class="flex justify-between bg-red-600 h-16">
     
                     <div >
                         <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
